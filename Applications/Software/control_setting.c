@@ -52,11 +52,11 @@ uint32_t Time_delay_tick_left=0;
 float tweaks_value = 0.01f;
 uint32_t last_shoot_time = 0;
 // ²½³¤
-float pressW_step = 0.005f;
+float pressW_step = 0.002f;
 float pressS_step = 0.005f;
 float pressA_step = 0.001f;
 float pressD_step = 0.001f;
-float pressShift_step = 5.55f;
+float pressShift_step = 0.01f;
 // ÁéÃô¶È
 // Ò£¿ØÆ÷
 float PitchCofficientFromRC = 800000.0f;

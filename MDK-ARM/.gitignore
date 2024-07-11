@@ -5,8 +5,7 @@
 /.eide.usr.ctx.json
 
 # project out
-/build
-/bin
+/MDK-ARM
 /obj
 /out
 

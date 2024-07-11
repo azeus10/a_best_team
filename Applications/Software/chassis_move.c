@@ -103,8 +103,8 @@ inline void change_limit(float last, float *now, float limit)
 }
 //软件功率控制函数
 float now_p = 0.0f;
-float b =0.01f;
-float e = 0.75f;
+float b =0.001f;
+float e = 0.85f;
 float a = 2.53999826e-07;// 1.23e-07;	// k1
 float k2 = 5.25299993e-06; // 1.453e-07; // k2
 float power_limit(int16_t current[4])
@@ -121,9 +121,9 @@ float power_limit(int16_t current[4])
 //	if(max_p >= REFEREE_DATA.Chassis_Power_Limit * 14)
 //		max_p = REFEREE_DATA.Chassis_Power_Limit * 14;
 	
-	if (cap.remain_vol <= 7)
+	if (cap.remain_vol <= 5)
 		max_p = REFEREE_DATA.Chassis_Power_Limit - 2.0f; // 2w余量
-	else if (cap.remain_vol > 7)
+	else if (cap.remain_vol > 5)
 	{
 //		if (chassis.is_open_cap == 0x00)
 //		{
@@ -235,15 +235,6 @@ void chassis_moto_speed_calc()
 //	 	chassis.speed.r = chassis.acc.max_r * dt + chassis.speed.now_r;
 //	 }
 	 
-	// 计算马达电流
-	//  if(RC_data.rc.ch[1] > 630)
-	// {
-	// 	chassis.wheel_current[FR] = 0.5*pid_cal(&motor_speed[FR], (get_motor_data(chassis_FR).speed_rpm)/19.0f*0.104719755*WHEEL_RADIUS, wheel_mps[FR]);
-   	// 	chassis.wheel_current[BR] = 1.9*pid_cal(&motor_speed[BR], (get_motor_data(chassis_BR).speed_rpm)/19.0f*0.104719755*WHEEL_RADIUS ,wheel_mps[BR]);
-	// 	chassis.wheel_current[FL] = 0.5*pid_cal(&motor_speed[FL], (get_motor_data(chassis_FL).speed_rpm)/19.0f*0.104719755*WHEEL_RADIUS, wheel_mps[FL]);
-	// 	chassis.wheel_current[BL] = 1.9*pid_cal(&motor_speed[BL], (get_motor_data(chassis_BL).speed_rpm)/19.0f*0.104719755*WHEEL_RADIUS, wheel_mps[BL]);
-		
-	// }
 	// else
 	// {
 		chassis.wheel_current[FR] = pid_cal(&motor_speed[FR], (get_motor_data(chassis_FR).speed_rpm), 1727*wheel_mps[FR]/ (2*PI*WHEEL_RADIUS) );//
@@ -254,16 +245,16 @@ void chassis_moto_speed_calc()
 	
 	Plimit = power_limit(chassis.wheel_current);
 
-		// 设定马达电流 （在freeRTOS中发送）
-	set_motor((chassis.wheel_current[BR]), chassis_BR);
-	set_motor((chassis.wheel_current[FL]), chassis_FL);
-  	set_motor((chassis.wheel_current[FR]), chassis_FR);
-	set_motor((chassis.wheel_current[BL]), chassis_BL);
+	// 	// 设定马达电流 （在freeRTOS中发送）
+	// set_motor((chassis.wheel_current[BR]), chassis_BR);
+	// set_motor((chassis.wheel_current[FL]), chassis_FL);
+  	// set_motor((chassis.wheel_current[FR]), chassis_FR);
+	// set_motor((chassis.wheel_current[BL]), chassis_BL);
 
-//	 set_motor((Plimp'p'p'p'pit*chassis.wheel_current[BR]), chassis_BR);
-//	 set_motor((Plimit*chassis.wheel_current[FL]), chassis_FL);
-//  	 set_motor((Plimit*chassis.wheel_current[FR]), chassis_FR);
-//	 set_motor((Plimit*chassis.wheel_current[BL]), chassis_BL);
+	 set_motor((Plimit*chassis.wheel_current[BR]), chassis_BR);
+	 set_motor((Plimit*chassis.wheel_current[FL]), chassis_FL);
+ 	 set_motor((Plimit*chassis.wheel_current[FR]), chassis_FR);
+	 set_motor((Plimit*chassis.wheel_current[BL]), chassis_BL);
 
 	chassis.speed.last_x = chassis.speed.now_x;
 	chassis.speed.last_y = chassis.speed.now_y;
