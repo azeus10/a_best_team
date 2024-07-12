@@ -574,7 +574,7 @@ void FlowModeTask_callback(void *argument)
 				relative_angle += mul * 180;
 		}
 
-		if (fabs(relative_angle) > 0.0f) //
+		if (fabs(relative_angle) > 0.3f) //
 			r_s = pid_cal(&chassis_follow, degree2rad(relative_angle), 0.0f);  //degree2rad(relative_angle)
 		else
 			r_s = 0.0;

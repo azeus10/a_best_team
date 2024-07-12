@@ -52,11 +52,11 @@ uint32_t Time_delay_tick_left=0;
 float tweaks_value = 0.01f;
 uint32_t last_shoot_time = 0;
 // 步长
-float pressW_step = 0.002f;
+float pressW_step = 0.2f;
 float pressS_step = 0.005f;
 float pressA_step = 0.001f;
 float pressD_step = 0.001f;
-float pressShift_step = 0.01f;
+float pressShift_step = 0.5f;
 // 灵敏度
 // 遥控器
 float PitchCofficientFromRC = 800000.0f;
@@ -67,7 +67,7 @@ float YawCofficientFromNUC = 15.0f;
 // 客户端
 float PitchCofficientFromPC = -12000.0f;
 float YawCofficientFromPC = 120.0f;
-float PitchLobCofficientFromPC = -7600000.0f;
+float PitchLobCofficientFromPC = -560000.0f;
 // 一键掉头标志位
 uint8_t one_key_back;
 // float  auto_yaw,auto_pitch;
@@ -518,6 +518,10 @@ void remove_control_task()
 				Global.mode=LEAN_LOB;
 			else if(Global.mode==LEAN_LOB)
 			  Global.mode=FLOW;
+			if(Global.mode==LEAN_LOB)
+			{gimbal.small_pitch.target == 2;}
+			else if(Global.mode!=LEAN_LOB)
+			{gimbal.small_pitch.target == 0;}
 			Time_delay_press_Z=Get_sys_time_ms();
 		}
 	}

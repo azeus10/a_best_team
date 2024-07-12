@@ -57,16 +57,12 @@ void gimbal_init()
 	pid_set(&pitch_ecd_location_pid, 17.0f, 0.0f, 2.0f, 100.0, 0.0f);
 	/*陀螺仪控制参数*/
 	pid_set(&yaw_imu_speed_pid, 500, 0.00f, 0.0f, 29000.0f, 0.0f);  //吊射 400 0  0 29000
-                                                           //30 0 0 0 29000
-	pid_set(&yaw_imu_location_pid,14.0f, 0.0f, 0.0f,29000.0f, 0.0f);
+	pid_set(&yaw_imu_location_pid,14.0f, 0.0f, 0.0f,29000.0f, 0.0f);//30 0 0 0 29000
 
-//	pid_set(&pitch_imu_speed_pid,100.0f, 0.0f,100.0f,0.0f, 0.0f); //400 0 15000 29000
-//	pid_set(&pitch_imu_location_pid, 900.0f, 0.0f, 5000.0f, 100.0, 0.0f);//75 0 0 600
-	pid_set(&pitch_imu_speed_pid,800.0f, 0.0f,2500.0f,29000.0f, 0.0f);     //7月4日没有小云台
-	pid_set(&pitch_imu_location_pid, 1500.0f, 0.0f, 20000.0f, 100.0, 0.0f);//临时调一版
-	//  pid_set(&pitch_imu_speed_pid,800.0f, 0.0f, 10000.0f,29000.0f, 0.0f); //200 0 0 29000
-	//  pid_set(&pitch_imu_location_pid, 3000.0f, 0.0f, 10000.0f, 100.0, 0.0f);//75 0 0 600
-
+	// pid_set(&pitch_imu_speed_pid,800.0f, 0.0f,2500.0f,29000.0f, 0.0f);     //可以吊射用
+	// pid_set(&pitch_imu_location_pid, 1500.0f, 0.0f, 20000.0f, 100.0, 0.0f);//
+	pid_set(&pitch_imu_speed_pid,800.0f, 0.0f,2500.0f,29000.0f, 0.0f);     //平时用
+	pid_set(&pitch_imu_location_pid, 300.0f, 0.0f, 35000.0f, 100.0, 0.0f);//
 	/*编码器+陀螺仪控制参数*/
 	pid_set(&yaw_ecd_cross_imu_speed_pid,240, 0.00f, 1700.0f, 0.0f, 0.0f);
 	pid_set(&yaw_ecd_cross_imu_location_pid, 18.0f, 0.0f, 0, 30000.0f, 0.0f);
@@ -231,34 +227,33 @@ void gimbal_pid_cal()
 //		}
 //	}
 
-	// if(Global.mode!=LEAN_LOB&&Global.input.vision_status==0)
-	//  {
- 	// pid_set(&yaw_imu_speed_pid, 500, 0.00f, 0.0f, 29000.0f, 0.0f);  //吊射 400 0  0 29000
-    //                                                            //30 0 0 0 29000
-	// pid_set(&yaw_imu_location_pid,14.0f, 0.0f, 0.0f,29000.0f, 0.0f);
+	if(Global.mode!=LEAN_LOB&&Global.input.vision_status==0)
+	 {
+ 	pid_set(&yaw_imu_speed_pid, 500, 0.00f, 0.0f, 29000.0f, 0.0f);  //吊射 400 0  0 29000
+                                                               //30 0 0 0 29000
+	pid_set(&yaw_imu_location_pid,14.0f, 0.0f, 0.0f,29000.0f, 0.0f);
 
-	// pid_set(&pitch_imu_speed_pid,400.0f, 0.0f, 15000.0f,29000.0f, 0.0f); //200 0 0 29000
-	// pid_set(&pitch_imu_location_pid, 900.0f, 0.0f, 5000.0f, 100.0, 0.0f);//75 0 0 600
-	//  }
-	// else if(Global.mode!=LEAN_LOB&&Global.input.vision_status==1)
-	// {
-	// pid_set(&yaw_imu_speed_pid, 500, 0.00f, 0.0f, 29000.0f, 0.0f);  //吊射 400 0  0 29000
-    //                                                            //30 0 0 0 29000
-	// pid_set(&yaw_imu_location_pid,20.0f, 0.0f, 0.0f,29000.0f, 0.0f);
+	pid_set(&pitch_imu_speed_pid,400.0f, 0.0f, 15000.0f,29000.0f, 0.0f); //200 0 0 29000
+	pid_set(&pitch_imu_location_pid, 900.0f, 0.0f, 5000.0f, 100.0, 0.0f);//75 0 0 600
+	 }
+	else if(Global.mode!=LEAN_LOB&&Global.input.vision_status==1)
+	{
+	pid_set(&yaw_imu_speed_pid, 500, 0.00f, 0.0f, 29000.0f, 0.0f);  //吊射 400 0  0 29000
+                                                               //30 0 0 0 29000
+	pid_set(&yaw_imu_location_pid,20.0f, 0.0f, 0.0f,29000.0f, 0.0f);
 
-	//  pid_set(&pitch_imu_speed_pid,350.0f, 0.0f, 0.0f,29000.0f, 0.0f); //200 0 0 29000
-	// pid_set(&pitch_imu_location_pid, 26.0f, 0.0f, 0.0f, 600.0, 0.0f);//75 0 
+	 pid_set(&pitch_imu_speed_pid,350.0f, 0.0f, 0.0f,29000.0f, 0.0f); //200 0 0 29000
+	pid_set(&pitch_imu_location_pid, 26.0f, 0.0f, 0.0f, 600.0, 0.0f);//75 0 
 	
-	//  }
-	//  else if(Global.mode==LEAN_LOB)
-	//  {
-	//  pid_set(&yaw_imu_speed_pid, 400, 0.00f, 0.0f, 29000.0f, 0.0f);                                                                
-	// pid_set(&yaw_imu_location_pid,30.0f, 0.0f, 0.0f,29000.0f, 0.0f);
+	 }
+	 else if(Global.mode==LEAN_LOB)
+	 {
+	 pid_set(&yaw_imu_speed_pid, 400, 0.00f, 0.0f, 29000.0f, 0.0f);                                                                
+	pid_set(&yaw_imu_location_pid,30.0f, 0.0f, 0.0f,29000.0f, 0.0f);
 
-	//  pid_set(&pitch_imu_speed_pid,800.0f, 0.0f, 10000.0f,29000.0f, 0.0f); //200 0 0 29000
-	//  pid_set(&pitch_imu_location_pid, 3000.0f, 0.0f, 10000.0f, 100.0, 0.0f);//75 0 0 600
-	
-	//  }
+	pid_set(&pitch_imu_speed_pid,800.0f, 0.0f,2500.0f,29000.0f, 0.0f);     //可以吊射用
+	pid_set(&pitch_imu_location_pid, 1500.0f, 0.0f, 20000.0f, 100.0, 0.0f);//
+	 }
 	gimbal_set_pitch(gimbal.pitch.set,0.07155f,0.7155f);//限位,英雄反过来的
 	//副云台设置零点    前哨站变化910   基地变化1820
 	if(gimbal.small_pitch.state==0)
@@ -282,7 +277,7 @@ void gimbal_pid_cal()
 			if(gimbal.small_pitch.set > (gimbal.small_pitch.offset + 910))
 				gimbal.small_pitch.set = gimbal.small_pitch.offset + 910;
 		}
-		else if(gimbal.small_pitch.target == 2)//打基地
+		else if(Global.mode==LEAN_LOB)//打基地
 		{
 			gimbal.small_pitch.set += 5; 
 			if(gimbal.small_pitch.set > (gimbal.small_pitch.offset + 1820))
