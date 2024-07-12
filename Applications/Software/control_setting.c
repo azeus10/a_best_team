@@ -29,7 +29,7 @@
 uint8_t is_input_for_rc = 1;
 // 消抖
 uint32_t Time_delay_LEAN = 0;
-
+int Time_delay_mouse1 = 0;
 uint32_t Time_delay_LOB = 0;
 uint32_t Time_delay_LOB_OUT = 0;
 uint32_t Time_delay_friction_wheel = 0;
@@ -414,7 +414,18 @@ void remove_control_task()
 	else
 		Global.cap=STOP;
 /******************射击行为控制******************/
-	Global.input.shoot_fire=RC_data.mouse.press_l;
+if(RC_data.mouse.press_l)
+{
+	Time_delay_mouse1++;
+}
+else
+{
+	Time_delay_mouse1=0;
+}
+if(Time_delay_mouse1 > 200)
+	Global.input.shoot_fire=1;
+else
+	Global.input.shoot_fire=0;
 	/*按下鼠标左键发射子弹*/
 //	if(RC_data.mouse.press_l)
 //	{
