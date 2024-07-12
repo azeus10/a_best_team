@@ -101,69 +101,175 @@ inline void change_limit(float last, float *now, float limit)
 			*now = last - limit;
 	}
 }
-//软件功率控制函数
+
+/******************************************************** */
 float now_p = 0.0f;
-float b =0.001f;
-float e = 0.85f;
-float a = 2.53999826e-07;// 1.23e-07;	// k1
-float k2 = 5.25299993e-06; // 1.453e-07; // k2
+// 初始化卡尔曼滤波器
+void init_kalman_filter(KalmanFilter* kf, float A, float B, float H, float Q, float R, float P, float x)
+{
+    kf->A = A;
+    kf->B = B;
+    kf->H = H;
+    kf->Q = Q;
+    kf->R = R;
+    kf->P = P;
+    kf->x = x;
+}
+
+// 卡尔曼滤波器预测
+void kalman_predict(KalmanFilter* kf, float u)
+{
+    // 状态预测
+    kf->x = kf->A * kf->x + kf->B * u;
+    // 估计误差协方差预测
+    kf->P = kf->A * kf->P * kf->A + kf->Q;
+}
+
+// 卡尔曼滤波器更新
+void kalman_update(KalmanFilter* kf, float z)
+{
+    // 卡尔曼增益计算
+    kf->K = kf->P * kf->H / (kf->H * kf->P * kf->H + kf->R);
+    // 状态更新
+    kf->x = kf->x + kf->K * (z - kf->H * kf->x);
+    // 估计误差协方差更新
+    kf->P = (1 - kf->K * kf->H) * kf->P;
+}
+
+// 功率限制函数
 float power_limit(int16_t current[4])
 {
-	float max_p;// = REFEREE_DATA.Chassis_Power_Limit - 2.0f; // 2w余量
-//	if(cap.remain_vol <= 8)
-//	{
-//		 max_p = REFEREE_DATA.Chassis_Power_Limit - 2.0f;
-//	}
-//	else if (cap.remain_vol > 8)
-//	{
-//		max_p += 14.0f * cap.remain_vol; // 超电最大功率 = 超电电压 * 14A 线圈最大电流
-//	}
-//	if(max_p >= REFEREE_DATA.Chassis_Power_Limit * 14)
-//		max_p = REFEREE_DATA.Chassis_Power_Limit * 14;
-	
-	if (cap.remain_vol <= 5)
-		max_p = REFEREE_DATA.Chassis_Power_Limit - 2.0f; // 2w余量
-	else if (cap.remain_vol > 5)
-	{
-//		if (chassis.is_open_cap == 0x00)
-//		{
-			max_p = REFEREE_DATA.Chassis_Power_Limit + 12 * cap.remain_vol; // 超电最大功率 = 超电电压 * 14A 线圈最大电流
-//		}
-//	else
-	}
-//	if(Global.input.fly == 1)
-//	{
-//		if(max_p >= REFEREE_DATA.Chassis_Power_Limit +14 * cap.remain_vol)
-//			max_p = REFEREE_DATA.Chassis_Power_Limit +14 * cap.remain_vol;
-////	}
-//	else
-//	{
-		if(max_p >= REFEREE_DATA.Chassis_Power_Limit +12 * cap.remain_vol)
-			max_p = REFEREE_DATA.Chassis_Power_Limit +12 * cap.remain_vol;
-//	}
+    static KalmanFilter kf;
+    static int initialized = 0;
 
-	now_p = 0;
+    if (!initialized) {
+        // 初始化卡尔曼滤波器参数
+        init_kalman_filter(&kf, 1.0f, 1.0f, 1.0f, 0.1f, 0.05f, 1.0f, 0.0f);
+        initialized = 1;
+    }
 
-	const float constant = 4.081f;
-	//适配新步兵修改电机减速比参数，没修改直接用后边注释的参数
-	// const float toque_coefficient = (20.0f / 16384.0f) * (0.22f) * (187.0f / 3591.0f) / 9.55f; // (20/16384)*(0.3)*(187/3591)/9.55=1.99688994e-6f P19
-	const float toque_coefficient = (20/16384)*(0.3)*(187/3591)/9.55;
+    float max_p;
+    if (cap.remain_vol <= 5)
+        max_p = REFEREE_DATA.Chassis_Power_Limit - 2.0f;
+    else
+        max_p = REFEREE_DATA.Chassis_Power_Limit + 14.0f * cap.remain_vol;
 
-	for (int i = 0; i < 4; i++)
-	{
-		// 估算功率
-		// 西交利物浦：https://github.com/MaxwellDemonLin/Motor-modeling-and-power-control/blob/master/chassis_power_control.c#L89
-		now_p += (fabs(current[i] * toque_coefficient * get_motor_data(i).speed_rpm) +
-					  fabs(k2 * get_motor_data(i).speed_rpm * get_motor_data(i).speed_rpm) +
-					  fabs(a * current[i] * current[i] + constant)) /e;
-	}
+    if (max_p >= REFEREE_DATA.Chassis_Power_Limit + 14.0f * cap.remain_vol)
+        max_p = REFEREE_DATA.Chassis_Power_Limit + 14.0f * cap.remain_vol;
 
-	float percentage = max_p / now_p;
+    float now_p = 0;
 
-	if (percentage > 1.0f)
-		return 1.0f;
-	return percentage - b;
+    // 参数设置
+    const float k2 = 5.25299993e-07f; // 电机转速平方项系数  速度影响大就增大k2
+    const float a = 2.53999826e-06f;  // 电流平方项系数   电流的影响大就怎大a
+    const float e = 0.85f;            // 电机效率
+    const float b = 0.0001f;           // 安全余量
+    const float constant = 4.081f;    // 固定功率损耗
+    const float toque_coefficient = (20.0f / 16384.0f) * (0.3f) * (187.0f / 3591.0f) / 9.55f; // 扭矩系数
+
+    for (int i = 0; i < 4; i++)
+    {
+        float speed_rpm = get_motor_data(i).speed_rpm;
+        float current_squared = current[i] * current[i];
+        
+        now_p += (fabs(current[i] * toque_coefficient * speed_rpm) +
+                  fabs(k2 * speed_rpm * speed_rpm) +
+                  fabs(a * current_squared + constant)) / e;
+    }
+
+    // 卡尔曼滤波器预测
+    kalman_predict(&kf, 0.0f);
+
+    // 获取当前测量的功率
+    float measured_p = now_p;
+
+    // 卡尔曼滤波器更新
+    kalman_update(&kf, measured_p);
+
+    // 预测未来的功率消耗
+    float predicted_p = kf.x;
+
+    // 动态调整b值
+    float dynamic_b = b * (1 + fabs(predicted_p - measured_p) / max_p);
+
+    // 精确的功率控制
+    float percentage = max_p / (now_p + predicted_p);
+
+    if (percentage > 1.0f)
+        return 1.0f;
+
+    return percentage - dynamic_b;
 }
+/********************************************************************/
+
+// //软件功率控制函数
+// float now_p = 0.0f;
+// float b =0.001f;
+// float e = 0.85f;
+// float a = 2.53999826e-07;// 1.23e-07;	// k1
+// float k2 = 5.25299993e-06; // 1.453e-07; // k2
+// float power_limit(int16_t current[4])
+// {
+// 	float max_p;// = REFEREE_DATA.Chassis_Power_Limit - 2.0f; // 2w余量
+// //	if(cap.remain_vol <= 8)
+// //	{
+// //		 max_p = REFEREE_DATA.Chassis_Power_Limit - 2.0f;
+// //	}
+// //	else if (cap.remain_vol > 8)
+// //	{
+// //		max_p += 14.0f * cap.remain_vol; // 超电最大功率 = 超电电压 * 14A 线圈最大电流
+// //	}
+// //	if(max_p >= REFEREE_DATA.Chassis_Power_Limit * 14)
+// //		max_p = REFEREE_DATA.Chassis_Power_Limit * 14;
+	
+// 	if (cap.remain_vol <= 5)
+// 		max_p = REFEREE_DATA.Chassis_Power_Limit - 2.0f; // 2w余量
+// 	else if (cap.remain_vol > 5)
+// 	{
+// //		if (chassis.is_open_cap == 0x00)
+// //		{
+// 			max_p = REFEREE_DATA.Chassis_Power_Limit + 14.0f * cap.remain_vol; // 超电最大功率 = 超电电压 * 14A 线圈最大电流
+// //		}
+// //	else
+// 	}
+// //	if(Global.input.fly == 1)
+// //	{
+// //		if(max_p >= REFEREE_DATA.Chassis_Power_Limit +14 * cap.remain_vol)
+// //			max_p = REFEREE_DATA.Chassis_Power_Limit +14 * cap.remain_vol;
+// ////	}
+// //	else
+// //	{
+// 		if(max_p >= REFEREE_DATA.Chassis_Power_Limit +14.0f * cap.remain_vol)
+// 			max_p = REFEREE_DATA.Chassis_Power_Limit +14.0f * cap.remain_vol;
+// //	}
+
+// 	now_p = 0;
+
+// 	const float constant = 4.081f;
+// 	//适配新步兵修改电机减速比参数，没修改直接用后边注释的参数
+// 	// const float toque_coefficient = (20.0f / 16384.0f) * (0.22f) * (187.0f / 3591.0f) / 9.55f; // (20/16384)*(0.3)*(187/3591)/9.55=1.99688994e-6f P19
+// 	const float toque_coefficient = (20/16384)*(0.3)*(187/3591)/9.55;
+
+// 	for (int i = 0; i < 4; i++)
+// 	{
+// 		// 估算功率
+// 		// 西交利物浦：https://github.com/MaxwellDemonLin/Motor-modeling-and-power-control/blob/master/chassis_power_control.c#L89
+// 		now_p += (fabs(current[i] * toque_coefficient * get_motor_data(i).speed_rpm) +
+// 					  fabs(k2 * get_motor_data(i).speed_rpm * get_motor_data(i).speed_rpm) +
+// 					  fabs(a * current[i] * current[i] + constant)) /e;
+// 	}
+
+// 	float percentage = max_p / now_p;
+
+// 	if (percentage > 1.0f)
+// 		return 1.0f;
+// 	return percentage - b;
+// }
+
+
+
+
+
 // 计算底盘马达速度
 void chassis_moto_speed_calc()
 {
@@ -242,8 +348,11 @@ void chassis_moto_speed_calc()
 		chassis.wheel_current[FL] = pid_cal(&motor_speed[FL], (get_motor_data(chassis_FL).speed_rpm), 1727*wheel_mps[FL]/(2*PI*WHEEL_RADIUS));
 		chassis.wheel_current[BL] = pid_cal(&motor_speed[BL], (get_motor_data(chassis_BL).speed_rpm), 1727*wheel_mps[BL]/(2*PI*WHEEL_RADIUS));
 	// }
-	
-	Plimit = power_limit(chassis.wheel_current);
+	chassis.wheel_now_current[FR] = get_motor_data(chassis_FR).given_current;
+	chassis.wheel_now_current[BR] = get_motor_data(chassis_BR).given_current;
+	chassis.wheel_now_current[FL] = get_motor_data(chassis_FL).given_current;
+	chassis.wheel_now_current[BL] = get_motor_data(chassis_BL).given_current;
+	Plimit = power_limit(chassis.wheel_now_current);
 
 	// 	// 设定马达电流 （在freeRTOS中发送）
 	// set_motor((chassis.wheel_current[BR]), chassis_BR);
