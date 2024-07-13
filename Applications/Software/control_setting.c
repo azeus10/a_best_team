@@ -67,7 +67,7 @@ float YawCofficientFromNUC = 15.0f;
 // 客户端
 float PitchCofficientFromPC = -12000.0f;
 float YawCofficientFromPC = 120.0f;
-float PitchLobCofficientFromPC = -560000.0f;
+float PitchLobCofficientFromPC = -4600000.0f;
 // 一键掉头标志位
 uint8_t one_key_back;
 // float  auto_yaw,auto_pitch;
@@ -422,7 +422,7 @@ else
 {
 	Time_delay_mouse1=0;
 }
-if(Time_delay_mouse1 > 200)
+if(Time_delay_mouse1 > 100)
 	Global.input.shoot_fire=1;
 else
 	Global.input.shoot_fire=0;

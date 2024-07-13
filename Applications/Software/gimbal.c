@@ -43,7 +43,7 @@ pid_t scope_location_pid;
 pid_t SAMALL_speed_pid;
 pid_t SAMALL_location_pid;
 int flag_Scope_init=0;
-
+int small_pitch_time_delay;
 // 云台初始化
 void gimbal_init()
 {
@@ -75,7 +75,7 @@ void gimbal_init()
 	pid_set(&scope_location_pid, 15.0f, 0.000f, 0.0f, 1000.0, 0.0f);
 
 	pid_set(&SAMALL_speed_pid, 7.0f, 0.0f, 1.0f, 10000.0f, 0.0f);
-	pid_set(&SAMALL_location_pid, 25.0f, 0.0f, 18.0f, 1000.0, 0.0f);
+	pid_set(&SAMALL_location_pid, 22.0f, 0.0f, 18.0f, 1000.0, 0.0f);
 
 	gimbal.pitch.now = 0;
 	gimbal.pitch.set = 0;
@@ -258,15 +258,19 @@ void gimbal_pid_cal()
 	//副云台设置零点    前哨站变化910   基地变化1820
 	if(gimbal.small_pitch.state==0)
 	{
-		// gimbal.small_pitch.set +=1;
-		// if(fabs(get_motor_data(SMALL_PITCH).given_current)>=5500&&fabs(get_motor_data(SMALL_PITCH).speed_rpm) <= 0 && gimbal.small_pitch.state == 0)
-		// {
-		// 	gimbal.small_pitch.offset=get_motor_data(SMALL_PITCH).ecd_cnt;
-		// 	gimbal.small_pitch.set=gimbal.small_pitch.offset - 546;
-		// 	gimbal.small_pitch.state=1;
-		// }
-		gimbal.small_pitch.offset = 2237;
-		gimbal.small_pitch.state=1;
+		gimbal.small_pitch.set -=100;
+		if(fabs(fabs(get_motor_data(SMALL_PITCH).speed_rpm) <= 0))
+		{
+			small_pitch_time_delay ++;
+		}
+		if(small_pitch_time_delay > 10 && fabs(get_motor_data(SMALL_PITCH).speed_rpm) <= 0)
+		{
+			gimbal.small_pitch.offset=get_motor_data(SMALL_PITCH).ecd_cnt + 446;
+			gimbal.small_pitch.set=gimbal.small_pitch.offset;
+			gimbal.small_pitch.state=1;
+		}
+		
+
 	}
 	// 副云台pid计算
 	if(gimbal.small_pitch.state == 1)
