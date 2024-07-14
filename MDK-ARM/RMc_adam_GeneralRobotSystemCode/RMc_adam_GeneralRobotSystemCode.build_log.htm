@@ -27,18 +27,24 @@ Project File Date:  07/11/2024
 <h2>Output:</h2>
 *** Using Compiler 'V5.06 update 6 (build 750)', folder: 'E:\keil\core\ARM\ARMCC\Bin'
 Build target 'RMc_adam_GeneralRobotSystemCode'
-compiling gimbal.c...
+compiling control_setting.c...
+..\Applications\Software\referee_handle_pack.h(595): warning:  #1295-D: Deprecated declaration Required_Data - give arg types
+  void Required_Data();
+..\Applications\Software\referee_handle_pack.h(596): warning:  #1295-D: Deprecated declaration Cap_Required_Data - give arg types
+  void Cap_Required_Data();
+..\Applications\Software\referee_handle_pack.h(597): warning:  #1-D: last line of file ends without a newline
+  #endif
 ..\Applications\Software\Global_status.h(71): warning:  #1295-D: Deprecated declaration Global_status_init - give arg types
   void Global_status_init();
-..\Applications\Software\gimbal.c(384): warning:  #1-D: last line of file ends without a newline
-  }
-..\Applications\Software\gimbal.c(215): warning:  #550-D: variable "last_set"  was set but never used
-  static float last_set;
-..\Applications\Software\gimbal.c: 3 warnings, 0 errors
+..\Applications\Software\control_setting.c(534): warning:  #174-D: expression has no effect
+  			{gimbal.small_pitch.target == 2;}
+..\Applications\Software\control_setting.c(536): warning:  #174-D: expression has no effect
+  			{gimbal.small_pitch.target == 0;}
+..\Applications\Software\control_setting.c: 6 warnings, 0 errors
 linking...
-Program Size: Code=80944 RO-data=3248 RW-data=812 ZI-data=57644  
+Program Size: Code=80856 RO-data=3248 RW-data=836 ZI-data=57604  
 FromELF: creating hex file...
-"RMc_adam_GeneralRobotSystemCode\RMc_adam_GeneralRobotSystemCode.axf" - 0 Error(s), 3 Warning(s).
+"RMc_adam_GeneralRobotSystemCode\RMc_adam_GeneralRobotSystemCode.axf" - 0 Error(s), 6 Warning(s).
 
 <h2>Software Packages used:</h2>
 
@@ -66,7 +72,7 @@ Package Vendor: Keil
    * Component: ARM::CMSIS:DSP@1.4.6
       Include file:  CMSIS/Include/arm_math.h
       Library file:  CMSIS/Lib/ARM/arm_cortexM4lf_math.lib
-Build Time Elapsed:  00:00:06
+Build Time Elapsed:  00:00:05
 </pre>
 </body>
 </html>

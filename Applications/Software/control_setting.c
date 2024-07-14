@@ -48,15 +48,16 @@ uint32_t Time_delay_press_F_CTRL=0;
 uint32_t Time_delay_press_F = 0;
 uint32_t Time_delay_press_R = 0;
 uint32_t Time_delay_tick_left=0;
+uint32_t Time_delay_press_X_CTRL=0;
 // 微调量
 float tweaks_value = 0.01f;
 uint32_t last_shoot_time = 0;
 // 步长
-float pressW_step = 0.2f;
+float pressW_step = 0.01f;
 float pressS_step = 0.005f;
 float pressA_step = 0.001f;
 float pressD_step = 0.001f;
-float pressShift_step = 0.5f;
+float pressShift_step = 0.02f;
 // 灵敏度
 // 遥控器
 float PitchCofficientFromRC = 800000.0f;
@@ -271,7 +272,7 @@ void remove_control_task()
 		}
 	}
 	/*按下X键瞄准镜开关切换*/
-	if(IF_KEY_PRESSED_X)
+	if(IF_KEY_PRESSED_X && !(IF_KEY_PRESSED_CTRL))
 	{
 		if(Get_sys_time_ms()-Time_delay_press_X>350)
 		{
@@ -545,13 +546,13 @@ else
 	}
 	if(IF_KEY_PRESSED_X&&IF_KEY_PRESSED_CTRL)
 	{
-		if(Get_sys_time_ms()-Time_delay_press_G_CTRL>350)
+		if(Get_sys_time_ms()-Time_delay_press_X_CTRL>350)
 		{
 			if(fly_mode == 0)
 			fly_mode = 1;
 			else if(fly_mode == 1)
 			fly_mode = 0;
-			Time_delay_press_G_CTRL=Get_sys_time_ms();
+			Time_delay_press_X_CTRL=Get_sys_time_ms();
 		}
 	}
 	

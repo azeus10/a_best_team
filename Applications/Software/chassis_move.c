@@ -107,8 +107,8 @@ inline void change_limit(float last, float *now, float limit)
 float now_p = 0.0f;
 float b =0.001f;
 float e = 0.85f;
-float a = 2.53999826e-07;// 1.23e-07;	// k1
-float k2 = 5.25299993e-06; // 1.453e-07; // k2
+float a = 2.03999826e-07;// 1.23e-07;	// k1
+float k2 = 4.25299993e-06; // 1.453e-07; // k2
 float power_limit(int16_t current[4])
 {
 	float max_p;// = REFEREE_DATA.Chassis_Power_Limit - 2.0f; // 2w余量
@@ -167,39 +167,32 @@ float power_limit(int16_t current[4])
 	return percentage - b;
 }
 
-
-
-
-
 // 计算底盘马达速度
 void chassis_moto_speed_calc()
 {
-	
-
-
 	//吊射模式下 底盘PD拉高一点达到锁死的效果
-if(fly_mode == 1)
-   {
-	pid_set(&motor_speed[FR], 2, 0.1, 1.5, MAX_CURRENT, 3000);   //16000 1000  
-	pid_set(&motor_speed[FL], 1.5, 0.1, 1.5, MAX_CURRENT, 3000);
-	pid_set(&motor_speed[BL], 1.5, 0.1, 1.5, MAX_CURRENT, 3000);
-	pid_set(&motor_speed[BR], 2, 0.1, 1.5, MAX_CURRENT, 3000);
+	if(fly_mode == 1)
+  	{
+		pid_set(&motor_speed[FR], 2, 0.1, 1.5, MAX_CURRENT, 3000);   //16000 1000  
+		pid_set(&motor_speed[FL], 1.5, 0.1, 1.5, MAX_CURRENT, 3000);
+		pid_set(&motor_speed[BL], 1.5, 0.1, 1.5, MAX_CURRENT, 3000);
+		pid_set(&motor_speed[BR], 2, 0.1, 1.5, MAX_CURRENT, 3000);
 
    }
    else if(Global.mode == LEAN_LOB)
-	{
+   {
+	    pid_set(&motor_speed[FR], 16000, 0, 1000, MAX_CURRENT, 3000);   //16000 1000
+	    pid_set(&motor_speed[FL], 16000, 0, 1000,  MAX_CURRENT, 3000);
+	    pid_set(&motor_speed[BL], 16000, 0, 1000,  MAX_CURRENT, 3000);
+	    pid_set(&motor_speed[BR], 16000, 0, 1000,  MAX_CURRENT, 3000);
+   }
+   else
+   {
 		pid_set(&motor_speed[FR], 8000, 0, 200, MAX_CURRENT, 3000);   //16000 1000  
 		pid_set(&motor_speed[FL], 8000, 0, 200, MAX_CURRENT, 3000);
 		pid_set(&motor_speed[BL], 8000, 0, 200, MAX_CURRENT, 3000);
 		pid_set(&motor_speed[BR], 8000, 0, 200, MAX_CURRENT, 3000);
-	}
-	else
-	{
-		pid_set(&motor_speed[FR], 8000, 0, 200, MAX_CURRENT, 3000);   //16000 1000  
-		pid_set(&motor_speed[FL], 8000, 0, 200, MAX_CURRENT, 3000);
-		pid_set(&motor_speed[BL], 8000, 0, 200, MAX_CURRENT, 3000);
-		pid_set(&motor_speed[BR], 8000, 0, 200, MAX_CURRENT, 3000);
-	}
+   }
 	
 	// 最大速度限制
 	val_limit(&chassis.speed.x, chassis.speed.max_x);
@@ -251,20 +244,19 @@ if(fly_mode == 1)
 //	 		chassis.speed.r = -(chassis.acc.max_r * dt + chassis.speed.now_r);
 //	 	chassis.speed.r = chassis.acc.max_r * dt + chassis.speed.now_r;
 //	 }
-	 if(Global.mode==LEAN_LOB)
-	 {
-		chassis.wheel_current[FR] = pid_cal(&motor_speed[FR], (get_motor_data(chassis_FR).speed_rpm)/19.0f*0.104719755*WHEEL_RADIUS, wheel_mps[FR]);
-   		chassis.wheel_current[BR] = pid_cal(&motor_speed[BR], (get_motor_data(chassis_BR).speed_rpm)/19.0f*0.104719755*WHEEL_RADIUS, wheel_mps[BR]);
-		chassis.wheel_current[FL] = pid_cal(&motor_speed[FL], (get_motor_data(chassis_FL).speed_rpm)/19.0f*0.104719755*WHEEL_RADIUS, wheel_mps[FL]);
-		chassis.wheel_current[BL] = pid_cal(&motor_speed[BL], (get_motor_data(chassis_BL).speed_rpm)/19.0f*0.104719755*WHEEL_RADIUS, wheel_mps[BL]);
-	// }
-	 }
-	else
+	 if(fly_mode == 1)
 	 {
 		chassis.wheel_current[FR] = pid_cal(&motor_speed[FR], (get_motor_data(chassis_FR).speed_rpm), 1727*wheel_mps[FR]/ (2*PI*WHEEL_RADIUS) );//
    		chassis.wheel_current[BR] = pid_cal(&motor_speed[BR], (get_motor_data(chassis_BR).speed_rpm), 1727*wheel_mps[BR]/(2*PI*WHEEL_RADIUS));
 		chassis.wheel_current[FL] = pid_cal(&motor_speed[FL], (get_motor_data(chassis_FL).speed_rpm), 1727*wheel_mps[FL]/(2*PI*WHEEL_RADIUS));
 		chassis.wheel_current[BL] = pid_cal(&motor_speed[BL], (get_motor_data(chassis_BL).speed_rpm), 1727*wheel_mps[BL]/(2*PI*WHEEL_RADIUS));
+	 }
+	else
+	 {
+		chassis.wheel_current[FR] = pid_cal(&motor_speed[FR], (get_motor_data(chassis_FR).speed_rpm)/19.0f*0.104719755*WHEEL_RADIUS, wheel_mps[FR]);
+   		chassis.wheel_current[BR] = pid_cal(&motor_speed[BR], (get_motor_data(chassis_BR).speed_rpm)/19.0f*0.104719755*WHEEL_RADIUS, wheel_mps[BR]);
+		chassis.wheel_current[FL] = pid_cal(&motor_speed[FL], (get_motor_data(chassis_FL).speed_rpm)/19.0f*0.104719755*WHEEL_RADIUS, wheel_mps[FL]);
+		chassis.wheel_current[BL] = pid_cal(&motor_speed[BL], (get_motor_data(chassis_BL).speed_rpm)/19.0f*0.104719755*WHEEL_RADIUS, wheel_mps[BL]);
 	 }
 	Plimit = power_limit(chassis.wheel_current);
 

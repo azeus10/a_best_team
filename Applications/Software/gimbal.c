@@ -254,7 +254,7 @@ void gimbal_pid_cal()
 	pid_set(&pitch_imu_speed_pid,800.0f, 0.0f,2500.0f,29000.0f, 0.0f);     //可以吊射用
 	pid_set(&pitch_imu_location_pid, 1500.0f, 0.0f, 20000.0f, 100.0, 0.0f);//
 	 }
-	gimbal_set_pitch(gimbal.pitch.set,0.07155f,0.7155f);//限位,英雄反过来的
+	gimbal_set_pitch(gimbal.pitch.set,0.27555f,0.7655f);//限位,英雄反过来的
 	//副云台设置零点    前哨站变化910   基地变化1820
 	if(gimbal.small_pitch.state==0)
 	{
@@ -275,13 +275,13 @@ void gimbal_pid_cal()
 	// 副云台pid计算
 	if(gimbal.small_pitch.state == 1)
 	{
-		if(gimbal.small_pitch.target == 1)//打前哨站
+		if(Global.mode==LEAN_LOB && Global.input.ScopeisOpen==1 &&gimbal.small_pitch.target == 1)//打前哨站
 		{
 			gimbal.small_pitch.set += 5; 
 			if(gimbal.small_pitch.set > (gimbal.small_pitch.offset + 910))
 				gimbal.small_pitch.set = gimbal.small_pitch.offset + 910;
 		}
-		else if(Global.mode==LEAN_LOB)//打基地
+		else if(Global.mode==LEAN_LOB && Global.input.ScopeisOpen==1)//打基地
 		{
 			gimbal.small_pitch.set += 5; 
 			if(gimbal.small_pitch.set > (gimbal.small_pitch.offset + 1820))

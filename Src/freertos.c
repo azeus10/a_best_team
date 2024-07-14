@@ -535,8 +535,8 @@ void FlowModeTask_callback(void *argument)
 
 		decode_as_6020(PITCH_MOTOR);
 		
-		if(IF_KEY_PRESSED_SHIFT)
-			pid_set(&chassis_follow,8, 0, 10, 50, 0);
+		if(fly_mode == 1)
+			pid_set(&chassis_follow,5, 0, 30, 50, 0);
 		else
 			pid_set(&chassis_follow,2, 0, 10, 50, 0);
 			
