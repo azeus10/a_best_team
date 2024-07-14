@@ -10,11 +10,11 @@ double lowPassFilter(double input, double prevOutput, double alpha)
 void pid_set(pid_t *PidSet,float p_set,float i_set,float d_set,float lim_out_set,float lim_i_outset)//PID设置
 {
   PidSet->p = p_set;   PidSet->i = i_set;   PidSet->d = d_set;
-	PidSet->p_out = 0.0f;
-	PidSet->i_out = 0.0f;
-	PidSet->d_out = 0.0f;
-  PidSet->total_out = 0.0f;
-  PidSet->set = 0.0f;
+	// PidSet->p_out = 0.0f;
+	// PidSet->i_out = 0.0f;
+	// PidSet->d_out = 0.0f;
+  // PidSet->total_out = 0.0f;
+  // PidSet->set = 0.0f;
   PidSet->lim_out = lim_out_set;   PidSet->lim_i_out = lim_i_outset;//将设置赋值
 }
 

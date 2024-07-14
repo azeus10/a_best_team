@@ -23,17 +23,6 @@
 #define chassis_BL CAN_1_3
 #define chassis_BR CAN_1_4
 
-typedef struct {
-    float A; // 状态转移矩阵
-    float B; // 控制矩阵
-    float H; // 观测矩阵
-    float Q; // 过程噪声协方差
-    float R; // 测量噪声协方差
-    float P; // 估计误差协方差
-    float x; // 状态估计
-    float K; // 卡尔曼增益
-} KalmanFilter;
-
 struct chassis_status
 {
 	struct
@@ -53,7 +42,6 @@ struct chassis_status
 	int16_t is_open_cap; //超电置位标志
 
 	int16_t wheel_current[4]; // PID输出的电调电流
-	int16_t wheel_now_current[4]; // 电机速度
 };
 
 struct cap
@@ -71,6 +59,7 @@ extern ext_power_heat_data_t power_heat_data;
 extern float Power;
 extern uint16_t Engerny_buffer;
 extern float Plimit;
+extern int fly_mode;
 
 void chassis_move_init(void);		// 底盘初始化							//底盘移动初始化
 void chassis_moto_speed_calc(void); //计算马达速度

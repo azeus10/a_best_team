@@ -543,7 +543,17 @@ else
 		 if(Global.mode == LEAN_LOB)
 		 Global.mode=FLOW;
 	}
-
+	if(IF_KEY_PRESSED_X&&IF_KEY_PRESSED_CTRL)
+	{
+		if(Get_sys_time_ms()-Time_delay_press_G_CTRL>350)
+		{
+			if(fly_mode == 0)
+			fly_mode = 1;
+			else if(fly_mode == 1)
+			fly_mode = 0;
+			Time_delay_press_G_CTRL=Get_sys_time_ms();
+		}
+	}
 	
  }
 	}
