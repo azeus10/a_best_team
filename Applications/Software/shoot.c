@@ -57,7 +57,7 @@ void shoot_init()
 	shoot.SetSpeedLeft = 0;
 	shoot.SetSpeedRight = 0;
 	shoot.compensate_angle=85;
-	shoot.speedUpLevel   = 5100;
+	shoot.speedUpLevel   = 5300;
 	shoot.speedRightLevel= 5300;
 	shoot.speedLeftLevel = 5300;
 }

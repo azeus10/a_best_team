@@ -363,6 +363,7 @@ void ChassisTask_callback(void *argument)
   /* USER CODE END ChassisTask_callback */
 }
 
+
 /* USER CODE BEGIN Header_GimbalTask_callback */
 /**
  * @brief Function implementing the GimbalTask thread.
@@ -409,7 +410,7 @@ void NUCcontrolTask_callback(void *argument)
 {
   /* USER CODE BEGIN NUCcontrolTask_callback */
 	
-  STM32_data_t toNUC;
+  //STM32_data_t toNUC;
 	/* Infinite loop */
 	//视觉通信
 	unsigned char data[128];
@@ -418,24 +419,24 @@ void NUCcontrolTask_callback(void *argument)
 	for (;;)
 	{
 //视觉通信部分
-//		if(get_robot_id()>100)         // 敌方颜色
-//			toNUC.enemy = 1;  //1        //红色  自瞄识别
-//		else
-//			toNUC.enemy = 0;    //0      //蓝色
-//		toNUC.b_speed=15.5f;
-//		toNUC.robot_speed_mps=0;
-//		toNUC.mode  = 1;
-//	  toNUC.yaw   =   IMU_data.AHRS.yaw;
-//    toNUC.pitch =   IMU_data.AHRS.pitch;
-//	  encodeSTM32(&toNUC, data, sizeof(STM32_data_t));
-//		VirCom_send(data, sizeof(STM32_data_t));
+		if(get_robot_id()>100)         // 敌方颜色
+			toNUC.enemy = 1;  //1        //红色  自瞄识别
+		else
+			toNUC.enemy = 0;    //0      //蓝色
+		toNUC.b_speed=15.5f;
+		toNUC.robot_speed_mps=0;
+		toNUC.mode  = 1;
+	  toNUC.yaw   =   rad2degree(IMU_data.AHRS.yaw);
+   toNUC.pitch =   rad2degree(IMU_data.AHRS.pitch);
+	  encodeSTM32(&toNUC, data, sizeof(STM32_data_t));
+		VirCom_send(data, sizeof(STM32_data_t));
 //虚拟串口显示波形部分
-	 char matlab[128];
-	 unsigned char len = 0;
-	 len = sprintf(matlab,"%f,%f,%f,%f\r\n",-get_motor_data(chassis_FR).speed_rpm/1.0,
-	 										(get_motor_data(chassis_FL).speed_rpm)/1.0,
-	 										-(get_motor_data(chassis_BR).speed_rpm)/1.0,
-											(get_motor_data(chassis_BL).speed_rpm)/1.0);
+	//  char matlab[128];
+	//  unsigned char len = 0;
+	//  len = sprintf(matlab,"%f,%f,%f,%f\r\n",-get_motor_data(chassis_FR).speed_rpm/1.0,
+	//  										(get_motor_data(chassis_FL).speed_rpm)/1.0,
+	//  										-(get_motor_data(chassis_BR).speed_rpm)/1.0,
+	// 										(get_motor_data(chassis_BL).speed_rpm)/1.0);
 // len = sprintf(matlab,"%f,%f,%f,%f\r\n",wheel_mps[0]/1.0,
 // 											wheel_mps[1]/1.0,
 // 											wheel_mps[2]/1.0,
@@ -444,7 +445,7 @@ void NUCcontrolTask_callback(void *argument)
 // 										(Plimit*chassis.wheel_current[1])/1.0,
 // 										(Plimit*chassis.wheel_current[2])/1.0,
 // 										-(Plimit*chassis.wheel_current[3])/1.0);
- VirCom_send(matlab,len);
+ //VirCom_send(matlab,len);
 
 		osDelay(2);
 	}

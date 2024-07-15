@@ -13,12 +13,11 @@
 #include "stdint.h"
 #include "stdlib.h"
 #include "string.h"
-
+STM32_data_t toNUC;
 int decodeSTM32(STM32_data_t *target, unsigned char rx_buff[], unsigned int len)
 {
 //    if (len != sizeof(STM32_data_t))
 //        return -1;
-
     memcpy(target, rx_buff, sizeof(STM32_data_t));
     return 0;
 }
@@ -49,3 +48,5 @@ int encodeNUC(NUC_data_t *target, unsigned char tx_buff[], unsigned int len)
 }
 
 //end of file
+
+

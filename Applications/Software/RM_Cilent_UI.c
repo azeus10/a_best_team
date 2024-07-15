@@ -12,6 +12,7 @@
 #include "Global_status.h"
 #include "CAN_receive&send.h"
 #include "IMU_updata.h"
+#include "chassis_move.h"
 
 #define Root_2 1.4142136f
 
@@ -110,10 +111,10 @@ void infanty_hero_status_UI_add(void) // 手动按键添加UI
    Line_Draw(&G7, "007", UI_Graph_ADD, 9, UI_Color_Orange, 2, 968, 1080-401,1000 , 1080-401); //停转前哨站
 	 
    //前哨站井字线瞄准装甲板
- 	 Line_Draw(&G36, "040", UI_Graph_ADD, 1, UI_Color_Purplish_red, 2, 840, 1080-684, 949, 1080-684); //水平1
- 	 Line_Draw(&G37, "037", UI_Graph_ADD, 1, UI_Color_Purplish_red, 2, 840, 1080-635, 949, 1080-635); //水平2
-	 Line_Draw(&G38, "038", UI_Graph_ADD, 1, UI_Color_Purplish_red, 2, 863, 1080-744, 863, 1080-575); //竖直1
-	 Line_Draw(&G39, "039", UI_Graph_ADD, 1, UI_Color_Purplish_red, 2, 929, 1080-744, 929, 1080-575); //竖直2
+ 	 Line_Draw(&G36, "040", UI_Graph_ADD, 1, UI_Color_Purplish_red, 2, 938, 1080-549, 1043, 1080-549); //水平1
+ 	 Line_Draw(&G37, "037", UI_Graph_ADD, 1, UI_Color_Purplish_red, 2, 938, 1080-586, 1043, 1080-586); //水平2
+	 Line_Draw(&G38, "038", UI_Graph_ADD, 1, UI_Color_Purplish_red, 2, 965, 1080-522, 965, 1080-617); //竖直1
+	 Line_Draw(&G39, "039", UI_Graph_ADD, 1, UI_Color_Purplish_red, 2, 1018, 1080-522, 1018, 1080-617); //竖直2
    //瞄准镜边缘线
 	 Arc_Draw(&G40, " 040", UI_Graph_ADD,  4, UI_Color_Green,60,120, 2,1000,1080-543,431,404);
 	 Arc_Draw(&G41, " 041", UI_Graph_ADD,  7, UI_Color_Green,240,300, 2,1000,1080-543,440,404);
@@ -263,10 +264,14 @@ void chassis_status_refresh(uint8_t status)             //底盘模式切换更新
    char lean_arr[4]   = "LEAN";
    char spin_arr[4]   = "SPIN";
    char tank_arr[4]   = "LOB ";
+   char fly_arr[4] = "FLY";
 
    switch (status)
    {
    case FLOW:
+      if(fly_mode == 1)
+      Char_Draw(&G8, "008", UI_Graph_Change, 7, UI_Color_Green, 18, 4, 2, 1200, 186, &fly_arr[0]);
+      else
       Char_Draw(&G8, "008", UI_Graph_Change, 7, UI_Color_Green, 18, 4, 2, 1200, 186, &normal_arr[0]);
       break;
 

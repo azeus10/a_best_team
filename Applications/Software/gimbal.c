@@ -71,7 +71,7 @@ void gimbal_init()
 	pid_set(&pitch_ecd_cross_imu_location_pid, 17.0f, 0.000f, 2.0f, 100.0, 0.0f);
 	/*副云台*/
 	//用于初始化的PID
-	pid_set(&scope_speed_pid, 40.0f, 0.0f, 0.0f, 2000.0f, 0.0f);
+	pid_set(&scope_speed_pid, 40.0f, 0.0f, 0.0f, 3000.0f, 0.0f);
 	pid_set(&scope_location_pid, 15.0f, 0.000f, 0.0f, 1000.0, 0.0f);
 
 	pid_set(&SAMALL_speed_pid, 7.0f, 0.0f, 1.0f, 10000.0f, 0.0f);
@@ -275,13 +275,13 @@ void gimbal_pid_cal()
 	// 副云台pid计算
 	if(gimbal.small_pitch.state == 1)
 	{
-		if(Global.mode==LEAN_LOB && Global.input.ScopeisOpen==1 &&gimbal.small_pitch.target == 1)//打前哨站
+		if(Global.mode==LEAN_LOB && Global.input.ScopeisOpen==1 && IMU_data.AHRS.pitch*57.3f < 30)//打前哨站
 		{
 			gimbal.small_pitch.set += 5; 
-			if(gimbal.small_pitch.set > (gimbal.small_pitch.offset + 910))
-				gimbal.small_pitch.set = gimbal.small_pitch.offset + 910;
+			if(gimbal.small_pitch.set > (gimbal.small_pitch.offset + 920))
+				gimbal.small_pitch.set = gimbal.small_pitch.offset + 920;
 		}
-		else if(Global.mode==LEAN_LOB && Global.input.ScopeisOpen==1)//打基地
+		else if(Global.mode==LEAN_LOB && Global.input.ScopeisOpen==1 && IMU_data.AHRS.pitch*57.3f >= 30)//打基地
 		{
 			gimbal.small_pitch.set += 5; 
 			if(gimbal.small_pitch.set > (gimbal.small_pitch.offset + 1820))
