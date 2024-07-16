@@ -130,6 +130,7 @@ void gimbal_updata()
 		gimbal.pitch.now = degree2rad(get_motor_data(PITCH_MOTOR).angle - gimbal.pitch.offset);
 
 	}
+	
 	/*мсбщрг*/
 	else if (gimbal.gimbal_source == IMU)
 	{
