@@ -37,10 +37,32 @@ compiling shoot.c...
 ..\Applications\Software\referee_handle_pack.h(597): warning:  #1-D: last line of file ends without a newline
   #endif
 ..\Applications\Software\shoot.c: 4 warnings, 0 errors
+compiling freertos.c...
+../Applications/Software/Global_status.h(71): warning:  #1295-D: Deprecated declaration Global_status_init - give arg types
+  void Global_status_init();
+../Applications/Software/referee_handle_pack.h(595): warning:  #1295-D: Deprecated declaration Required_Data - give arg types
+  void Required_Data();
+../Applications/Software/referee_handle_pack.h(596): warning:  #1295-D: Deprecated declaration Cap_Required_Data - give arg types
+  void Cap_Required_Data();
+../Applications/Software/referee_handle_pack.h(597): warning:  #1-D: last line of file ends without a newline
+  #endif
+../Src/freertos.c(447): warning:  #167-D: argument of type "char *" is incompatible with parameter of type "uint8_t *"
+   VirCom_send(matlab,len);
+../Src/freertos.c(416): warning:  #177-D: variable "data"  was declared but never referenced
+  	unsigned char data[128];
+../Src/freertos.c(418): warning:  #177-D: variable "robot_status"  was declared but never referenced
+  	ext_robot_status_t robot_status;
+../Src/freertos.c(735): warning:  #550-D: variable "x_s"  was set but never used
+  	float x_s, y_s, r_s;
+../Src/freertos.c(735): warning:  #550-D: variable "y_s"  was set but never used
+  	float x_s, y_s, r_s;
+../Src/freertos.c(735): warning:  #550-D: variable "r_s"  was set but never used
+  	float x_s, y_s, r_s;
+../Src/freertos.c: 10 warnings, 0 errors
 linking...
-Program Size: Code=80504 RO-data=3248 RW-data=836 ZI-data=57668  
+Program Size: Code=80920 RO-data=3248 RW-data=836 ZI-data=57604  
 FromELF: creating hex file...
-"RMc_adam_GeneralRobotSystemCode\RMc_adam_GeneralRobotSystemCode.axf" - 0 Error(s), 4 Warning(s).
+"RMc_adam_GeneralRobotSystemCode\RMc_adam_GeneralRobotSystemCode.axf" - 0 Error(s), 14 Warning(s).
 
 <h2>Software Packages used:</h2>
 
@@ -68,7 +90,7 @@ Package Vendor: Keil
    * Component: ARM::CMSIS:DSP@1.4.6
       Library file:  CMSIS/Lib/ARM/arm_cortexM4lf_math.lib
       Include file:  CMSIS/Include/arm_math.h
-Build Time Elapsed:  00:00:04
+Build Time Elapsed:  00:00:05
 </pre>
 </body>
 </html>
