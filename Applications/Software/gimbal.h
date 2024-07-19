@@ -82,7 +82,7 @@ struct gimbal_status
 
 extern struct gimbal_status gimbal;
 extern pid_t yaw_imu_location_pid;
-
+extern float imu2ecd_zero;
 //extern pid_t pitch_speed_pid;
 
 //外部调用

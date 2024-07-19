@@ -419,23 +419,24 @@ void NUCcontrolTask_callback(void *argument)
 	for (;;)
 	{
 //视觉通信部分
-// 		if(get_robot_id()>100)         // 敌方颜色
-// 			toNUC.enemy = 1;  //1        //红色  自瞄识别
-// 		else
-// 			toNUC.enemy = 0;    //0      //蓝色
-// 		toNUC.b_speed=15.5f;
-// 		toNUC.robot_speed_mps=0;
-// 		toNUC.mode  = 1;
-// 	  toNUC.yaw   =   rad2degree(IMU_data.AHRS.yaw);
-//    toNUC.pitch =   rad2degree(IMU_data.AHRS.pitch);
-// 	  encodeSTM32(&toNUC, data, sizeof(STM32_data_t));
-// 		VirCom_send(data, sizeof(STM32_data_t));
+		if(get_robot_id()>100)         // 敌方颜色
+			toNUC.enemy = 1;  //1        //红色  自瞄识别
+		else
+			toNUC.enemy = 0;    //0      //蓝色
+		toNUC.b_speed=15.5f;
+		toNUC.robot_speed_mps=0;
+		toNUC.mode  = 3;
+	  toNUC.yaw   =   rad2degree(IMU_data.AHRS.yaw);
+   toNUC.pitch =   rad2degree(IMU_data.AHRS.pitch);
+	  encodeSTM32(&toNUC, data, sizeof(STM32_data_t));
+		VirCom_send(data, sizeof(STM32_data_t));
 //虚拟串口显示波形部分
-	 char matlab[128];
-	 unsigned char len = 0;
-	 len = sprintf(matlab,"%f,%f,%f\r\n",get_motor_data(SHOOT_MOTOR1).speed_rpm/1.0,
-	 										(get_motor_data(SHOOT_MOTOR2).speed_rpm)/1.0,
-	 										-(get_motor_data(SHOOT_MOTOR3).speed_rpm)/1.0);
+	//  char matlab[128];
+	
+	//  unsigned char len = 0;
+	//  len = sprintf(matlab,"%f,%f,%f\r\n",get_motor_data(SHOOT_MOTOR1).speed_rpm/1.0,
+	//  										(get_motor_data(SHOOT_MOTOR2).speed_rpm)/1.0,
+	//  										-(get_motor_data(SHOOT_MOTOR3).speed_rpm)/1.0);
 // len = sprintf(matlab,"%f,%f,%f,%f\r\n",wheel_mps[0]/1.0,
 // 											wheel_mps[1]/1.0,
 // 											wheel_mps[2]/1.0,
@@ -444,7 +445,7 @@ void NUCcontrolTask_callback(void *argument)
 // 										(Plimit*chassis.wheel_current[1])/1.0,
 // 										(Plimit*chassis.wheel_current[2])/1.0,
 // 										-(Plimit*chassis.wheel_current[3])/1.0);
- VirCom_send(matlab,len);
+//  VirCom_send(matlab,len);
 
 		osDelay(2);
 	}
@@ -492,7 +493,7 @@ void RefereeTask_callback(void *argument)
 
     //UI更新
 		chassis_status_refresh(Global.mode);
-		Chassis_Refresh(motor_data[4].angle-85.0f);                      // 底盘图示状态更新
+		Chassis_Refresh(motor_data[4].angle_cnt-15.5f);                      // 底盘图示状态更新
 		Super_POWER(cap_get_remain_vol());			                          // 超级电容UI动态更新
 		super_cap_speedup(Global.input.fly);                                    // 超电开关显示
 		shoot_refresh(shoot.SpeedRight);                                  // 射击速度

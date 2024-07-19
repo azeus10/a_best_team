@@ -44,14 +44,16 @@ pid_t SAMALL_speed_pid;
 pid_t SAMALL_location_pid;
 int flag_Scope_init=0;
 int small_pitch_time_delay;
+float imu2ecd_zero = 0.0f;
+float imu2ecd_err = 0.0f;
 // 云台初始化
 void gimbal_init()
 {
 
 	/*主云台*/
 	/*编码器控制参数*/
-	pid_set(&yaw_ecd_speed_pid, 9000, 0.0f, 8000.0f, 30000.0f, 0.0f);
-	pid_set(&yaw_ecd_location_pid, 8.0f, 0.0f, 2, 30000.0f, 0.0f);
+	pid_set(&yaw_ecd_speed_pid, 450, 0.0f, 700.0f, 20000.0f, 0.0f);
+	pid_set(&yaw_ecd_location_pid, 800.0f, 0.0f, 800, 500.0f, 0.0f);
 
 	pid_set(&pitch_ecd_speed_pid, 10000.0f,10.0f, 1400.0f, 30000.0f, 0.0f);
 	pid_set(&pitch_ecd_location_pid, 17.0f, 0.0f, 2.0f, 100.0, 0.0f);
@@ -136,9 +138,18 @@ void gimbal_updata()
 	{
 		// yaw轴更新
 		//角度制
+		if(Global.mode==LEAN_LOB)
+		{
+			decode_as_6020(YAW_MOTOR);
+			gimbal.yaw_speed =  (get_motor_data(YAW_MOTOR).speed_rpm * 0.10472f);
+			gimbal.yaw.now   =  degree2rad(get_motor_data(YAW_MOTOR).angle_cnt - imu2ecd_err);
+		}
+		else
+		{
+			gimbal.yaw_speed =   (-cos(IMU_data.AHRS.pitch) * IMU_data.gyro[2] +sin(IMU_data.AHRS.pitch) * IMU_data.gyro[0])*360.0f/(2*3.1415926f);
+			gimbal.yaw.now   =   -rad2degree(IMU_data.AHRS.yaw_rad_cnt);
+		}
 		
-		gimbal.yaw_speed =   (-cos(IMU_data.AHRS.pitch) * IMU_data.gyro[2] +sin(IMU_data.AHRS.pitch) * IMU_data.gyro[0])*360.0f/(2*3.1415926f);
-		gimbal.yaw.now   =   -rad2degree(IMU_data.AHRS.yaw_rad_cnt);
 		
 		//pitch轴更新
 		decode_as_6020(PITCH_MOTOR);
@@ -326,7 +337,17 @@ void gimbal_pid_cal()
 		
 		if (gimbal.yaw_status == LOCATION)
 		{
-			gimbal.set_yaw_speed = pid_cal(&yaw_imu_location_pid, gimbal.yaw.now, gimbal.yaw.set);
+			if(Global.mode==LEAN_LOB)
+			{
+				gimbal.set_yaw_speed = pid_cal(&yaw_ecd_location_pid, gimbal.yaw.now, degree2rad(gimbal.yaw.set - imu2ecd_zero));
+			}
+			else
+			{
+				gimbal.set_yaw_speed = pid_cal(&yaw_imu_location_pid, gimbal.yaw.now, gimbal.yaw.set);
+				imu2ecd_zero = gimbal.yaw.set;
+				imu2ecd_err = get_motor_data(YAW_MOTOR).angle_cnt;
+			}
+			
 		}
 		else
 			gimbal.set_yaw_speed = gimbal.yaw_speed;
@@ -345,8 +366,15 @@ void gimbal_pid_cal()
 			gimbal.set_scope_speed = gimbal.scope_speed;
 		}
 
-		// 速度环
-		set_motor(pid_cal(&yaw_imu_speed_pid, gimbal.yaw_speed, gimbal.set_yaw_speed), YAW_MOTOR);
+		// // 速度环
+		if(Global.mode==LEAN_LOB)
+		{
+			set_motor(pid_cal(&yaw_ecd_speed_pid, gimbal.yaw_speed, gimbal.set_yaw_speed), YAW_MOTOR);
+		}
+		else
+		{
+			set_motor(pid_cal(&yaw_imu_speed_pid, gimbal.yaw_speed, gimbal.set_yaw_speed), YAW_MOTOR);
+		}
 		set_motor(pid_cal(&pitch_imu_speed_pid, gimbal.pitch_speed, gimbal.set_pitch_speed), PITCH_MOTOR);
 		set_motor(pid_cal(&scope_speed_pid, gimbal.scope_speed, gimbal.set_scope_speed), SCOPE_MOTOR);
 	}
