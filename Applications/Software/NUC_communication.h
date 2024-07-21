@@ -25,25 +25,28 @@
 // 	char unknow[11];
 //	
 //	uint16_t checksum;
-	
+	char header;
 	float yaw,pitch;
-	float x_speed,y_speed, r_speed;
+
 	float robot_speed_mps;
 	float b_speed;
 	int mode;
 	uint8_t enemy;
-	char unknown[31];
+	char unknown[9];
+	char tails;
  } STM32_data_t;
 
 
 typedef struct
 {
 //uint8_t header;
+	char header;
 	float yaw;
 	float pitch;
   uint8_t shoot;//发弹标志位
-	uint16_t checksum;
+	//uint16_t checksum;
 	char unknown[21];
+	char tails;
 } __attribute__((packed)) NUC_data_t;
 
 

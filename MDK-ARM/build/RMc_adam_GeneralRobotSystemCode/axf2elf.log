@@ -1,0 +1,4 @@
+arm-none-eabi-objcopy --update-section ER_IROM1="e:\rm_24\Fly_hero\MDK-ARM\build\RMc_adam_GeneralRobotSystemCode\RMc_adam_GeneralRobotSystemCode.bin" "e:\rm_24\Fly_hero\MDK-ARM\build\RMc_adam_GeneralRobotSystemCode\RMc_adam_GeneralRobotSystemCode.axf" "e:\rm_24\Fly_hero\MDK-ARM\build\RMc_adam_GeneralRobotSystemCode\RMc_adam_GeneralRobotSystemCode.elf"
+
+arm-none-eabi-objcopy: e:\rm_24\Fly_hero\MDK-ARM\build\RMc_adam_GeneralRobotSystemCode\RMc_adam_GeneralRobotSystemCode.elf: warning: allocated section `RW_IRAM1' not in segment
+

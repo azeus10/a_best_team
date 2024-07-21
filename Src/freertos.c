@@ -413,12 +413,13 @@ void NUCcontrolTask_callback(void *argument)
   //STM32_data_t toNUC;
 	/* Infinite loop */
 	//视觉通信
-	unsigned char data[128];
+  	 char data[128];
 	//串口显示波形（Vofa+）
 	ext_robot_status_t robot_status;
 	for (;;)
 	{
 //视觉通信部分
+		toNUC.header = 0xAA;
 		if(get_robot_id()>100)         // 敌方颜色
 			toNUC.enemy = 1;  //1        //红色  自瞄识别
 		else
@@ -426,9 +427,11 @@ void NUCcontrolTask_callback(void *argument)
 		toNUC.b_speed=15.5f;
 		toNUC.robot_speed_mps=0;
 		toNUC.mode  = 3;
-	  toNUC.yaw   =   rad2degree(IMU_data.AHRS.yaw);
-   toNUC.pitch =   rad2degree(IMU_data.AHRS.pitch);
-	  encodeSTM32(&toNUC, data, sizeof(STM32_data_t));
+	    toNUC.yaw   =   rad2degree(IMU_data.AHRS.yaw);
+        toNUC.pitch =   rad2degree(IMU_data.AHRS.pitch);
+		toNUC.tails = 0xBB;
+
+	    encodeSTM32(&toNUC, data, sizeof(STM32_data_t));
 		VirCom_send(data, sizeof(STM32_data_t));
 //虚拟串口显示波形部分
 	//  char matlab[128];
@@ -447,7 +450,7 @@ void NUCcontrolTask_callback(void *argument)
 // 										-(Plimit*chassis.wheel_current[3])/1.0);
 //  VirCom_send(matlab,len);
 
-		osDelay(2);
+		osDelay(1);
 	}
 
   /* USER CODE END NUCcontrolTask_callback */

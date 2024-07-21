@@ -52,8 +52,8 @@ void gimbal_init()
 
 	/*主云台*/
 	/*编码器控制参数*/
-	pid_set(&yaw_ecd_speed_pid, 450, 0.0f, 700.0f, 20000.0f, 0.0f);
-	pid_set(&yaw_ecd_location_pid, 800.0f, 0.0f, 800, 500.0f, 0.0f);
+	pid_set(&yaw_ecd_speed_pid, 400, 0.0f, 500.0f, 25000.0f, 0.0f);
+	pid_set(&yaw_ecd_location_pid, 1800.0f, 0.0f, 7400, 500.0f, 0.0f);
 
 	pid_set(&pitch_ecd_speed_pid, 10000.0f,10.0f, 1400.0f, 30000.0f, 0.0f);
 	pid_set(&pitch_ecd_location_pid, 17.0f, 0.0f, 2.0f, 100.0, 0.0f);
@@ -290,8 +290,8 @@ void gimbal_pid_cal()
 		if(Global.mode==LEAN_LOB && Global.input.ScopeisOpen==1 && IMU_data.AHRS.pitch*57.3f < 30)//打前哨站
 		{
 			gimbal.small_pitch.set += 5; 
-			if(gimbal.small_pitch.set > (gimbal.small_pitch.offset + 920))
-				gimbal.small_pitch.set = gimbal.small_pitch.offset + 920;
+			if(gimbal.small_pitch.set > (gimbal.small_pitch.offset + 850))
+				gimbal.small_pitch.set = gimbal.small_pitch.offset + 850;
 		}
 		else if(Global.mode==LEAN_LOB && Global.input.ScopeisOpen==1 && IMU_data.AHRS.pitch*57.3f >= 30)//打基地
 		{

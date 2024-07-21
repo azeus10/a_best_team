@@ -27,13 +27,11 @@ void VirCom_send(uint8_t data[], uint16_t len)
 }
 void VirCom_rev(uint8_t data[], uint16_t len)
 {
-//	uint16_t sum;
-//	StartCommunciate=1;
- // if (data[0] == (unsigned)'s')
-//  {
-//		if(Verify_CRC16_Check_Sum(data,sizeof(NUC_data_t)))
-			decodeNUC(&fromNUC,data,len);
- // }
+
+ if (data[0] == 0xaa)
+ {
+	decodeNUC(&fromNUC,data,len);
+ }
 }
 
 
