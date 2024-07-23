@@ -105,10 +105,10 @@ inline void change_limit(float last, float *now, float limit)
 
 //软件功率控制函数
 float now_p = 0.0f;
-float b = 0.001f;
+float b =0.001f;
 float e = 0.85f;
-float a = 1.33999826e-07;// 1.23e-07;	// k1
-float k2 = 2.75299993e-06; // 1.453e-07; // k2
+float a = 2.53999826e-07;// 1.23e-07;	// k1
+float k2 = 5.25299993e-06; // 1.453e-07; // k2
 float power_limit(int16_t current[4])
 {
 	float max_p;// = REFEREE_DATA.Chassis_Power_Limit - 2.0f; // 2w余量

@@ -3606,7 +3606,7 @@
       <ActiveTab>2</ActiveTab>
       <Doc>
         <Name>..\Applications\Software\gimbal.c</Name>
-        <ColumnNumber>32</ColumnNumber>
+        <ColumnNumber>35</ColumnNumber>
         <TopLine>58</TopLine>
         <CurrentLine>67</CurrentLine>
         <Folding>1</Folding>
@@ -3625,7 +3625,7 @@
       <Doc>
         <Name>.\startup_stm32f407xx.s</Name>
         <ColumnNumber>0</ColumnNumber>
-        <TopLine>201</TopLine>
+        <TopLine>216</TopLine>
         <CurrentLine>176</CurrentLine>
         <Folding>1</Folding>
         <ContractedFolders></ContractedFolders>
@@ -3642,16 +3642,16 @@
       </Doc>
       <Doc>
         <Name>..\Applications\Software\control_setting.c</Name>
-        <ColumnNumber>33</ColumnNumber>
+        <ColumnNumber>13</ColumnNumber>
         <TopLine>327</TopLine>
-        <CurrentLine>334</CurrentLine>
+        <CurrentLine>335</CurrentLine>
         <Folding>1</Folding>
         <ContractedFolders></ContractedFolders>
         <PaneID>0</PaneID>
       </Doc>
       <Doc>
         <Name>../Src/freertos.c</Name>
-        <ColumnNumber>46</ColumnNumber>
+        <ColumnNumber>52</ColumnNumber>
         <TopLine>544</TopLine>
         <CurrentLine>555</CurrentLine>
         <Folding>1</Folding>
@@ -3688,7 +3688,7 @@
       <Doc>
         <Name>../Src/main.c</Name>
         <ColumnNumber>0</ColumnNumber>
-        <TopLine>154</TopLine>
+        <TopLine>1</TopLine>
         <CurrentLine>1</CurrentLine>
         <Folding>1</Folding>
         <ContractedFolders></ContractedFolders>
