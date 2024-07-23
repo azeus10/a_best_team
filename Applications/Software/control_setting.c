@@ -53,7 +53,7 @@ uint32_t Time_delay_press_X_CTRL=0;
 float tweaks_value = 0.01f;
 uint32_t last_shoot_time = 0;
 // 步长
-float pressW_step = 0.005f;
+float pressW_step = 0.001f;
 float pressS_step = 0.005f;
 float pressA_step = 0.001f;
 float pressD_step = 0.001f;
@@ -63,8 +63,8 @@ float pressShift_step = 0.01f;
 float PitchCofficientFromRC = 800000.0f;
 float YawCofficientFromRC = 600.0f;
 // 自瞄
-float PitchCofficientFromNUC = -5500.0f;
-float YawCofficientFromNUC = 400.0f;
+float PitchCofficientFromNUC = -1500.0f;
+float YawCofficientFromNUC = 20.0f;
 // 客户端
 float PitchCofficientFromPC = -12000.0f;
 float YawCofficientFromPC = 120.0f;
@@ -335,15 +335,18 @@ void remove_control_task()
 			Global.input.y = 0.0f;
 			if (Global.cap == FULL)
 			{
-				if(Global.input.y < 1000.0f)
+				if(Global.input.y < 7.0f)
 					Global.input.y += pressShift_step;
+				else
+				Global.input.y = 7.0;	
 			}
 			else
 			{
-				if(Global.input.y < 50.5f)
+				
+				if(Global.input.y < 1.8f)
 					Global.input.y += pressW_step;
 				else
-					Global.input.y = 50.5f;
+					Global.input.y = 1.8f;
 			}
 		}
 	/*按下S键后退*/

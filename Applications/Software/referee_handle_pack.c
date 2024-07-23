@@ -333,7 +333,7 @@ void Required_Data() //后续可根据需要自行添加
 		REFEREE_DATA.Buffer_Energy = power_heat_data.buffer_energy;                             //缓冲能量
 		REFEREE_DATA.Chassis_Power = power_heat_data.chassis_power;                             //底盘功率
 		REFEREE_DATA.Chassis_Power_Limit = robot_status.chassis_power_limit;                    //底盘功率限制
-	  REFEREE_DATA.Projectile_allowance_42mm=projectile_allowance.projectile_allowance_42mm;  //42mm允许发弹量
+	    REFEREE_DATA.Projectile_allowance_42mm=projectile_allowance.projectile_allowance_42mm;  //42mm允许发弹量
 	   
 }
 

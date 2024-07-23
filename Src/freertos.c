@@ -542,7 +542,7 @@ void FlowModeTask_callback(void *argument)
 		if(fly_mode == 1)
 			pid_set(&chassis_follow,5, 0, 30, 50, 0);
 		else
-			pid_set(&chassis_follow,2, 0, 10, 50, 0);
+			pid_set(&chassis_follow,3, 0, 26, 50, 0);
 			
 		
 		 // 0 副云台保持水平
