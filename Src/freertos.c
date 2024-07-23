@@ -419,17 +419,17 @@ void NUCcontrolTask_callback(void *argument)
 	for (;;)
 	{
 //视觉通信部分
-		toNUC.header = 0xAA;
+		//toNUC.header = 0xEE;
 		if(get_robot_id()>100)         // 敌方颜色
 			toNUC.enemy = 1;  //1        //红色  自瞄识别
 		else
 			toNUC.enemy = 0;    //0      //蓝色
 		toNUC.b_speed=15.5f;
-		toNUC.robot_speed_mps=0;
-		toNUC.mode  = 3;
+	
+		toNUC.mode  = 1;
 	    toNUC.yaw   =   rad2degree(IMU_data.AHRS.yaw);
         toNUC.pitch =   rad2degree(IMU_data.AHRS.pitch);
-		toNUC.tails = 0xBB;
+		
 
 	    encodeSTM32(&toNUC, data, sizeof(STM32_data_t));
 		VirCom_send(data, sizeof(STM32_data_t));

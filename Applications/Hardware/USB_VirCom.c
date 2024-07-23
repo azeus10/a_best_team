@@ -28,10 +28,11 @@ void VirCom_send(uint8_t data[], uint16_t len)
 void VirCom_rev(uint8_t data[], uint16_t len)
 {
 
- if (data[0] == 0xaa)
- {
+//  if (data[0] == 0xaa)
+//  {
 	decodeNUC(&fromNUC,data,len);
- }
+	
+//  }
 }
 
 

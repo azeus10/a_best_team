@@ -1,33 +1,9 @@
 >>> cc
 
-".\..\Applications\Hardware\IMU_updata.c", line 131: Warning:  #1035-D: single-precision operand implicitly converted to double-precision
-  	IMU_data.gyro[0]   -= (0.00495134993);
-  	^
-".\..\Applications\Hardware\IMU_updata.c", line 164: Warning:  #1035-D: single-precision operand implicitly converted to double-precision
-  	IMU_data.AHRS.err_code = AHRS_update(IMU_data.AHRS.q, (float)(Get_sys_time_ms() - last_time) * 0.001,
-  	                                                      ^
-".\..\Applications\Hardware\IMU_updata.c", line 201: Warning:  #186-D: pointless comparison of unsigned integer with zero
-  	if(ccr < 0)
-  	       ^
-.\..\Applications\Hardware\IMU_updata.c: 3 warnings, 0 errors
-".\..\Applications\Hardware\LK_motor_process.c", line 52: Warning:  #188-D: enumerated type mixed with another type
-    LK_control.mode=0xA3;
-                   ^
-.\..\Applications\Hardware\LK_motor_process.c: 1 warning, 0 errors
 ".\..\Applications\Hardware\UART_data_transmit.c", line 95: Warning:  #167-D: argument of type "char *" is incompatible with parameter of type "uint8_t *"
   			Nloop_Tof_Unpack_Data((char *)uart->rev_data, len);
   			                      ^
 .\..\Applications\Hardware\UART_data_transmit.c: 1 warning, 0 errors
-".\..\Applications\Hardware\DBUS_remote_control.c", line 124: Warning:  #223-D: function "Error_detect_remote" declared implicitly
-      Error_detect_remote();
-      ^
-".\..\Applications\Hardware\DBUS_remote_control.c", line 236: Warning:  #223-D: function "fabs" declared implicitly
-    if(fabs(RC_data_view.rc.ch[0])==0)
-       ^
-".\..\Applications\Hardware\DBUS_remote_control.c", line 244: Warning:  #223-D: function "fabs" declared implicitly
-  	if(fabs(RC_data_view.rc.ch[1])==0)
-  	   ^
-.\..\Applications\Hardware\DBUS_remote_control.c: 3 warnings, 0 errors
 ".\..\Applications\Software\RM_Cilent_UI.c", line 83: Warning:  #177-D: variable "lean_arr"  was declared but never referenced
      char lean_arr[4]   = "lean";
           ^
@@ -44,6 +20,10 @@
      Line_Draw(&G20, "020", UI_Graph_Change, 3, UI_Color_Pink, 2, 1200 + 40 * Root_2 * cosf(-degree2rad(angle + 276.5f)), 50 + 40 * Root_2 * sinf(-degree2rad(angle + 276.5f)), 1200 + 40 * Root_2 * cosf(-degree2rad(angle + 186.5)), 50 + 40 * Root_2 * sinf(-degree2rad(angle + 186.5)));
                                                                                                                                                                                                                                                                            ^
 .\..\Applications\Software\RM_Cilent_UI.c: 5 warnings, 0 errors
+".\..\Applications\Software\gimbal.c", line 227: Warning:  #550-D: variable "last_set"  was set but never used
+  static float last_set;
+               ^
+.\..\Applications\Software\gimbal.c: 1 warning, 0 errors
 ".\..\Applications\Software\control_setting.c", line 534: Warning:  #174-D: expression has no effect
   			{gimbal.small_pitch.target == 2;}
   			 ^
@@ -51,40 +31,16 @@
   			{gimbal.small_pitch.target == 0;}
   			 ^
 .\..\Applications\Software\control_setting.c: 2 warnings, 0 errors
-".\..\Applications\Software\chassis_move.c", line 158: Warning:  #188-D: enumerated type mixed with another type
-  		now_p += (fabs(current[i] * toque_coefficient * get_motor_data(i).speed_rpm) +
-  		                                                               ^
-".\..\Applications\Software\chassis_move.c", line 159: Warning:  #188-D: enumerated type mixed with another type
-  					  fabs(k2 * get_motor_data(i).speed_rpm * get_motor_data(i).speed_rpm) +
-  					                           ^
-".\..\Applications\Software\chassis_move.c", line 159: Warning:  #188-D: enumerated type mixed with another type
-  					  fabs(k2 * get_motor_data(i).speed_rpm * get_motor_data(i).speed_rpm) +
-  					                                                         ^
-".\..\Applications\Software\chassis_move.c", line 256: Warning:  #1035-D: single-precision operand implicitly converted to double-precision
-  		chassis.wheel_current[FR] = pid_cal(&motor_speed[FR], (get_motor_data(chassis_FR).speed_rpm)/19.0f*0.104719755*WHEEL_RADIUS, wheel_mps[FR]);
-  		                                                      ^
-".\..\Applications\Software\chassis_move.c", line 257: Warning:  #1035-D: single-precision operand implicitly converted to double-precision
-     		chassis.wheel_current[BR] = pid_cal(&motor_speed[BR], (get_motor_data(chassis_BR).speed_rpm)/19.0f*0.104719755*WHEEL_RADIUS, wheel_mps[BR]);
-     		                                                      ^
-".\..\Applications\Software\chassis_move.c", line 258: Warning:  #1035-D: single-precision operand implicitly converted to double-precision
-  		chassis.wheel_current[FL] = pid_cal(&motor_speed[FL], (get_motor_data(chassis_FL).speed_rpm)/19.0f*0.104719755*WHEEL_RADIUS, wheel_mps[FL]);
-  		                                                      ^
-".\..\Applications\Software\chassis_move.c", line 259: Warning:  #1035-D: single-precision operand implicitly converted to double-precision
-  		chassis.wheel_current[BL] = pid_cal(&motor_speed[BL], (get_motor_data(chassis_BL).speed_rpm)/19.0f*0.104719755*WHEEL_RADIUS, wheel_mps[BL]);
-  		                                                      ^
-.\..\Applications\Software\chassis_move.c: 7 warnings, 0 errors
-".\..\Applications\Software\gimbal.c", line 227: Warning:  #550-D: variable "last_set"  was set but never used
-  static float last_set;
-               ^
-.\..\Applications\Software\gimbal.c: 1 warning, 0 errors
-".\..\Drivers\Nooloop\nlink_utils.c", line 33: Warning:  #1293-D: assignment in condition
-    while ((current = str[cnt]))
-           ^
-.\..\Drivers\Nooloop\nlink_utils.c: 1 warning, 0 errors
 ".\..\Applications\Software\vofa.c", line 27: Warning:  #550-D: variable "len"  was set but never used
   	static uint16_t len;
   	                ^
 .\..\Applications\Software\vofa.c: 1 warning, 0 errors
+".\..\Src\freertos.c", line 434: Warning:  #167-D: argument of type "char *" is incompatible with parameter of type "unsigned char *"
+  	    encodeSTM32(&toNUC, data, sizeof(STM32_data_t));
+  	                        ^
+".\..\Src\freertos.c", line 435: Warning:  #167-D: argument of type "char *" is incompatible with parameter of type "uint8_t *"
+  		VirCom_send(data, sizeof(STM32_data_t));
+  		            ^
 ".\..\Src\freertos.c", line 418: Warning:  #177-D: variable "robot_status"  was declared but never referenced
   	ext_robot_status_t robot_status;
   	                   ^
@@ -97,7 +53,7 @@
 ".\..\Src\freertos.c", line 739: Warning:  #550-D: variable "r_s"  was set but never used
   	float x_s, y_s, r_s;
   	                ^
-.\..\Src\freertos.c: 4 warnings, 0 errors
+.\..\Src\freertos.c: 6 warnings, 0 errors
 
 >>> ld
 

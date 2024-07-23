@@ -52,7 +52,7 @@ void gimbal_init()
 
 	/*Ö÷ÔÆÌ¨*/
 	/*±àÂëÆ÷¿ØÖÆ²ÎÊý*/
-	pid_set(&yaw_ecd_speed_pid, 400, 0.0f, 500.0f, 25000.0f, 0.0f);
+	pid_set(&yaw_ecd_speed_pid, 300, 0.0f, 400.0f, 25000.0f, 0.0f);
 	pid_set(&yaw_ecd_location_pid, 1800.0f, 0.0f, 7400, 500.0f, 0.0f);
 
 	pid_set(&pitch_ecd_speed_pid, 10000.0f,10.0f, 1400.0f, 30000.0f, 0.0f);
@@ -248,16 +248,16 @@ void gimbal_pid_cal()
 	pid_set(&pitch_imu_speed_pid,400.0f, 0.0f, 15000.0f,29000.0f, 0.0f); //200 0 0 29000
 	pid_set(&pitch_imu_location_pid, 900.0f, 0.0f, 5000.0f, 100.0, 0.0f);//75 0 0 600
 	 }
-	else if(Global.mode!=LEAN_LOB&&Global.input.vision_status==1)
-	{
-	pid_set(&yaw_imu_speed_pid, 500, 0.00f, 0.0f, 29000.0f, 0.0f);  //µõÉä 400 0  0 29000
-                                                               //30 0 0 0 29000
-	pid_set(&yaw_imu_location_pid,20.0f, 0.0f, 0.0f,29000.0f, 0.0f);
+	// else if(Global.mode!=LEAN_LOB&&Global.input.vision_status==1)
+	// {
+	// pid_set(&yaw_imu_speed_pid, 500, 0.00f, 0.0f, 29000.0f, 0.0f);  //µõÉä 400 0  0 29000
+    //                                                            //30 0 0 0 29000
+	// pid_set(&yaw_imu_location_pid,20.0f, 0.0f, 0.0f,29000.0f, 0.0f);
 
-	 pid_set(&pitch_imu_speed_pid,350.0f, 0.0f, 0.0f,29000.0f, 0.0f); //200 0 0 29000
-	pid_set(&pitch_imu_location_pid, 26.0f, 0.0f, 0.0f, 600.0, 0.0f);//75 0 
+	//  pid_set(&pitch_imu_speed_pid,400.0f, 0.0f, 15000.0f,29000.0f, 0.0f); //200 0 0 29000
+	// pid_set(&pitch_imu_location_pid, 900.0f, 0.0f, 5000.0f, 100.0, 0.0f);//75 0 
 	
-	 }
+	//  }
 	 else if(Global.mode==LEAN_LOB)
 	 {
 	 pid_set(&yaw_imu_speed_pid, 400, 0.00f, 0.0f, 29000.0f, 0.0f);                                                                

@@ -53,18 +53,18 @@ uint32_t Time_delay_press_X_CTRL=0;
 float tweaks_value = 0.01f;
 uint32_t last_shoot_time = 0;
 // 步长
-float pressW_step = 0.01f;
+float pressW_step = 0.005f;
 float pressS_step = 0.005f;
 float pressA_step = 0.001f;
 float pressD_step = 0.001f;
-float pressShift_step = 0.02f;
+float pressShift_step = 0.01f;
 // 灵敏度
 // 遥控器
 float PitchCofficientFromRC = 800000.0f;
 float YawCofficientFromRC = 600.0f;
 // 自瞄
-float PitchCofficientFromNUC = -28.0f;
-float YawCofficientFromNUC = 15.0f;
+float PitchCofficientFromNUC = -5500.0f;
+float YawCofficientFromNUC = 400.0f;
 // 客户端
 float PitchCofficientFromPC = -12000.0f;
 float YawCofficientFromPC = 120.0f;
@@ -72,7 +72,7 @@ float PitchLobCofficientFromPC = -4600000.0f;
 // 一键掉头标志位
 uint8_t one_key_back;
 // float  auto_yaw,auto_pitch;
-// float  yaw_sen =0.8f;
+// float  yaw_sen =0.8f;2
 // float pitch_sen=0.8f;
 // 全局状态机初始化
 void Global_status_init()
@@ -179,8 +179,6 @@ void remove_control_task()
 	//正常控制
 	else
 		{
-			fromNUC.pitch = 0;
-			fromNUC.yaw = 0;
 			// 角度制
 			Global.input.yaw = (RC_data.rc.ch[2] / YawCofficientFromRC);
 			Global.input.pitch = (RC_data.rc.ch[3] / PitchCofficientFromRC) * 57.3f;
@@ -218,8 +216,7 @@ void remove_control_task()
 	/*松开鼠标右键进入正常云台控制*/
 	else
 	{
-		fromNUC.pitch = 0;
-		fromNUC.yaw   = 0;
+		
     //正常移动云台+微调操作
 		if (MOUSE_Z_MOVE_SPEED || MOUSE_Y_MOVE_SPEED)
 		{
