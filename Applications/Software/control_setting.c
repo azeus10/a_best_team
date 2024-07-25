@@ -512,7 +512,8 @@ else
 	/*按下V键UI结构体初始化*/
 	if(IF_KEY_PRESSED_V&&!(IF_KEY_PRESSED_CTRL))
 	{
-		UI_task_init();
+		// UI_task_init();
+		ui_init();
 	}
 	/*按下B键刷新瞄准线*/
 	if(IF_KEY_PRESSED_B)

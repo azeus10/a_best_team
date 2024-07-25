@@ -23,6 +23,7 @@
 #include "task.h"
 #include "main.h"
 #include "cmsis_os.h"
+#include "ui.h"
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
@@ -74,6 +75,7 @@
 /* USER CODE BEGIN Variables */
 
 extern struct IMU_t IMU_data;
+float relative_angle = 0;
 
 /* USER CODE END Variables */
 /* Definitions for Flash_LED_Task */
@@ -494,19 +496,26 @@ void RefereeTask_callback(void *argument)
 		Cap_Required_Data();
 		cap_update();
 
-    //UI更新
-		chassis_status_refresh(Global.mode);
-		Chassis_Refresh(motor_data[4].angle_cnt-15.5f);                      // 底盘图示状态更新
-		Super_POWER(cap_get_remain_vol());			                          // 超级电容UI动态更新
-		super_cap_speedup(Global.input.fly);                                    // 超电开关显示
-		shoot_refresh(shoot.SpeedRight);                                  // 射击速度
-		HeatLimitRefresh(Global.input.isHeatLimit);                       // 热量限制
-	  PitchYawRefresh(IMU_data.AHRS.pitch*57.3f,IMU_data.AHRS.yaw);     //Pitch,yaw轴数据更新
-		DistanceRefresh(Nloop_TOF[0].dis);                                //测距仪距离更新
-		ShootDeltaRefresh((shoot.speedUpLevel-5100)*1.0f,shoot.speedLeftLevel-5300,shoot.speedRightLevel-5300);
-
-		UI_id_check(); // 检查机器人id，实现动态更新
+    	//UI更新
+		// chassis_status_refresh(Global.mode);
+		// Chassis_Refresh(motor_data[4].angle_cnt-15.5f);                      // 底盘图示状态更新
+		// Super_POWER(cap_get_remain_vol());			                          // 超级电容UI动态更新
+		// super_cap_speedup(Global.input.fly);                                    // 超电开关显示
+		// shoot_refresh(shoot.SpeedRight);                                  // 射击速度
+		// HeatLimitRefresh(Global.input.isHeatLimit);                       // 热量限制
+		ui_pitch_angle(IMU_data.AHRS.pitch*57.3f,IMU_data.AHRS.yaw);
+	  	//PitchYawRefresh();     //Pitch,yaw轴数据更新
+	  	ShootDeltaRefresh((shoot.speedUpLevel-5100)*1.0f,shoot.speedLeftLevel-5300,shoot.speedRightLevel-5300);
+		//DistanceRefresh(Nloop_TOF[0].dis);                                //测距仪距离更新
+		 ui_supercap(cap.remain_vol);
+  	 	 char_change();
+ 	  	 ui_chassis(-relative_angle);
+ 		// ui_auto(fromNUC.shoot);
+  		// ui_chassisline();
+   		osDelay(2);
+   		ui_updata();
 		osDelay(5);
+		UI_id_check(); // 检查机器人id，实现动态更新
 	}
   /* USER CODE END RefereeTask_callback */
 }
@@ -524,7 +533,7 @@ void FlowModeTask_callback(void *argument)
 	/* Infinite loop */
 	float x_s, y_s, r_s;
 	float sin_beta, cos_beta;
-	float relative_angle = 0;
+	//float relative_angle = 0;
 	float lixirui = 0;
 	uint32_t mul = 0;
   pid_t chassis_follow;
@@ -614,7 +623,7 @@ void SpinModeTask_callback(void *argument)
 	
 	/* Infinite loop */
 	float x_s, y_s, r_s;
-	float relative_angle;
+	//float relative_angle;
 	float sin_beta, cos_beta;
 
 	for (;;)
@@ -737,7 +746,7 @@ void LobMode_callback(void *argument)
   /* USER CODE BEGIN LobMode_callback */
 	//吊射模式任务线程
 	float x_s, y_s, r_s;
-	float relative_angle = 0;
+	// float relative_angle = 0;
 	float sin_beta=0,cos_beta=0;
 	uint32_t mul=0;
 	pid_t chassis_follow;
@@ -825,7 +834,7 @@ void LeanModeTask_callback(void *argument)
 	//尖角模式任务线程
 	float x_s, y_s, r_s;
 	float sin_beta, cos_beta;
-	float relative_angle = 0;
+	//float relative_angle = 0;
 	uint32_t mul = 0;
 	pid_t chassis_follow;
 	// 底盘跟随PID

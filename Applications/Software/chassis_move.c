@@ -173,6 +173,8 @@ void chassis_moto_speed_calc()
 	//吊射模式下 底盘PD拉高一点达到锁死的效果
 	if(fly_mode == 1)
   	{
+		if(Global.mode == LEAN_LOB)
+		Global.mode = FLOW;
 		pid_set(&motor_speed[FR], 2, 0.1, 1.5, MAX_CURRENT, 3000);   //16000 1000  
 		pid_set(&motor_speed[FL], 1.5, 0.1, 1.5, MAX_CURRENT, 3000);
 		pid_set(&motor_speed[BL], 1.5, 0.1, 1.5, MAX_CURRENT, 3000);
@@ -181,6 +183,8 @@ void chassis_moto_speed_calc()
    }
    else if(Global.mode == LEAN_LOB)
    {
+		if(fly_mode == 1)
+		fly_mode == 0;
 	    pid_set(&motor_speed[FR], 16000, 0, 1000, MAX_CURRENT, 3000);   //16000 1000
 	    pid_set(&motor_speed[FL], 16000, 0, 1000,  MAX_CURRENT, 3000);
 	    pid_set(&motor_speed[BL], 16000, 0, 1000,  MAX_CURRENT, 3000);

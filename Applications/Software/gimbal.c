@@ -263,8 +263,8 @@ void gimbal_pid_cal()
 	 pid_set(&yaw_imu_speed_pid, 400, 0.00f, 0.0f, 29000.0f, 0.0f);                                                                
 	pid_set(&yaw_imu_location_pid,30.0f, 0.0f, 0.0f,29000.0f, 0.0f);
 
-	pid_set(&pitch_imu_speed_pid,800.0f, 0.0f,2500.0f,29000.0f, 0.0f);     //可以吊射用
-	pid_set(&pitch_imu_location_pid, 1500.0f, 0.0f, 20000.0f, 100.0, 0.0f);//
+	pid_set(&pitch_imu_speed_pid,800.0f, 0.1f,2500.0f,29000.0f, 20000.0f);     //可以吊射用
+	pid_set(&pitch_imu_location_pid, 1700.0f, 0.0f, 20000.0f, 100.0, 0.0f);//
 	 }
 	gimbal_set_pitch(gimbal.pitch.set,0.27555f,0.7655f);//限位,英雄反过来的
 	//副云台设置零点    前哨站变化910   基地变化1820

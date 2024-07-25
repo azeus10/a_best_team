@@ -340,7 +340,7 @@
               <MiscControls></MiscControls>
               <Define>USE_HAL_DRIVER,STM32F407xx</Define>
               <Undefine></Undefine>
-              <IncludePath>../Inc;../Drivers/STM32F4xx_HAL_Driver/Inc;../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy;../Middlewares/Third_Party/FreeRTOS/Source/include;../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2;../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F;../Middlewares/ST/STM32_USB_Device_Library/Core/Inc;../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc;../Drivers/CMSIS/Device/ST/STM32F4xx/Include;../Drivers/CMSIS/Include;../Drivers/Chip;../Task;../Algorithm;../Applications/Software;../Applications/Hardware;../Drivers/Nooloop</IncludePath>
+              <IncludePath>../Inc;../Drivers/STM32F4xx_HAL_Driver/Inc;../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy;../Middlewares/Third_Party/FreeRTOS/Source/include;../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2;../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F;../Middlewares/ST/STM32_USB_Device_Library/Core/Inc;../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc;../Drivers/CMSIS/Device/ST/STM32F4xx/Include;../Drivers/CMSIS/Include;../Drivers/Chip;../Task;../Algorithm;../Applications/Software;../Applications/Hardware;../Drivers/Nooloop;..\Applications\Software\UI</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
@@ -969,6 +969,91 @@
               <FileName>vofa.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\Applications\Software\vofa.c</FilePath>
+            </File>
+            <File>
+              <FileName>ui.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\Applications\Software\UI\ui.c</FilePath>
+            </File>
+            <File>
+              <FileName>ui.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\Applications\Software\UI\ui.h</FilePath>
+            </File>
+            <File>
+              <FileName>ui_default_Ungroup_0.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\Applications\Software\UI\ui_default_Ungroup_0.c</FilePath>
+            </File>
+            <File>
+              <FileName>ui_default_Ungroup_0.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\Applications\Software\UI\ui_default_Ungroup_0.h</FilePath>
+            </File>
+            <File>
+              <FileName>ui_default_Ungroup_1.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\Applications\Software\UI\ui_default_Ungroup_1.c</FilePath>
+            </File>
+            <File>
+              <FileName>ui_default_Ungroup_1.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\Applications\Software\UI\ui_default_Ungroup_1.h</FilePath>
+            </File>
+            <File>
+              <FileName>ui_default_Ungroup_2.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\Applications\Software\UI\ui_default_Ungroup_2.c</FilePath>
+            </File>
+            <File>
+              <FileName>ui_default_Ungroup_2.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\Applications\Software\UI\ui_default_Ungroup_2.h</FilePath>
+            </File>
+            <File>
+              <FileName>ui_default_Ungroup_3.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\Applications\Software\UI\ui_default_Ungroup_3.c</FilePath>
+            </File>
+            <File>
+              <FileName>ui_default_Ungroup_3.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\Applications\Software\UI\ui_default_Ungroup_3.h</FilePath>
+            </File>
+            <File>
+              <FileName>ui_default_Ungroup_4.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\Applications\Software\UI\ui_default_Ungroup_4.c</FilePath>
+            </File>
+            <File>
+              <FileName>ui_default_Ungroup_4.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\Applications\Software\UI\ui_default_Ungroup_4.h</FilePath>
+            </File>
+            <File>
+              <FileName>ui_default_Ungroup_5.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\Applications\Software\UI\ui_default_Ungroup_5.c</FilePath>
+            </File>
+            <File>
+              <FileName>ui_default_Ungroup_5.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\Applications\Software\UI\ui_default_Ungroup_5.h</FilePath>
+            </File>
+            <File>
+              <FileName>ui_interface.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\Applications\Software\UI\ui_interface.c</FilePath>
+            </File>
+            <File>
+              <FileName>ui_interface.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\Applications\Software\UI\ui_interface.h</FilePath>
+            </File>
+            <File>
+              <FileName>ui_types.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\Applications\Software\UI\ui_types.h</FilePath>
             </File>
           </Files>
         </Group>

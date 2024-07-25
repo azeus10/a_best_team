@@ -161,7 +161,7 @@ int main(void)
 	
 	Global_status_init();      //全局状态机初始化
   referee_usart_task_init(); // 裁判系统解算
-  UI_task_init();            // UI图层初始化
+  // UI_task_init();            // UI图层初始化
 
   led_show(PINK);            // 初始化完毕
   HAL_Delay(100);

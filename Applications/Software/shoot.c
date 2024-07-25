@@ -41,9 +41,9 @@ static int BulletCnt = 0;
 void shoot_init()
 {
 #ifdef USE_3508_AS_SHOOT_MOTOR
-	pid_set(&shoot1_speed_pid, 50, 0, 0.0, 3000, 0.0); 
-	pid_set(&shoot2_speed_pid, 50, 0, 0.0, 3000, 0.0);
-	pid_set(&shoot3_speed_pid, 50, 0, 0.0, 3000, 0.0);
+	pid_set(&shoot1_speed_pid, 25, 0, 0.0, 3000, 0.0); 
+	pid_set(&shoot2_speed_pid, 25, 0, 0.0, 3000, 0.0);
+	pid_set(&shoot3_speed_pid, 25, 0, 0.0, 3000, 0.0);
 #endif
 	
 	pid_set(&trigger_speed_pid, 3, 0, 63, 15000, 0);	 //16000
@@ -57,9 +57,9 @@ void shoot_init()
 	shoot.SetSpeedLeft = 0;
 	shoot.SetSpeedRight = 0;
 	shoot.compensate_angle=85;
-	shoot.speedUpLevel   = 5100;
-	shoot.speedRightLevel= 5100;
-	shoot.speedLeftLevel = 5100;
+	shoot.speedUpLevel   = 5400;
+	shoot.speedRightLevel= 5400;
+	shoot.speedLeftLevel = 5400;
 
 }
 // 更新拨弹电机数据
