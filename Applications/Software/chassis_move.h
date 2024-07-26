@@ -60,6 +60,7 @@ extern float Power;
 extern uint16_t Engerny_buffer;
 extern float Plimit;
 extern int fly_mode;
+extern float CHASSIS_WZ_SET_SCALE;
 
 void chassis_move_init(void);		// 底盘初始化							//底盘移动初始化
 void chassis_moto_speed_calc(void); //计算马达速度
@@ -68,5 +69,6 @@ void val_limit(float *val, float MAX);
 void chassis_power_limit(void);
 
 #endif
+
 
 // end of file

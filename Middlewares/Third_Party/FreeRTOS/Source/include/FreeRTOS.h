@@ -1232,6 +1232,7 @@ typedef struct xSTATIC_EVENT_GROUP
 
 } StaticEventGroup_t;
 
+extern float spin_forward_sen;
 /*
  * In line with software engineering best practice, especially when supplying a
  * library that is likely to change in future versions, FreeRTOS implements a

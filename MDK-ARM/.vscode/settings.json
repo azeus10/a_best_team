@@ -87,6 +87,7 @@
     "vofa.h": "c",
     "nloop_middlewares.h": "c",
     "stdio.h": "c",
-    "chassis_move.h": "c"
+    "chassis_move.h": "c",
+    "freertos.h": "c"
   }
 }

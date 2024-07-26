@@ -76,6 +76,7 @@
 
 extern struct IMU_t IMU_data;
 float relative_angle = 0;
+float spin_forward_sen = -7.9f;
 
 /* USER CODE END Variables */
 /* Definitions for Flash_LED_Task */
@@ -503,13 +504,13 @@ void RefereeTask_callback(void *argument)
 		// super_cap_speedup(Global.input.fly);                                    // 超电开关显示
 		// shoot_refresh(shoot.SpeedRight);                                  // 射击速度
 		// HeatLimitRefresh(Global.input.isHeatLimit);                       // 热量限制
-		ui_pitch_angle(IMU_data.AHRS.pitch*57.3f,IMU_data.AHRS.yaw);
-	  	//PitchYawRefresh();     //Pitch,yaw轴数据更新
-	  	ShootDeltaRefresh((shoot.speedUpLevel-5100)*1.0f,shoot.speedLeftLevel-5300,shoot.speedRightLevel-5300);
+		ui_pitch_angle(IMU_data.AHRS.pitch*57.3f*1000);
+	  	//PitchYawRefresh(IMU_data.AHRS.pitch*57.3f,IMU_data.AHRS.yaw);     //Pitch,yaw轴数据更新
+	  	//ShootDeltaRefresh((shoot.speedUpLevel-5100)*1.0f,shoot.speedLeftLevel-5300,shoot.speedRightLevel-5300);
 		//DistanceRefresh(Nloop_TOF[0].dis);                                //测距仪距离更新
-		 ui_supercap(cap.remain_vol);
-  	 	 char_change();
- 	  	 ui_chassis(-relative_angle);
+		ui_supercap(cap.remain_vol);//超点能量
+  	 	char_change();//字符更新
+ 	  	ui_chassis(relative_angle);//地盘方向指示
  		// ui_auto(fromNUC.shoot);
   		// ui_chassisline();
    		osDelay(2);
@@ -629,10 +630,8 @@ void SpinModeTask_callback(void *argument)
 	for (;;)
 	{
 		osDelay(5);
-
 		if (Global.mode != SPIN)
 			continue;
-		
 		decode_as_6020(YAW_MOTOR);
 		decode_as_6020(PITCH_MOTOR);
 		
@@ -641,7 +640,7 @@ void SpinModeTask_callback(void *argument)
 		else if(Global.input.Subgimbalisfollow==0)
 		LK_control.angleControl=0.0f;
 		
-		relative_angle = -(get_motor_data(YAW_MOTOR).angle_cnt - gimbal.yaw.offset-0.0f);
+		relative_angle = -(get_motor_data(YAW_MOTOR).angle_cnt - gimbal.yaw.offset-get_motor_data(YAW_MOTOR).round_speed*spin_forward_sen);
 		
 		sin_beta = sinf(degree2rad(relative_angle)); // 输入弧度，输出对应的角度sin，cos对应值
 		cos_beta = cosf(degree2rad(relative_angle));
@@ -651,9 +650,26 @@ void SpinModeTask_callback(void *argument)
     
 		
 		if (Global.cap == FULL)
-			r_s = 2.0f; // 小陀螺转速  2.0
+		{
+			if(REFEREE_DATA.Chassis_Power_Limit <= 55)
+			{
+				r_s = 2.0f;
+			}
+			else if (REFEREE_DATA.Chassis_Power_Limit >55 && REFEREE_DATA.Chassis_Power_Limit <= 85)
+			{
+				r_s = 3.0f;
+			}
+			else if (REFEREE_DATA.Chassis_Power_Limit >85 && REFEREE_DATA.Chassis_Power_Limit <= 100)
+			{
+				r_s = 4.0f;
+			}
+			else if(REFEREE_DATA.Chassis_Power_Limit > 100)
+			{
+				r_s = 5.5f;
+			}
+		}
 		else
-			r_s = 1.5f; //
+		r_s = 1.5f; //
 
 		//通信质量测试
 		if (switch_is_down(RC_L_SW) && switch_is_mid(RC_R_SW))

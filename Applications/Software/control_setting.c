@@ -69,6 +69,7 @@ float YawCofficientFromNUC = 20.0f;
 float PitchCofficientFromPC = -12000.0f;
 float YawCofficientFromPC = 120.0f;
 float PitchLobCofficientFromPC = -4600000.0f;
+float max_cap_speed;
 // 一键掉头标志位
 uint8_t one_key_back;
 // float  auto_yaw,auto_pitch;
@@ -94,6 +95,26 @@ void Global_status_init()
 }
 void remove_control_task()
 {
+/*按等级提升性能*/
+
+if(REFEREE_DATA.Chassis_Power_Limit <= 55)
+{
+	max_cap_speed = 5.0f;
+}
+else if (REFEREE_DATA.Chassis_Power_Limit >55 && REFEREE_DATA.Chassis_Power_Limit <= 85)
+{
+	max_cap_speed = 5.5f;
+}
+else if (REFEREE_DATA.Chassis_Power_Limit >85 && REFEREE_DATA.Chassis_Power_Limit <= 100)
+{
+	max_cap_speed = 6.0f;
+}
+else if(REFEREE_DATA.Chassis_Power_Limit > 100)
+{
+	max_cap_speed = 7.0f;
+}
+
+
 	//模式切换区
 	//左上右上 键鼠模式
 	if (switch_is_up(RC_L_SW) && switch_is_up(RC_R_SW))
@@ -335,18 +356,18 @@ void remove_control_task()
 			Global.input.y = 0.0f;
 			if (Global.cap == FULL)
 			{
-				if(Global.input.y < 7.0f)
+				if(Global.input.y < max_cap_speed)
 					Global.input.y += pressShift_step;
 				else
-				Global.input.y = 7.0;	
+				Global.input.y = max_cap_speed;	
 			}
 			else
 			{
 				
-				if(Global.input.y < 1.8f)
+				if(Global.input.y < 3.0f)
 					Global.input.y += pressW_step;
 				else
-					Global.input.y = 1.8f;
+					Global.input.y = 3.0f;
 			}
 		}
 	/*按下S键后退*/

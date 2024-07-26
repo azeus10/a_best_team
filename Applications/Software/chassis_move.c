@@ -45,7 +45,7 @@ float Plimit = 1.0f; // 等比系数
 int fly_mode = 0; // 飞坡开关
 float Power;
 uint16_t Engerny_buffer;
-
+float CHASSIS_WZ_SET_SCALE = 0.0f; // 底盘转角速度设置比例
 // 马达速度环PID
 pid_t motor_speed[4];
 
@@ -209,10 +209,10 @@ void chassis_moto_speed_calc()
 	decode_as_3508(CAN_1_4);
 
 	// 计算速度分量
-	wheel_mps[FR] = +chassis.speed.x - chassis.speed.y + chassis.speed.r;
-	wheel_mps[FL] = +chassis.speed.x + chassis.speed.y + chassis.speed.r;
-	wheel_mps[BL] = -chassis.speed.x + chassis.speed.y + chassis.speed.r;
-	wheel_mps[BR] = -chassis.speed.x - chassis.speed.y + chassis.speed.r;
+	wheel_mps[FR] = +chassis.speed.x - chassis.speed.y + (1+CHASSIS_WZ_SET_SCALE)*chassis.speed.r;
+	wheel_mps[FL] = +chassis.speed.x + chassis.speed.y + (1+CHASSIS_WZ_SET_SCALE)*chassis.speed.r;
+	wheel_mps[BL] = -chassis.speed.x + chassis.speed.y + (1-CHASSIS_WZ_SET_SCALE)*chassis.speed.r;
+	wheel_mps[BR] = -chassis.speed.x - chassis.speed.y + (1-CHASSIS_WZ_SET_SCALE)*chassis.speed.r;
 
 	// 当前速度
 	chassis.speed.now_x = wheel_mps[FL] / 2.0f - wheel_mps[BL] / 2.0f;

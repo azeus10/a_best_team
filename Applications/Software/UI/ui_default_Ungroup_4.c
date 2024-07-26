@@ -62,7 +62,7 @@ void _ui_init_default_Ungroup_4() {
     ui_default_Ungroup_MoveLineleft->figure_tpye = 0;
     ui_default_Ungroup_MoveLineleft->layer = 2;
     ui_default_Ungroup_MoveLineleft->start_x = 341;
-    ui_default_Ungroup_MoveLineleft->start_y = -4;
+    ui_default_Ungroup_MoveLineleft->start_y = 0;
     ui_default_Ungroup_MoveLineleft->end_x = 741;
     ui_default_Ungroup_MoveLineleft->end_y = 408;
     ui_default_Ungroup_MoveLineleft->color = 6;
