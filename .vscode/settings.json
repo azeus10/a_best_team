@@ -2,6 +2,8 @@
     "files.associations": {
         "stdint.h": "c",
         "gimbal.h": "c",
-        "usbd_cdc.h": "c"
+        "usbd_cdc.h": "c",
+        "ui.h": "c",
+        "ui_default_state_0.h": "c"
     }
 }

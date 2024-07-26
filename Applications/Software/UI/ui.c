@@ -13,28 +13,40 @@
 void ui_init(){
   ui_self_id=get_robot_id();
   osDelay(20);
-  _ui_init_default_Ungroup_0();
+  _ui_init_default_state_0();
   osDelay(20);		
-  _ui_init_default_Ungroup_1();
+  _ui_init_default_state_1();
 	osDelay(20);		
-  _ui_init_default_Ungroup_2();
+  _ui_init_default_state_2();
 	osDelay(20);		
-  _ui_init_default_Ungroup_3();
+  _ui_init_default_shoot_0();
 	osDelay(20);		
-  _ui_init_default_Ungroup_4();
+  _ui_init_default_gimbal_0();
   osDelay(20);			
+  _ui_init_default_energy_0();
+  osDelay(20);	
+  _ui_init_default_chassis_0();
+  osDelay(20);	
+  _ui_init_default_aim_0();
+  osDelay(20);	
 }
 
 void ui_updata(){
-  _ui_update_default_Ungroup_4();
+  _ui_update_default_state_0();
   osDelay(2);
-  _ui_update_default_Ungroup_0();
+  _ui_update_default_state_1();
   osDelay(2);
-  _ui_update_default_Ungroup_1();
+  _ui_update_default_state_2();
   osDelay(2);
-  _ui_update_default_Ungroup_2();
+  _ui_update_default_shoot_0();
   osDelay(2);
-  _ui_update_default_Ungroup_3();
+  _ui_update_default_gimbal_0();
+  osDelay(2);
+  _ui_update_default_energy_0();
+  osDelay(2);
+  _ui_update_default_chassis_0();
+  osDelay(2);
+  _ui_update_default_aim_0();
   osDelay(2);
 
 }
@@ -47,20 +59,20 @@ void ui_supercap(float votage){
   if(percent<=0)
     percent = 0;
   if(percent >=0.6)
-    ui_default_Ungroup_EnergyLine->color = 2;//ÂÌÉ«
+    ui_default_energy_EnergyLine->color = 2;//ÂÌÉ«
   if(percent<=0.6)
-    ui_default_Ungroup_EnergyLine->color = 3;//³ÈÉ«
+    ui_default_energy_EnergyLine->color = 3;//³ÈÉ«
   if(percent <=0.3)
-    ui_default_Ungroup_EnergyLine->color = 4;//×ÏºìÉ«
-  ui_default_Ungroup_EnergyLine->end_x = ui_default_Ungroup_EnergyLine->start_x +795.0f*percent;
+    ui_default_energy_EnergyLine->color = 4;//×ÏºìÉ«
+  ui_default_energy_EnergyLine->end_x = ui_default_energy_EnergyLine->start_x +795.0f*percent;
   
   if(Global.cap != FULL){
-    ui_default_Ungroup_energycircle->color=6;
-    ui_default_Ungroup_energycircle->width=1;
+    ui_default_energy_energycircle->color=6;
+    ui_default_energy_energycircle->width=1;
   }
   else{
-    ui_default_Ungroup_energycircle->color=1;
-    ui_default_Ungroup_energycircle->width=8;
+    ui_default_energy_energycircle->color=1;
+    ui_default_energy_energycircle->width=8;
 
   }
 }
@@ -71,35 +83,35 @@ void char_change()
   //·ÉÆÂÄ£Ê½
   if(fly_mode !=1)
   {
-    ui_default_Ungroup_Fly->color=7;
-    ui_default_Ungroup_Fly->font_size=30;
+    ui_default_state_Fly->color=7;
+    ui_default_state_Fly->font_size=30;
   }
   else
   {
-    ui_default_Ungroup_Fly->color=2;
-    ui_default_Ungroup_Fly->font_size=30;
+    ui_default_state_Fly->color=2;
+    ui_default_state_Fly->font_size=30;
   }
    //Ä¦²ÁÂÖ
   if(Global.input.shooter_status != 1){
-    ui_default_Ungroup_Shoot->color=7;
-    ui_default_Ungroup_Shoot->font_size=30;
+    ui_default_state_Shoot->color=7;
+    ui_default_state_Shoot->font_size=30;
   }
   else
   {
-    ui_default_Ungroup_Shoot->color=2;
-    ui_default_Ungroup_Shoot->font_size=30;
+    ui_default_state_Shoot->color=2;
+    ui_default_state_Shoot->font_size=30;
   }
 
   //µõÉä
   if(Global.mode != LEAN_LOB)
   {
-    ui_default_Ungroup_Lob->color=7;
-    ui_default_Ungroup_Lob->font_size=30;
+    ui_default_state_Lob->color=7;
+    ui_default_state_Lob->font_size=30;
   }
 
   else{
-    ui_default_Ungroup_Lob->color=2;
-    ui_default_Ungroup_Lob->font_size=30;
+    ui_default_state_Lob->color=2;
+    ui_default_state_Lob->font_size=30;
   }
 }
 
@@ -118,8 +130,8 @@ void ui_chassis(float angle){
       angle_end-=360.0f;
     if(angle_start>=360.0f)
       angle_start-=360.0f;
-    ui_default_Ungroup_Chassis->start_angle=angle_start;
-    ui_default_Ungroup_Chassis->end_angle=angle_end;
+    ui_default_chassis_Chassis->start_angle=angle_start;
+    ui_default_chassis_Chassis->end_angle=angle_end;
     
     
 
@@ -154,13 +166,13 @@ void ui_chassis(float angle){
 
 void ui_pitch_angle(float angle)
 {
-  ui_default_Ungroup_pitch_angle->number = angle;
+  ui_default_gimbal_pitch_angle->number = angle;
 }
 //?????
 void ui_shoot_speed(int a,int b)
 {
-ui_default_Ungroup_shootup_speed->number = a;
-ui_default_Ungroup_shootleft_speed->number = b;
+ui_default_shoot_shootup_speed->number = a;
+ui_default_shoot_shootleft_speed->number = b;
 
 }
 

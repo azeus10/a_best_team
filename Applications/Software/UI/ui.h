@@ -10,41 +10,92 @@ extern "C" {
 
 #include "ui_interface.h"
 
-#include "ui_default_Ungroup_0.h"
-#include "ui_default_Ungroup_1.h"
-#include "ui_default_Ungroup_2.h"
-#include "ui_default_Ungroup_3.h"
-#include "ui_default_Ungroup_4.h"
+#include "ui_default_chassis_0.h"
 
+#define ui_init_default_chassis() \
+_ui_init_default_chassis_0()
+
+#define ui_update_default_chassis() \
+_ui_update_default_chassis_0()
+
+#define ui_remove_default_chassis() \
+_ui_remove_default_chassis_0()
+    
+
+#include "ui_default_energy_0.h"
+
+#define ui_init_default_energy() \
+_ui_init_default_energy_0()
+
+#define ui_update_default_energy() \
+_ui_update_default_energy_0()
+
+#define ui_remove_default_energy() \
+_ui_remove_default_energy_0()
+    
+
+#include "ui_default_state_0.h"
+#include "ui_default_state_1.h"
+#include "ui_default_state_2.h"
 
 void ui_init();
 void ui_updata();
 void ui_supercap(float votage);
 void char_change();
 void ui_chassis(float angle);
-void ui_chassisline();
+void ui_shoot_speed(int a,int b);
 void ui_pitch_angle(float angle);
 
-#define ui_init_default_Ungroup() \
-_ui_init_default_Ungroup_0(); \
-_ui_init_default_Ungroup_1(); \
-_ui_init_default_Ungroup_2(); \
-_ui_init_default_Ungroup_3(); \
-_ui_init_default_Ungroup_4()
+#define ui_init_default_state() \
+_ui_init_default_state_0(); \
+_ui_init_default_state_1(); \
+_ui_init_default_state_2()
 
-#define ui_update_default_Ungroup() \
-_ui_update_default_Ungroup_0(); \
-_ui_update_default_Ungroup_1(); \
-_ui_update_default_Ungroup_2(); \
-_ui_update_default_Ungroup_3(); \
-_ui_update_default_Ungroup_4()
+#define ui_update_default_state() \
+_ui_update_default_state_0(); \
+_ui_update_default_state_1(); \
+_ui_update_default_state_2()
 
-#define ui_remove_default_Ungroup() \
-_ui_remove_default_Ungroup_0(); \
-_ui_remove_default_Ungroup_1(); \
-_ui_remove_default_Ungroup_2(); \
-_ui_remove_default_Ungroup_3(); \
-_ui_remove_default_Ungroup_4()
+#define ui_remove_default_state() \
+_ui_remove_default_state_0(); \
+_ui_remove_default_state_1(); \
+_ui_remove_default_state_2()
+    
+
+#include "ui_default_aim_0.h"
+
+#define ui_init_default_aim() \
+_ui_init_default_aim_0()
+
+#define ui_update_default_aim() \
+_ui_update_default_aim_0()
+
+#define ui_remove_default_aim() \
+_ui_remove_default_aim_0()
+    
+
+#include "ui_default_gimbal_0.h"
+
+#define ui_init_default_gimbal() \
+_ui_init_default_gimbal_0()
+
+#define ui_update_default_gimbal() \
+_ui_update_default_gimbal_0()
+
+#define ui_remove_default_gimbal() \
+_ui_remove_default_gimbal_0()
+    
+
+#include "ui_default_shoot_0.h"
+
+#define ui_init_default_shoot() \
+_ui_init_default_shoot_0()
+
+#define ui_update_default_shoot() \
+_ui_update_default_shoot_0()
+
+#define ui_remove_default_shoot() \
+_ui_remove_default_shoot_0()
     
 
 
