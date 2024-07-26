@@ -50,11 +50,11 @@ void ui_supercap(float votage){
   if(percent<=0)
     percent = 0;
   if(percent >=0.6)
-    ui_default_Ungroup_EnergyLine->color = 2;//è„—è„¤è„¡èŠ¦
+    ui_default_Ungroup_EnergyLine->color = 2;//ÂÌÉ«
   if(percent<=0.6)
-    ui_default_Ungroup_EnergyLine->color = 3;//é²è„ è„¡èŠ¦
+    ui_default_Ungroup_EnergyLine->color = 3;//³ÈÉ«
   if(percent <=0.3)
-    ui_default_Ungroup_EnergyLine->color = 4;//è„³è„§æ½žçŸ›è„¡èŠ¦
+    ui_default_Ungroup_EnergyLine->color = 4;//×ÏºìÉ«
   ui_default_Ungroup_EnergyLine->end_x = ui_default_Ungroup_EnergyLine->start_x +795.0f*percent;
   
   if(Global.cap != FULL){
@@ -71,7 +71,7 @@ void ui_supercap(float votage){
 
 void char_change()
 {
-  //è·¯è„¡è„è„—è„›æ‹¢è„¢é™†
+  //·ÉÆÂÄ£Ê½
   if(fly_mode !=1)
   {
     ui_default_Ungroup_Fly->color=7;
@@ -82,7 +82,7 @@ void char_change()
     ui_default_Ungroup_Fly->color=2;
     ui_default_Ungroup_Fly->font_size=30;
   }
-   //è„›å¨„è™è„•è„—è„°
+   //Ä¦²ÁÂÖ
   if(Global.input.shooter_status != 1){
     ui_default_Ungroup_Shoot->color=7;
     ui_default_Ungroup_Shoot->font_size=30;
@@ -93,7 +93,7 @@ void char_change()
     ui_default_Ungroup_Shoot->font_size=30;
   }
 
-  //ç¢ŒçŽ«è„¡ç›²
+  //µõÉä
   if(Global.mode != LEAN_LOB)
   {
     ui_default_Ungroup_Lob->color=7;
@@ -104,7 +104,7 @@ void char_change()
     ui_default_Ungroup_Lob->color=2;
     ui_default_Ungroup_Lob->font_size=30;
   }
-  //é©´ç¯“ç¢Œç‚‰
+  //¿¨µ¯
   if(Global.input.shooter_status == 1 && get_motor_data(SHOOT_MOTOR1).speed_rpm<10 && get_motor_data(SHOOT_MOTOR2).speed_rpm<10
     && get_motor_data(SHOOT_MOTOR3).speed_rpm<10)
   {
@@ -149,28 +149,28 @@ void ui_chassis(float angle){
 }
 
 
-// void ui_auto(uint8_t status){//è„³è„­è„™èŒ…è„ å¨„è„«æ¯›è„³è„­è„™èŒ…é©´è²Œ
-//    switch (status)//è„³è„­è„™èŒ…è„ å¨„
+// void ui_auto(uint8_t status){//×ÔÃéÈ¦Óë×ÔÃé¿ò
+//    switch (status)//×ÔÃéÈ¦
 // 	 {
 // 		 case 0:		 
-//       ui_default_Ungroup_AutoRound->color=4;//è„³è„§æ½žçŸ›è„¡èŠ¦
+//       ui_default_Ungroup_AutoRound->color=4;//×ÏºìÉ«
 // 			break;
 // 		 case 1:
-//       ui_default_Ungroup_AutoRound->color=3;//é²è„ è„¡èŠ¦
+//       ui_default_Ungroup_AutoRound->color=3;//³ÈÉ«
 // 			break;
 // 		 case 2:
-//       ui_default_Ungroup_AutoRound->color=2;//è„—è„¤è„¡èŠ¦
+//       ui_default_Ungroup_AutoRound->color=2;//ÂÌÉ«
 // 			break;
 // 			default:
-//       ui_default_Ungroup_AutoRound->color=4;//è„³è„§æ½žçŸ›è„¡èŠ¦
+//       ui_default_Ungroup_AutoRound->color=4;//×ÏºìÉ«
 // 			break;			
 // 	 }	
 //    if(Global.input.vision_status!=1)
 //      ui_default_Ungroup_AutoRect->color=8;
 //    else
 //      ui_default_Ungroup_AutoRect->color=2;
-//    if(Global.input.vision_online==0){//è„³è„­è„™èŒ…ç¢Œä¹ˆè„§è„½
-//      ui_default_Ungroup_AutoRound->color=4;//è„³è„§æ½žçŸ›è„¡èŠ¦
+//    if(Global.input.vision_online==0){//×ÔÃéµôÏß
+//      ui_default_Ungroup_AutoRound->color=4;//×ÏºìÉ«
 //      ui_default_Ungroup_AutoRect->color=7;
 //    }
 // }
@@ -189,4 +189,12 @@ void ui_chassisline(){
     ui_default_Ungroup_MoveLineright->end_y = 1;
   }
 }
+//?????
+void ui_shoot_speed(int a,int b, int c)
+{
+ui_default_Ungroup_shootup_speed->number = a;
+ui_default_Ungroup_shootleft_speed->number = b;
+ui_default_Ungroup_shootright_speed->number = c;
+}
+
 

@@ -43,28 +43,28 @@ void _ui_init_default_Ungroup_4() {
 
     ui_default_Ungroup_energycircle->figure_tpye = 1;
     ui_default_Ungroup_energycircle->layer = 1;
-    ui_default_Ungroup_energycircle->start_x = 537;
-    ui_default_Ungroup_energycircle->start_y = 116;
+    ui_default_Ungroup_energycircle->start_x = 528;
+    ui_default_Ungroup_energycircle->start_y = 114;
     ui_default_Ungroup_energycircle->color = 6;
     ui_default_Ungroup_energycircle->width = 1;
-    ui_default_Ungroup_energycircle->end_x = 1417;
-    ui_default_Ungroup_energycircle->end_y = 154;
+    ui_default_Ungroup_energycircle->end_x = 1408;
+    ui_default_Ungroup_energycircle->end_y = 152;
 
     ui_default_Ungroup_EnergyLine->figure_tpye = 1;
     ui_default_Ungroup_EnergyLine->layer = 1;
-    ui_default_Ungroup_EnergyLine->start_x = 538;
-    ui_default_Ungroup_EnergyLine->start_y = 120;
+    ui_default_Ungroup_EnergyLine->start_x = 529;
+    ui_default_Ungroup_EnergyLine->start_y = 118;
     ui_default_Ungroup_EnergyLine->color = 2;
     ui_default_Ungroup_EnergyLine->width = 15;
-    ui_default_Ungroup_EnergyLine->end_x = 1400;
-    ui_default_Ungroup_EnergyLine->end_y = 135;
+    ui_default_Ungroup_EnergyLine->end_x = 1391;
+    ui_default_Ungroup_EnergyLine->end_y = 133;
 
     ui_default_Ungroup_MoveLineleft->figure_tpye = 0;
     ui_default_Ungroup_MoveLineleft->layer = 2;
     ui_default_Ungroup_MoveLineleft->start_x = 341;
     ui_default_Ungroup_MoveLineleft->start_y = 0;
     ui_default_Ungroup_MoveLineleft->end_x = 741;
-    ui_default_Ungroup_MoveLineleft->end_y = 408;
+    ui_default_Ungroup_MoveLineleft->end_y = 409;
     ui_default_Ungroup_MoveLineleft->color = 6;
     ui_default_Ungroup_MoveLineleft->width = 3;
 

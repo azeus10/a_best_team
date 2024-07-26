@@ -133,7 +133,7 @@ I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uart.h)(0x668F3E6B)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_pcd.h)(0x668F3E6B)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_usb.h)(0x668F3E6B)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_pcd_ex.h)(0x668F3E6B)
-F (../Src/freertos.c)(0x66A33A33)(--c99 -c --cpu Cortex-M4.fp.sp -g -O2 -Otime --apcs=interwork --split_sections -I ../Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I ../Middlewares/Third_Party/FreeRTOS/Source/include -I ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2 -I ../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F -I ../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I ../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc -I ../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I ../Drivers/CMSIS/Include -I ../Drivers/Chip -I ../Task -I ../Algorithm -I ../Applications/Software -I ../Applications/Hardware -I ../Drivers/Nooloop -I ..\Applications\Software\UI-I.\RTE\_RMc_adam_GeneralRobotSystemCode-IE:\keil\pack\ARM\CMSIS\4.5.0\CMSIS\Include-IE:\keil\pack\Keil\STM32F4xx_DFP\2.16.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include-D__UVISION_VERSION="539" -D_RTE_ -DSTM32F407xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F407xx-o rmc_adam_generalrobotsystemcode\freertos.o --omf_browse rmc_adam_generalrobotsystemcode\freertos.crf --depend rmc_adam_generalrobotsystemcode\freertos.d)
+F (../Src/freertos.c)(0x66A37F3A)(--c99 -c --cpu Cortex-M4.fp.sp -g -O2 -Otime --apcs=interwork --split_sections -I ../Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I ../Middlewares/Third_Party/FreeRTOS/Source/include -I ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2 -I ../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F -I ../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I ../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc -I ../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I ../Drivers/CMSIS/Include -I ../Drivers/Chip -I ../Task -I ../Algorithm -I ../Applications/Software -I ../Applications/Hardware -I ../Drivers/Nooloop -I ..\Applications\Software\UI-I.\RTE\_RMc_adam_GeneralRobotSystemCode-IE:\keil\pack\ARM\CMSIS\4.5.0\CMSIS\Include-IE:\keil\pack\Keil\STM32F4xx_DFP\2.16.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include-D__UVISION_VERSION="539" -D_RTE_ -DSTM32F407xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F407xx-o rmc_adam_generalrobotsystemcode\freertos.o --omf_browse rmc_adam_generalrobotsystemcode\freertos.crf --depend rmc_adam_generalrobotsystemcode\freertos.d)
 I (../Middlewares/Third_Party/FreeRTOS/Source/include/FreeRTOS.h)(0x66A3171E)
 I (E:\keil\core\ARM\ARMCC\include\stddef.h)(0x5CEB79E2)
 I (E:\keil\core\ARM\ARMCC\include\stdint.h)(0x5CEB79E2)
@@ -185,19 +185,19 @@ I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_usb.h)(0x668F3E6B)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_pcd_ex.h)(0x668F3E6B)
 I (../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2/cmsis_os.h)(0x668F3E6C)
 I (../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2/cmsis_os2.h)(0x668F3E6C)
-I (..\Applications\Software\UI\ui.h)(0x66A26E1B)
-I (..\Applications\Software\UI\ui_interface.h)(0x66A24833)
+I (..\Applications\Software\UI\ui.h)(0x66A37511)
+I (..\Applications\Software\UI\ui_interface.h)(0x66A37335)
 I (E:\keil\core\ARM\ARMCC\include\stdio.h)(0x5CEB79E2)
 I (../Applications/Hardware/UART_data_transmit.h)(0x669F5D4C)
 I (../Inc/usart.h)(0x668F3E6B)
 I (../Inc/struct_typedef.h)(0x668F3E6B)
-I (..\Applications\Software\UI\ui_types.h)(0x66A24826)
-I (..\Applications\Software\UI\ui_default_Ungroup_0.h)(0x66A24773)
-I (..\Applications\Software\UI\ui_default_Ungroup_1.h)(0x66A24773)
-I (..\Applications\Software\UI\ui_default_Ungroup_2.h)(0x66A24773)
-I (..\Applications\Software\UI\ui_default_Ungroup_3.h)(0x66A24773)
-I (..\Applications\Software\UI\ui_default_Ungroup_4.h)(0x66A24773)
-I (..\Applications\Software\UI\ui_default_Ungroup_5.h)(0x66A24773)
+I (..\Applications\Software\UI\ui_types.h)(0x66A37328)
+I (..\Applications\Software\UI\ui_default_Ungroup_0.h)(0x66A372B3)
+I (..\Applications\Software\UI\ui_default_Ungroup_1.h)(0x66A372B3)
+I (..\Applications\Software\UI\ui_default_Ungroup_2.h)(0x66A372B3)
+I (..\Applications\Software\UI\ui_default_Ungroup_3.h)(0x66A372B3)
+I (..\Applications\Software\UI\ui_default_Ungroup_4.h)(0x66A372B3)
+I (..\Applications\Software\UI\ui_default_Ungroup_5.h)(0x66A372B3)
 I (E:\keil\core\ARM\ARMCC\include\math.h)(0x5CEB79D6)
 I (../Algorithm/fifo.h)(0x668F3E6B)
 I (E:\keil\core\ARM\ARMCC\include\string.h)(0x5CEB79E2)
@@ -1802,7 +1802,7 @@ I (../Algorithm/pid.h)(0x668F3E6B)
 I (../Algorithm/RampFunc.h)(0x668F3E6B)
 I (..\Applications\Software\control_setting.h)(0x668F3E6B)
 I (E:\keil\core\ARM\ARMCC\include\stdio.h)(0x5CEB79E2)
-F (..\Applications\Software\shoot.c)(0x66A29322)(--c99 -c --cpu Cortex-M4.fp.sp -g -O2 -Otime --apcs=interwork --split_sections -I ../Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I ../Middlewares/Third_Party/FreeRTOS/Source/include -I ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2 -I ../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F -I ../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I ../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc -I ../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I ../Drivers/CMSIS/Include -I ../Drivers/Chip -I ../Task -I ../Algorithm -I ../Applications/Software -I ../Applications/Hardware -I ../Drivers/Nooloop -I ..\Applications\Software\UI-I.\RTE\_RMc_adam_GeneralRobotSystemCode-IE:\keil\pack\ARM\CMSIS\4.5.0\CMSIS\Include-IE:\keil\pack\Keil\STM32F4xx_DFP\2.16.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include-D__UVISION_VERSION="539" -D_RTE_ -DSTM32F407xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F407xx-o rmc_adam_generalrobotsystemcode\shoot.o --omf_browse rmc_adam_generalrobotsystemcode\shoot.crf --depend rmc_adam_generalrobotsystemcode\shoot.d)
+F (..\Applications\Software\shoot.c)(0x66A38EBB)(--c99 -c --cpu Cortex-M4.fp.sp -g -O2 -Otime --apcs=interwork --split_sections -I ../Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I ../Middlewares/Third_Party/FreeRTOS/Source/include -I ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2 -I ../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F -I ../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I ../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc -I ../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I ../Drivers/CMSIS/Include -I ../Drivers/Chip -I ../Task -I ../Algorithm -I ../Applications/Software -I ../Applications/Hardware -I ../Drivers/Nooloop -I ..\Applications\Software\UI-I.\RTE\_RMc_adam_GeneralRobotSystemCode-IE:\keil\pack\ARM\CMSIS\4.5.0\CMSIS\Include-IE:\keil\pack\Keil\STM32F4xx_DFP\2.16.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include-D__UVISION_VERSION="539" -D_RTE_ -DSTM32F407xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F407xx-o rmc_adam_generalrobotsystemcode\shoot.o --omf_browse rmc_adam_generalrobotsystemcode\shoot.crf --depend rmc_adam_generalrobotsystemcode\shoot.d)
 I (..\Applications\Software\Global_status.h)(0x66933329)
 I (E:\keil\core\ARM\ARMCC\include\stdint.h)(0x5CEB79E2)
 I (../Applications/Hardware/CAN_receive&send.h)(0x668F3E6B)
@@ -2265,9 +2265,9 @@ I (../Inc/struct_typedef.h)(0x668F3E6B)
 I (E:\keil\core\ARM\ARMCC\include\string.h)(0x5CEB79E2)
 I (E:\keil\core\ARM\ARMCC\include\stdio.h)(0x5CEB79E2)
 I (E:\keil\core\ARM\ARMCC\include\stdarg.h)(0x5CEB79E4)
-F (..\Applications\Software\UI\ui.c)(0x66A2EE1D)(--c99 -c --cpu Cortex-M4.fp.sp -g -O2 -Otime --apcs=interwork --split_sections -I ../Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I ../Middlewares/Third_Party/FreeRTOS/Source/include -I ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2 -I ../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F -I ../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I ../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc -I ../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I ../Drivers/CMSIS/Include -I ../Drivers/Chip -I ../Task -I ../Algorithm -I ../Applications/Software -I ../Applications/Hardware -I ../Drivers/Nooloop -I ..\Applications\Software\UI-I.\RTE\_RMc_adam_GeneralRobotSystemCode-IE:\keil\pack\ARM\CMSIS\4.5.0\CMSIS\Include-IE:\keil\pack\Keil\STM32F4xx_DFP\2.16.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include-D__UVISION_VERSION="539" -D_RTE_ -DSTM32F407xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F407xx-o rmc_adam_generalrobotsystemcode\ui.o --omf_browse rmc_adam_generalrobotsystemcode\ui.crf --depend rmc_adam_generalrobotsystemcode\ui.d)
-I (..\Applications\Software\UI\ui.h)(0x66A26E1B)
-I (..\Applications\Software\UI\ui_interface.h)(0x66A24833)
+F (..\Applications\Software\UI\ui.c)(0x66A37E1B)(--c99 -c --cpu Cortex-M4.fp.sp -g -O2 -Otime --apcs=interwork --split_sections -I ../Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I ../Middlewares/Third_Party/FreeRTOS/Source/include -I ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2 -I ../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F -I ../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I ../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc -I ../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I ../Drivers/CMSIS/Include -I ../Drivers/Chip -I ../Task -I ../Algorithm -I ../Applications/Software -I ../Applications/Hardware -I ../Drivers/Nooloop -I ..\Applications\Software\UI-I.\RTE\_RMc_adam_GeneralRobotSystemCode-IE:\keil\pack\ARM\CMSIS\4.5.0\CMSIS\Include-IE:\keil\pack\Keil\STM32F4xx_DFP\2.16.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include-D__UVISION_VERSION="539" -D_RTE_ -DSTM32F407xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F407xx-o rmc_adam_generalrobotsystemcode\ui.o --omf_browse rmc_adam_generalrobotsystemcode\ui.crf --depend rmc_adam_generalrobotsystemcode\ui.d)
+I (..\Applications\Software\UI\ui.h)(0x66A37511)
+I (..\Applications\Software\UI\ui_interface.h)(0x66A37335)
 I (E:\keil\core\ARM\ARMCC\include\stdio.h)(0x5CEB79E2)
 I (../Drivers/CMSIS/Device/ST/STM32F4xx/Include/stm32f4xx.h)(0x668F3E6B)
 I (../Drivers/CMSIS/Device/ST/STM32F4xx/Include/stm32f407xx.h)(0x668F3E6B)
@@ -2312,13 +2312,13 @@ I (../Applications/Hardware/UART_data_transmit.h)(0x669F5D4C)
 I (../Inc/usart.h)(0x668F3E6B)
 I (../Inc/main.h)(0x668F3E6B)
 I (../Inc/struct_typedef.h)(0x668F3E6B)
-I (..\Applications\Software\UI\ui_types.h)(0x66A24826)
-I (..\Applications\Software\UI\ui_default_Ungroup_0.h)(0x66A24773)
-I (..\Applications\Software\UI\ui_default_Ungroup_1.h)(0x66A24773)
-I (..\Applications\Software\UI\ui_default_Ungroup_2.h)(0x66A24773)
-I (..\Applications\Software\UI\ui_default_Ungroup_3.h)(0x66A24773)
-I (..\Applications\Software\UI\ui_default_Ungroup_4.h)(0x66A24773)
-I (..\Applications\Software\UI\ui_default_Ungroup_5.h)(0x66A24773)
+I (..\Applications\Software\UI\ui_types.h)(0x66A37328)
+I (..\Applications\Software\UI\ui_default_Ungroup_0.h)(0x66A372B3)
+I (..\Applications\Software\UI\ui_default_Ungroup_1.h)(0x66A372B3)
+I (..\Applications\Software\UI\ui_default_Ungroup_2.h)(0x66A372B3)
+I (..\Applications\Software\UI\ui_default_Ungroup_3.h)(0x66A372B3)
+I (..\Applications\Software\UI\ui_default_Ungroup_4.h)(0x66A372B3)
+I (..\Applications\Software\UI\ui_default_Ungroup_5.h)(0x66A372B3)
 I (../Applications/Software/referee_handle_pack.h)(0x669FAC1D)
 I (../Applications/Software/protocol.h)(0x668F3E6B)
 I (E:\keil\core\ARM\ARMCC\include\stdbool.h)(0x5CEB79DE)
@@ -2339,10 +2339,10 @@ I (../Applications/Software/gimbal.h)(0x669FF042)
 I (../Algorithm/pid.h)(0x668F3E6B)
 I (../Applications/Hardware/CAN_receive&send.h)(0x668F3E6B)
 I (../Applications/Software/shoot.h)(0x668F3E6B)
-F (..\Applications\Software\UI\ui.h)(0x66A26E1B)()
-F (..\Applications\Software\UI\ui_default_Ungroup_0.c)(0x66A24773)(--c99 -c --cpu Cortex-M4.fp.sp -g -O2 -Otime --apcs=interwork --split_sections -I ../Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I ../Middlewares/Third_Party/FreeRTOS/Source/include -I ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2 -I ../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F -I ../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I ../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc -I ../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I ../Drivers/CMSIS/Include -I ../Drivers/Chip -I ../Task -I ../Algorithm -I ../Applications/Software -I ../Applications/Hardware -I ../Drivers/Nooloop -I ..\Applications\Software\UI-I.\RTE\_RMc_adam_GeneralRobotSystemCode-IE:\keil\pack\ARM\CMSIS\4.5.0\CMSIS\Include-IE:\keil\pack\Keil\STM32F4xx_DFP\2.16.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include-D__UVISION_VERSION="539" -D_RTE_ -DSTM32F407xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F407xx-o rmc_adam_generalrobotsystemcode\ui_default_ungroup_0.o --omf_browse rmc_adam_generalrobotsystemcode\ui_default_ungroup_0.crf --depend rmc_adam_generalrobotsystemcode\ui_default_ungroup_0.d)
-I (..\Applications\Software\UI\ui_default_Ungroup_0.h)(0x66A24773)
-I (..\Applications\Software\UI\ui_interface.h)(0x66A24833)
+F (..\Applications\Software\UI\ui.h)(0x66A37511)()
+F (..\Applications\Software\UI\ui_default_Ungroup_0.c)(0x66A372B3)(--c99 -c --cpu Cortex-M4.fp.sp -g -O2 -Otime --apcs=interwork --split_sections -I ../Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I ../Middlewares/Third_Party/FreeRTOS/Source/include -I ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2 -I ../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F -I ../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I ../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc -I ../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I ../Drivers/CMSIS/Include -I ../Drivers/Chip -I ../Task -I ../Algorithm -I ../Applications/Software -I ../Applications/Hardware -I ../Drivers/Nooloop -I ..\Applications\Software\UI-I.\RTE\_RMc_adam_GeneralRobotSystemCode-IE:\keil\pack\ARM\CMSIS\4.5.0\CMSIS\Include-IE:\keil\pack\Keil\STM32F4xx_DFP\2.16.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include-D__UVISION_VERSION="539" -D_RTE_ -DSTM32F407xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F407xx-o rmc_adam_generalrobotsystemcode\ui_default_ungroup_0.o --omf_browse rmc_adam_generalrobotsystemcode\ui_default_ungroup_0.crf --depend rmc_adam_generalrobotsystemcode\ui_default_ungroup_0.d)
+I (..\Applications\Software\UI\ui_default_Ungroup_0.h)(0x66A372B3)
+I (..\Applications\Software\UI\ui_interface.h)(0x66A37335)
 I (E:\keil\core\ARM\ARMCC\include\stdio.h)(0x5CEB79E2)
 I (../Drivers/CMSIS/Device/ST/STM32F4xx/Include/stm32f4xx.h)(0x668F3E6B)
 I (../Drivers/CMSIS/Device/ST/STM32F4xx/Include/stm32f407xx.h)(0x668F3E6B)
@@ -2387,12 +2387,12 @@ I (../Applications/Hardware/UART_data_transmit.h)(0x669F5D4C)
 I (../Inc/usart.h)(0x668F3E6B)
 I (../Inc/main.h)(0x668F3E6B)
 I (../Inc/struct_typedef.h)(0x668F3E6B)
-I (..\Applications\Software\UI\ui_types.h)(0x66A24826)
+I (..\Applications\Software\UI\ui_types.h)(0x66A37328)
 I (E:\keil\core\ARM\ARMCC\include\string.h)(0x5CEB79E2)
-F (..\Applications\Software\UI\ui_default_Ungroup_0.h)(0x66A24773)()
-F (..\Applications\Software\UI\ui_default_Ungroup_1.c)(0x66A24773)(--c99 -c --cpu Cortex-M4.fp.sp -g -O2 -Otime --apcs=interwork --split_sections -I ../Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I ../Middlewares/Third_Party/FreeRTOS/Source/include -I ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2 -I ../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F -I ../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I ../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc -I ../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I ../Drivers/CMSIS/Include -I ../Drivers/Chip -I ../Task -I ../Algorithm -I ../Applications/Software -I ../Applications/Hardware -I ../Drivers/Nooloop -I ..\Applications\Software\UI-I.\RTE\_RMc_adam_GeneralRobotSystemCode-IE:\keil\pack\ARM\CMSIS\4.5.0\CMSIS\Include-IE:\keil\pack\Keil\STM32F4xx_DFP\2.16.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include-D__UVISION_VERSION="539" -D_RTE_ -DSTM32F407xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F407xx-o rmc_adam_generalrobotsystemcode\ui_default_ungroup_1.o --omf_browse rmc_adam_generalrobotsystemcode\ui_default_ungroup_1.crf --depend rmc_adam_generalrobotsystemcode\ui_default_ungroup_1.d)
-I (..\Applications\Software\UI\ui_default_Ungroup_1.h)(0x66A24773)
-I (..\Applications\Software\UI\ui_interface.h)(0x66A24833)
+F (..\Applications\Software\UI\ui_default_Ungroup_0.h)(0x66A372B3)()
+F (..\Applications\Software\UI\ui_default_Ungroup_1.c)(0x66A372B3)(--c99 -c --cpu Cortex-M4.fp.sp -g -O2 -Otime --apcs=interwork --split_sections -I ../Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I ../Middlewares/Third_Party/FreeRTOS/Source/include -I ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2 -I ../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F -I ../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I ../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc -I ../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I ../Drivers/CMSIS/Include -I ../Drivers/Chip -I ../Task -I ../Algorithm -I ../Applications/Software -I ../Applications/Hardware -I ../Drivers/Nooloop -I ..\Applications\Software\UI-I.\RTE\_RMc_adam_GeneralRobotSystemCode-IE:\keil\pack\ARM\CMSIS\4.5.0\CMSIS\Include-IE:\keil\pack\Keil\STM32F4xx_DFP\2.16.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include-D__UVISION_VERSION="539" -D_RTE_ -DSTM32F407xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F407xx-o rmc_adam_generalrobotsystemcode\ui_default_ungroup_1.o --omf_browse rmc_adam_generalrobotsystemcode\ui_default_ungroup_1.crf --depend rmc_adam_generalrobotsystemcode\ui_default_ungroup_1.d)
+I (..\Applications\Software\UI\ui_default_Ungroup_1.h)(0x66A372B3)
+I (..\Applications\Software\UI\ui_interface.h)(0x66A37335)
 I (E:\keil\core\ARM\ARMCC\include\stdio.h)(0x5CEB79E2)
 I (../Drivers/CMSIS/Device/ST/STM32F4xx/Include/stm32f4xx.h)(0x668F3E6B)
 I (../Drivers/CMSIS/Device/ST/STM32F4xx/Include/stm32f407xx.h)(0x668F3E6B)
@@ -2437,12 +2437,12 @@ I (../Applications/Hardware/UART_data_transmit.h)(0x669F5D4C)
 I (../Inc/usart.h)(0x668F3E6B)
 I (../Inc/main.h)(0x668F3E6B)
 I (../Inc/struct_typedef.h)(0x668F3E6B)
-I (..\Applications\Software\UI\ui_types.h)(0x66A24826)
+I (..\Applications\Software\UI\ui_types.h)(0x66A37328)
 I (E:\keil\core\ARM\ARMCC\include\string.h)(0x5CEB79E2)
-F (..\Applications\Software\UI\ui_default_Ungroup_1.h)(0x66A24773)()
-F (..\Applications\Software\UI\ui_default_Ungroup_2.c)(0x66A24773)(--c99 -c --cpu Cortex-M4.fp.sp -g -O2 -Otime --apcs=interwork --split_sections -I ../Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I ../Middlewares/Third_Party/FreeRTOS/Source/include -I ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2 -I ../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F -I ../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I ../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc -I ../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I ../Drivers/CMSIS/Include -I ../Drivers/Chip -I ../Task -I ../Algorithm -I ../Applications/Software -I ../Applications/Hardware -I ../Drivers/Nooloop -I ..\Applications\Software\UI-I.\RTE\_RMc_adam_GeneralRobotSystemCode-IE:\keil\pack\ARM\CMSIS\4.5.0\CMSIS\Include-IE:\keil\pack\Keil\STM32F4xx_DFP\2.16.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include-D__UVISION_VERSION="539" -D_RTE_ -DSTM32F407xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F407xx-o rmc_adam_generalrobotsystemcode\ui_default_ungroup_2.o --omf_browse rmc_adam_generalrobotsystemcode\ui_default_ungroup_2.crf --depend rmc_adam_generalrobotsystemcode\ui_default_ungroup_2.d)
-I (..\Applications\Software\UI\ui_default_Ungroup_2.h)(0x66A24773)
-I (..\Applications\Software\UI\ui_interface.h)(0x66A24833)
+F (..\Applications\Software\UI\ui_default_Ungroup_1.h)(0x66A372B3)()
+F (..\Applications\Software\UI\ui_default_Ungroup_2.c)(0x66A372B3)(--c99 -c --cpu Cortex-M4.fp.sp -g -O2 -Otime --apcs=interwork --split_sections -I ../Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I ../Middlewares/Third_Party/FreeRTOS/Source/include -I ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2 -I ../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F -I ../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I ../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc -I ../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I ../Drivers/CMSIS/Include -I ../Drivers/Chip -I ../Task -I ../Algorithm -I ../Applications/Software -I ../Applications/Hardware -I ../Drivers/Nooloop -I ..\Applications\Software\UI-I.\RTE\_RMc_adam_GeneralRobotSystemCode-IE:\keil\pack\ARM\CMSIS\4.5.0\CMSIS\Include-IE:\keil\pack\Keil\STM32F4xx_DFP\2.16.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include-D__UVISION_VERSION="539" -D_RTE_ -DSTM32F407xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F407xx-o rmc_adam_generalrobotsystemcode\ui_default_ungroup_2.o --omf_browse rmc_adam_generalrobotsystemcode\ui_default_ungroup_2.crf --depend rmc_adam_generalrobotsystemcode\ui_default_ungroup_2.d)
+I (..\Applications\Software\UI\ui_default_Ungroup_2.h)(0x66A372B3)
+I (..\Applications\Software\UI\ui_interface.h)(0x66A37335)
 I (E:\keil\core\ARM\ARMCC\include\stdio.h)(0x5CEB79E2)
 I (../Drivers/CMSIS/Device/ST/STM32F4xx/Include/stm32f4xx.h)(0x668F3E6B)
 I (../Drivers/CMSIS/Device/ST/STM32F4xx/Include/stm32f407xx.h)(0x668F3E6B)
@@ -2487,12 +2487,12 @@ I (../Applications/Hardware/UART_data_transmit.h)(0x669F5D4C)
 I (../Inc/usart.h)(0x668F3E6B)
 I (../Inc/main.h)(0x668F3E6B)
 I (../Inc/struct_typedef.h)(0x668F3E6B)
-I (..\Applications\Software\UI\ui_types.h)(0x66A24826)
+I (..\Applications\Software\UI\ui_types.h)(0x66A37328)
 I (E:\keil\core\ARM\ARMCC\include\string.h)(0x5CEB79E2)
-F (..\Applications\Software\UI\ui_default_Ungroup_2.h)(0x66A24773)()
-F (..\Applications\Software\UI\ui_default_Ungroup_3.c)(0x66A24773)(--c99 -c --cpu Cortex-M4.fp.sp -g -O2 -Otime --apcs=interwork --split_sections -I ../Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I ../Middlewares/Third_Party/FreeRTOS/Source/include -I ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2 -I ../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F -I ../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I ../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc -I ../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I ../Drivers/CMSIS/Include -I ../Drivers/Chip -I ../Task -I ../Algorithm -I ../Applications/Software -I ../Applications/Hardware -I ../Drivers/Nooloop -I ..\Applications\Software\UI-I.\RTE\_RMc_adam_GeneralRobotSystemCode-IE:\keil\pack\ARM\CMSIS\4.5.0\CMSIS\Include-IE:\keil\pack\Keil\STM32F4xx_DFP\2.16.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include-D__UVISION_VERSION="539" -D_RTE_ -DSTM32F407xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F407xx-o rmc_adam_generalrobotsystemcode\ui_default_ungroup_3.o --omf_browse rmc_adam_generalrobotsystemcode\ui_default_ungroup_3.crf --depend rmc_adam_generalrobotsystemcode\ui_default_ungroup_3.d)
-I (..\Applications\Software\UI\ui_default_Ungroup_3.h)(0x66A24773)
-I (..\Applications\Software\UI\ui_interface.h)(0x66A24833)
+F (..\Applications\Software\UI\ui_default_Ungroup_2.h)(0x66A372B3)()
+F (..\Applications\Software\UI\ui_default_Ungroup_3.c)(0x66A372B3)(--c99 -c --cpu Cortex-M4.fp.sp -g -O2 -Otime --apcs=interwork --split_sections -I ../Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I ../Middlewares/Third_Party/FreeRTOS/Source/include -I ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2 -I ../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F -I ../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I ../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc -I ../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I ../Drivers/CMSIS/Include -I ../Drivers/Chip -I ../Task -I ../Algorithm -I ../Applications/Software -I ../Applications/Hardware -I ../Drivers/Nooloop -I ..\Applications\Software\UI-I.\RTE\_RMc_adam_GeneralRobotSystemCode-IE:\keil\pack\ARM\CMSIS\4.5.0\CMSIS\Include-IE:\keil\pack\Keil\STM32F4xx_DFP\2.16.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include-D__UVISION_VERSION="539" -D_RTE_ -DSTM32F407xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F407xx-o rmc_adam_generalrobotsystemcode\ui_default_ungroup_3.o --omf_browse rmc_adam_generalrobotsystemcode\ui_default_ungroup_3.crf --depend rmc_adam_generalrobotsystemcode\ui_default_ungroup_3.d)
+I (..\Applications\Software\UI\ui_default_Ungroup_3.h)(0x66A372B3)
+I (..\Applications\Software\UI\ui_interface.h)(0x66A37335)
 I (E:\keil\core\ARM\ARMCC\include\stdio.h)(0x5CEB79E2)
 I (../Drivers/CMSIS/Device/ST/STM32F4xx/Include/stm32f4xx.h)(0x668F3E6B)
 I (../Drivers/CMSIS/Device/ST/STM32F4xx/Include/stm32f407xx.h)(0x668F3E6B)
@@ -2537,12 +2537,12 @@ I (../Applications/Hardware/UART_data_transmit.h)(0x669F5D4C)
 I (../Inc/usart.h)(0x668F3E6B)
 I (../Inc/main.h)(0x668F3E6B)
 I (../Inc/struct_typedef.h)(0x668F3E6B)
-I (..\Applications\Software\UI\ui_types.h)(0x66A24826)
+I (..\Applications\Software\UI\ui_types.h)(0x66A37328)
 I (E:\keil\core\ARM\ARMCC\include\string.h)(0x5CEB79E2)
-F (..\Applications\Software\UI\ui_default_Ungroup_3.h)(0x66A24773)()
-F (..\Applications\Software\UI\ui_default_Ungroup_4.c)(0x66A26E01)(--c99 -c --cpu Cortex-M4.fp.sp -g -O2 -Otime --apcs=interwork --split_sections -I ../Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I ../Middlewares/Third_Party/FreeRTOS/Source/include -I ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2 -I ../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F -I ../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I ../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc -I ../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I ../Drivers/CMSIS/Include -I ../Drivers/Chip -I ../Task -I ../Algorithm -I ../Applications/Software -I ../Applications/Hardware -I ../Drivers/Nooloop -I ..\Applications\Software\UI-I.\RTE\_RMc_adam_GeneralRobotSystemCode-IE:\keil\pack\ARM\CMSIS\4.5.0\CMSIS\Include-IE:\keil\pack\Keil\STM32F4xx_DFP\2.16.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include-D__UVISION_VERSION="539" -D_RTE_ -DSTM32F407xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F407xx-o rmc_adam_generalrobotsystemcode\ui_default_ungroup_4.o --omf_browse rmc_adam_generalrobotsystemcode\ui_default_ungroup_4.crf --depend rmc_adam_generalrobotsystemcode\ui_default_ungroup_4.d)
-I (..\Applications\Software\UI\ui_default_Ungroup_4.h)(0x66A24773)
-I (..\Applications\Software\UI\ui_interface.h)(0x66A24833)
+F (..\Applications\Software\UI\ui_default_Ungroup_3.h)(0x66A372B3)()
+F (..\Applications\Software\UI\ui_default_Ungroup_4.c)(0x66A372B3)(--c99 -c --cpu Cortex-M4.fp.sp -g -O2 -Otime --apcs=interwork --split_sections -I ../Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I ../Middlewares/Third_Party/FreeRTOS/Source/include -I ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2 -I ../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F -I ../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I ../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc -I ../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I ../Drivers/CMSIS/Include -I ../Drivers/Chip -I ../Task -I ../Algorithm -I ../Applications/Software -I ../Applications/Hardware -I ../Drivers/Nooloop -I ..\Applications\Software\UI-I.\RTE\_RMc_adam_GeneralRobotSystemCode-IE:\keil\pack\ARM\CMSIS\4.5.0\CMSIS\Include-IE:\keil\pack\Keil\STM32F4xx_DFP\2.16.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include-D__UVISION_VERSION="539" -D_RTE_ -DSTM32F407xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F407xx-o rmc_adam_generalrobotsystemcode\ui_default_ungroup_4.o --omf_browse rmc_adam_generalrobotsystemcode\ui_default_ungroup_4.crf --depend rmc_adam_generalrobotsystemcode\ui_default_ungroup_4.d)
+I (..\Applications\Software\UI\ui_default_Ungroup_4.h)(0x66A372B3)
+I (..\Applications\Software\UI\ui_interface.h)(0x66A37335)
 I (E:\keil\core\ARM\ARMCC\include\stdio.h)(0x5CEB79E2)
 I (../Drivers/CMSIS/Device/ST/STM32F4xx/Include/stm32f4xx.h)(0x668F3E6B)
 I (../Drivers/CMSIS/Device/ST/STM32F4xx/Include/stm32f407xx.h)(0x668F3E6B)
@@ -2587,11 +2587,11 @@ I (../Applications/Hardware/UART_data_transmit.h)(0x669F5D4C)
 I (../Inc/usart.h)(0x668F3E6B)
 I (../Inc/main.h)(0x668F3E6B)
 I (../Inc/struct_typedef.h)(0x668F3E6B)
-I (..\Applications\Software\UI\ui_types.h)(0x66A24826)
-F (..\Applications\Software\UI\ui_default_Ungroup_4.h)(0x66A24773)()
-F (..\Applications\Software\UI\ui_default_Ungroup_5.c)(0x66A24773)(--c99 -c --cpu Cortex-M4.fp.sp -g -O2 -Otime --apcs=interwork --split_sections -I ../Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I ../Middlewares/Third_Party/FreeRTOS/Source/include -I ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2 -I ../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F -I ../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I ../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc -I ../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I ../Drivers/CMSIS/Include -I ../Drivers/Chip -I ../Task -I ../Algorithm -I ../Applications/Software -I ../Applications/Hardware -I ../Drivers/Nooloop -I ..\Applications\Software\UI-I.\RTE\_RMc_adam_GeneralRobotSystemCode-IE:\keil\pack\ARM\CMSIS\4.5.0\CMSIS\Include-IE:\keil\pack\Keil\STM32F4xx_DFP\2.16.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include-D__UVISION_VERSION="539" -D_RTE_ -DSTM32F407xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F407xx-o rmc_adam_generalrobotsystemcode\ui_default_ungroup_5.o --omf_browse rmc_adam_generalrobotsystemcode\ui_default_ungroup_5.crf --depend rmc_adam_generalrobotsystemcode\ui_default_ungroup_5.d)
-I (..\Applications\Software\UI\ui_default_Ungroup_5.h)(0x66A24773)
-I (..\Applications\Software\UI\ui_interface.h)(0x66A24833)
+I (..\Applications\Software\UI\ui_types.h)(0x66A37328)
+F (..\Applications\Software\UI\ui_default_Ungroup_4.h)(0x66A372B3)()
+F (..\Applications\Software\UI\ui_default_Ungroup_5.c)(0x66A372B3)(--c99 -c --cpu Cortex-M4.fp.sp -g -O2 -Otime --apcs=interwork --split_sections -I ../Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I ../Middlewares/Third_Party/FreeRTOS/Source/include -I ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2 -I ../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F -I ../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I ../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc -I ../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I ../Drivers/CMSIS/Include -I ../Drivers/Chip -I ../Task -I ../Algorithm -I ../Applications/Software -I ../Applications/Hardware -I ../Drivers/Nooloop -I ..\Applications\Software\UI-I.\RTE\_RMc_adam_GeneralRobotSystemCode-IE:\keil\pack\ARM\CMSIS\4.5.0\CMSIS\Include-IE:\keil\pack\Keil\STM32F4xx_DFP\2.16.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include-D__UVISION_VERSION="539" -D_RTE_ -DSTM32F407xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F407xx-o rmc_adam_generalrobotsystemcode\ui_default_ungroup_5.o --omf_browse rmc_adam_generalrobotsystemcode\ui_default_ungroup_5.crf --depend rmc_adam_generalrobotsystemcode\ui_default_ungroup_5.d)
+I (..\Applications\Software\UI\ui_default_Ungroup_5.h)(0x66A372B3)
+I (..\Applications\Software\UI\ui_interface.h)(0x66A37335)
 I (E:\keil\core\ARM\ARMCC\include\stdio.h)(0x5CEB79E2)
 I (../Drivers/CMSIS/Device/ST/STM32F4xx/Include/stm32f4xx.h)(0x668F3E6B)
 I (../Drivers/CMSIS/Device/ST/STM32F4xx/Include/stm32f407xx.h)(0x668F3E6B)
@@ -2636,10 +2636,10 @@ I (../Applications/Hardware/UART_data_transmit.h)(0x669F5D4C)
 I (../Inc/usart.h)(0x668F3E6B)
 I (../Inc/main.h)(0x668F3E6B)
 I (../Inc/struct_typedef.h)(0x668F3E6B)
-I (..\Applications\Software\UI\ui_types.h)(0x66A24826)
-F (..\Applications\Software\UI\ui_default_Ungroup_5.h)(0x66A24773)()
-F (..\Applications\Software\UI\ui_interface.c)(0x66A24773)(--c99 -c --cpu Cortex-M4.fp.sp -g -O2 -Otime --apcs=interwork --split_sections -I ../Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I ../Middlewares/Third_Party/FreeRTOS/Source/include -I ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2 -I ../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F -I ../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I ../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc -I ../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I ../Drivers/CMSIS/Include -I ../Drivers/Chip -I ../Task -I ../Algorithm -I ../Applications/Software -I ../Applications/Hardware -I ../Drivers/Nooloop -I ..\Applications\Software\UI-I.\RTE\_RMc_adam_GeneralRobotSystemCode-IE:\keil\pack\ARM\CMSIS\4.5.0\CMSIS\Include-IE:\keil\pack\Keil\STM32F4xx_DFP\2.16.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include-D__UVISION_VERSION="539" -D_RTE_ -DSTM32F407xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F407xx-o rmc_adam_generalrobotsystemcode\ui_interface.o --omf_browse rmc_adam_generalrobotsystemcode\ui_interface.crf --depend rmc_adam_generalrobotsystemcode\ui_interface.d)
-I (..\Applications\Software\UI\ui_interface.h)(0x66A24833)
+I (..\Applications\Software\UI\ui_types.h)(0x66A37328)
+F (..\Applications\Software\UI\ui_default_Ungroup_5.h)(0x66A372B3)()
+F (..\Applications\Software\UI\ui_interface.c)(0x66A372B3)(--c99 -c --cpu Cortex-M4.fp.sp -g -O2 -Otime --apcs=interwork --split_sections -I ../Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I ../Middlewares/Third_Party/FreeRTOS/Source/include -I ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2 -I ../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F -I ../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I ../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc -I ../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I ../Drivers/CMSIS/Include -I ../Drivers/Chip -I ../Task -I ../Algorithm -I ../Applications/Software -I ../Applications/Hardware -I ../Drivers/Nooloop -I ..\Applications\Software\UI-I.\RTE\_RMc_adam_GeneralRobotSystemCode-IE:\keil\pack\ARM\CMSIS\4.5.0\CMSIS\Include-IE:\keil\pack\Keil\STM32F4xx_DFP\2.16.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include-D__UVISION_VERSION="539" -D_RTE_ -DSTM32F407xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F407xx-o rmc_adam_generalrobotsystemcode\ui_interface.o --omf_browse rmc_adam_generalrobotsystemcode\ui_interface.crf --depend rmc_adam_generalrobotsystemcode\ui_interface.d)
+I (..\Applications\Software\UI\ui_interface.h)(0x66A37335)
 I (E:\keil\core\ARM\ARMCC\include\stdio.h)(0x5CEB79E2)
 I (../Drivers/CMSIS/Device/ST/STM32F4xx/Include/stm32f4xx.h)(0x668F3E6B)
 I (../Drivers/CMSIS/Device/ST/STM32F4xx/Include/stm32f407xx.h)(0x668F3E6B)
@@ -2684,10 +2684,10 @@ I (../Applications/Hardware/UART_data_transmit.h)(0x669F5D4C)
 I (../Inc/usart.h)(0x668F3E6B)
 I (../Inc/main.h)(0x668F3E6B)
 I (../Inc/struct_typedef.h)(0x668F3E6B)
-I (..\Applications\Software\UI\ui_types.h)(0x66A24826)
+I (..\Applications\Software\UI\ui_types.h)(0x66A37328)
 I (E:\keil\core\ARM\ARMCC\include\string.h)(0x5CEB79E2)
-F (..\Applications\Software\UI\ui_interface.h)(0x66A24833)()
-F (..\Applications\Software\UI\ui_types.h)(0x66A24826)()
+F (..\Applications\Software\UI\ui_interface.h)(0x66A37335)()
+F (..\Applications\Software\UI\ui_types.h)(0x66A37328)()
 F (..\Drivers\Chip\BMI088driver.c)(0x668F3E6B)(--c99 -c --cpu Cortex-M4.fp.sp -g -O2 -Otime --apcs=interwork --split_sections -I ../Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I ../Middlewares/Third_Party/FreeRTOS/Source/include -I ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2 -I ../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F -I ../Middlewares/ST/STM32_USB_Device_Library/Core/Inc -I ../Middlewares/ST/STM32_USB_Device_Library/Class/CDC/Inc -I ../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I ../Drivers/CMSIS/Include -I ../Drivers/Chip -I ../Task -I ../Algorithm -I ../Applications/Software -I ../Applications/Hardware -I ../Drivers/Nooloop -I ..\Applications\Software\UI-I.\RTE\_RMc_adam_GeneralRobotSystemCode-IE:\keil\pack\ARM\CMSIS\4.5.0\CMSIS\Include-IE:\keil\pack\Keil\STM32F4xx_DFP\2.16.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include-D__UVISION_VERSION="539" -D_RTE_ -DSTM32F407xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F407xx-o rmc_adam_generalrobotsystemcode\bmi088driver.o --omf_browse rmc_adam_generalrobotsystemcode\bmi088driver.crf --depend rmc_adam_generalrobotsystemcode\bmi088driver.d)
 I (..\Drivers\Chip\BMI088driver.h)(0x668F3E6B)
 I (../Inc/struct_typedef.h)(0x668F3E6B)
