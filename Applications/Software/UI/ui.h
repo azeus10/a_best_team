@@ -15,7 +15,7 @@ extern "C" {
 #include "ui_default_Ungroup_2.h"
 #include "ui_default_Ungroup_3.h"
 #include "ui_default_Ungroup_4.h"
-#include "ui_default_Ungroup_5.h"
+
 
 void ui_init();
 void ui_updata();
@@ -30,24 +30,21 @@ _ui_init_default_Ungroup_0(); \
 _ui_init_default_Ungroup_1(); \
 _ui_init_default_Ungroup_2(); \
 _ui_init_default_Ungroup_3(); \
-_ui_init_default_Ungroup_4(); \
-_ui_init_default_Ungroup_5()
+_ui_init_default_Ungroup_4()
 
 #define ui_update_default_Ungroup() \
 _ui_update_default_Ungroup_0(); \
 _ui_update_default_Ungroup_1(); \
 _ui_update_default_Ungroup_2(); \
 _ui_update_default_Ungroup_3(); \
-_ui_update_default_Ungroup_4(); \
-_ui_update_default_Ungroup_5()
+_ui_update_default_Ungroup_4()
 
 #define ui_remove_default_Ungroup() \
 _ui_remove_default_Ungroup_0(); \
 _ui_remove_default_Ungroup_1(); \
 _ui_remove_default_Ungroup_2(); \
 _ui_remove_default_Ungroup_3(); \
-_ui_remove_default_Ungroup_4(); \
-_ui_remove_default_Ungroup_5()
+_ui_remove_default_Ungroup_4()
     
 
 

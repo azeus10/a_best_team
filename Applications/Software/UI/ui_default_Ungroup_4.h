@@ -7,13 +7,8 @@
 
 #include "ui_interface.h"
 
-extern ui_interface_arc_t *ui_default_Ungroup_Chassis;
-extern ui_interface_rect_t *ui_default_Ungroup_energycircle;
-extern ui_interface_rect_t *ui_default_Ungroup_EnergyLine;
-extern ui_interface_line_t *ui_default_Ungroup_MoveLineleft;
-extern ui_interface_line_t *ui_default_Ungroup_MoveLineright;
-extern ui_interface_rect_t *ui_default_Ungroup_aim_18;
-extern ui_interface_line_t *ui_default_Ungroup_DropLine;
+extern ui_interface_number_t *ui_default_Ungroup_shootup_speed;
+extern ui_interface_number_t *ui_default_Ungroup_shootleft_speed;
 
 void _ui_init_default_Ungroup_4();
 void _ui_update_default_Ungroup_4();

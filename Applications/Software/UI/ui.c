@@ -22,9 +22,7 @@ void ui_init(){
   _ui_init_default_Ungroup_3();
 	osDelay(20);		
   _ui_init_default_Ungroup_4();
-  osDelay(20);		
-  _ui_init_default_Ungroup_5();
-	osDelay(20);		
+  osDelay(20);			
 }
 
 void ui_updata(){
@@ -38,8 +36,7 @@ void ui_updata(){
   osDelay(2);
   _ui_update_default_Ungroup_3();
   osDelay(2);
-  _ui_update_default_Ungroup_5();
-  osDelay(2);
+
 }
 
 void ui_supercap(float votage){
@@ -104,26 +101,6 @@ void char_change()
     ui_default_Ungroup_Lob->color=2;
     ui_default_Ungroup_Lob->font_size=30;
   }
-  //¿¨µ¯
-  if(Global.input.shooter_status == 1 && get_motor_data(SHOOT_MOTOR1).speed_rpm<10 && get_motor_data(SHOOT_MOTOR2).speed_rpm<10
-    && get_motor_data(SHOOT_MOTOR3).speed_rpm<10)
-  {
-    ui_default_Ungroup_LALE->color=2;
-    ui_default_Ungroup_LALE->font_size=30;
-  }
-  else{ 
-    ui_default_Ungroup_LALE->color=7;
-    ui_default_Ungroup_LALE->font_size=30;
-  }
-  if(shoot.trigger_location.now > shoot.trigger_location.set + 28225)
-    {
-    ui_default_Ungroup_LALE->color=2;
-    ui_default_Ungroup_LALE->font_size=30;
-  }
-    else{ 
-    ui_default_Ungroup_LALE->color=7;
-    ui_default_Ungroup_LALE->font_size=30;
-  }
 }
 
 void ui_chassis(float angle){
@@ -179,22 +156,12 @@ void ui_pitch_angle(float angle)
 {
   ui_default_Ungroup_pitch_angle->number = angle;
 }
-
-void ui_chassisline(){
-  if(fly_mode ==1){
-    ui_default_Ungroup_MoveLineleft->end_y = 408;
-    ui_default_Ungroup_MoveLineright->end_y = 408;
-  }else{
-    ui_default_Ungroup_MoveLineleft->end_y = 1;
-    ui_default_Ungroup_MoveLineright->end_y = 1;
-  }
-}
 //?????
-void ui_shoot_speed(int a,int b, int c)
+void ui_shoot_speed(int a,int b)
 {
 ui_default_Ungroup_shootup_speed->number = a;
 ui_default_Ungroup_shootleft_speed->number = b;
-ui_default_Ungroup_shootright_speed->number = c;
+
 }
 
 

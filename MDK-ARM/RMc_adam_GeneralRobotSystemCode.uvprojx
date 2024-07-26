@@ -1031,16 +1031,6 @@
               <FilePath>..\Applications\Software\UI\ui_default_Ungroup_4.h</FilePath>
             </File>
             <File>
-              <FileName>ui_default_Ungroup_5.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\Applications\Software\UI\ui_default_Ungroup_5.c</FilePath>
-            </File>
-            <File>
-              <FileName>ui_default_Ungroup_5.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>..\Applications\Software\UI\ui_default_Ungroup_5.h</FilePath>
-            </File>
-            <File>
               <FileName>ui_interface.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\Applications\Software\UI\ui_interface.c</FilePath>

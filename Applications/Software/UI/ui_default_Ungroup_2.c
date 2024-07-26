@@ -11,7 +11,7 @@
 
 ui_string_frame_t ui_default_Ungroup_2;
 
-ui_interface_string_t* ui_default_Ungroup_LALE = &ui_default_Ungroup_2.option;
+ui_interface_string_t* ui_default_Ungroup_Lob = &ui_default_Ungroup_2.option;
 
 void _ui_init_default_Ungroup_2() {
     ui_default_Ungroup_2.option.figure_name[0] = FRAME_ID;
@@ -21,12 +21,12 @@ void _ui_init_default_Ungroup_2() {
     ui_default_Ungroup_2.option.figure_tpye = 7;
     ui_default_Ungroup_2.option.layer = 5;
     ui_default_Ungroup_2.option.font_size = 30;
-    ui_default_Ungroup_2.option.start_x = 119;
-    ui_default_Ungroup_2.option.start_y = 724;
+    ui_default_Ungroup_2.option.start_x = 114;
+    ui_default_Ungroup_2.option.start_y = 767;
     ui_default_Ungroup_2.option.color = 7;
-    ui_default_Ungroup_2.option.str_length = 4;
+    ui_default_Ungroup_2.option.str_length = 3;
     ui_default_Ungroup_2.option.width = 3;
-    strcpy(ui_default_Ungroup_LALE->string, "KALE");
+    strcpy(ui_default_Ungroup_Lob->string, "Lob");
 
     ui_proc_string_frame(&ui_default_Ungroup_2);
     SEND_MESSAGE((uint8_t *) &ui_default_Ungroup_2, sizeof(ui_default_Ungroup_2));

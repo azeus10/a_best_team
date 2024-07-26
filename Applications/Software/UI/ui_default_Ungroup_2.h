@@ -7,7 +7,7 @@
 
 #include "ui_interface.h"
 
-extern ui_interface_string_t *ui_default_Ungroup_LALE;
+extern ui_interface_string_t *ui_default_Ungroup_Lob;
 
 void _ui_init_default_Ungroup_2();
 void _ui_update_default_Ungroup_2();

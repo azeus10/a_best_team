@@ -6,18 +6,13 @@
 
 #define FRAME_ID 0
 #define GROUP_ID 0
-#define START_ID 4
-#define OBJ_NUM 7
-#define FRAME_OBJ_NUM 7
+#define START_ID 10
+#define OBJ_NUM 2
+#define FRAME_OBJ_NUM 2
 
 CAT(ui_, CAT(FRAME_OBJ_NUM, _frame_t)) ui_default_Ungroup_4;
-ui_interface_arc_t *ui_default_Ungroup_Chassis = (ui_interface_arc_t *)&(ui_default_Ungroup_4.data[0]);
-ui_interface_rect_t *ui_default_Ungroup_energycircle = (ui_interface_rect_t *)&(ui_default_Ungroup_4.data[1]);
-ui_interface_rect_t *ui_default_Ungroup_EnergyLine = (ui_interface_rect_t *)&(ui_default_Ungroup_4.data[2]);
-ui_interface_line_t *ui_default_Ungroup_MoveLineleft = (ui_interface_line_t *)&(ui_default_Ungroup_4.data[3]);
-ui_interface_line_t *ui_default_Ungroup_MoveLineright = (ui_interface_line_t *)&(ui_default_Ungroup_4.data[4]);
-ui_interface_rect_t *ui_default_Ungroup_aim_18 = (ui_interface_rect_t *)&(ui_default_Ungroup_4.data[5]);
-ui_interface_line_t *ui_default_Ungroup_DropLine = (ui_interface_line_t *)&(ui_default_Ungroup_4.data[6]);
+ui_interface_number_t *ui_default_Ungroup_shootup_speed = (ui_interface_number_t *)&(ui_default_Ungroup_4.data[0]);
+ui_interface_number_t *ui_default_Ungroup_shootleft_speed = (ui_interface_number_t *)&(ui_default_Ungroup_4.data[1]);
 
 void _ui_init_default_Ungroup_4() {
     for (int i = 0; i < OBJ_NUM; i++) {
@@ -30,70 +25,23 @@ void _ui_init_default_Ungroup_4() {
         ui_default_Ungroup_4.data[i].operate_tpyel = 0;
     }
 
-    ui_default_Ungroup_Chassis->figure_tpye = 4;
-    ui_default_Ungroup_Chassis->layer = 0;
-    ui_default_Ungroup_Chassis->rx = 360;
-    ui_default_Ungroup_Chassis->ry = 360;
-    ui_default_Ungroup_Chassis->start_x = 960;
-    ui_default_Ungroup_Chassis->start_y = 540;
-    ui_default_Ungroup_Chassis->color = 1;
-    ui_default_Ungroup_Chassis->width = 8;
-    ui_default_Ungroup_Chassis->start_angle = 160;
-    ui_default_Ungroup_Chassis->end_angle = 200;
+    ui_default_Ungroup_shootup_speed->figure_tpye = 6;
+    ui_default_Ungroup_shootup_speed->layer = 0;
+    ui_default_Ungroup_shootup_speed->font_size = 30;
+    ui_default_Ungroup_shootup_speed->start_x = 286;
+    ui_default_Ungroup_shootup_speed->start_y = 809;
+    ui_default_Ungroup_shootup_speed->color = 0;
+    ui_default_Ungroup_shootup_speed->number = 0;
+    ui_default_Ungroup_shootup_speed->width = 3;
 
-    ui_default_Ungroup_energycircle->figure_tpye = 1;
-    ui_default_Ungroup_energycircle->layer = 1;
-    ui_default_Ungroup_energycircle->start_x = 528;
-    ui_default_Ungroup_energycircle->start_y = 114;
-    ui_default_Ungroup_energycircle->color = 6;
-    ui_default_Ungroup_energycircle->width = 1;
-    ui_default_Ungroup_energycircle->end_x = 1408;
-    ui_default_Ungroup_energycircle->end_y = 152;
-
-    ui_default_Ungroup_EnergyLine->figure_tpye = 1;
-    ui_default_Ungroup_EnergyLine->layer = 1;
-    ui_default_Ungroup_EnergyLine->start_x = 529;
-    ui_default_Ungroup_EnergyLine->start_y = 118;
-    ui_default_Ungroup_EnergyLine->color = 2;
-    ui_default_Ungroup_EnergyLine->width = 15;
-    ui_default_Ungroup_EnergyLine->end_x = 1391;
-    ui_default_Ungroup_EnergyLine->end_y = 133;
-
-    ui_default_Ungroup_MoveLineleft->figure_tpye = 0;
-    ui_default_Ungroup_MoveLineleft->layer = 2;
-    ui_default_Ungroup_MoveLineleft->start_x = 341;
-    ui_default_Ungroup_MoveLineleft->start_y = 0;
-    ui_default_Ungroup_MoveLineleft->end_x = 741;
-    ui_default_Ungroup_MoveLineleft->end_y = 409;
-    ui_default_Ungroup_MoveLineleft->color = 6;
-    ui_default_Ungroup_MoveLineleft->width = 3;
-
-    ui_default_Ungroup_MoveLineright->figure_tpye = 0;
-    ui_default_Ungroup_MoveLineright->layer = 2;
-    ui_default_Ungroup_MoveLineright->start_x = 1599;
-    ui_default_Ungroup_MoveLineright->start_y = 11;
-    ui_default_Ungroup_MoveLineright->end_x = 1165;
-    ui_default_Ungroup_MoveLineright->end_y = 412;
-    ui_default_Ungroup_MoveLineright->color = 6;
-    ui_default_Ungroup_MoveLineright->width = 3;
-
-    ui_default_Ungroup_aim_18->figure_tpye = 1;
-    ui_default_Ungroup_aim_18->layer = 3;
-    ui_default_Ungroup_aim_18->start_x = 842;
-    ui_default_Ungroup_aim_18->start_y = 694;
-    ui_default_Ungroup_aim_18->color = 5;
-    ui_default_Ungroup_aim_18->width = 4;
-    ui_default_Ungroup_aim_18->end_x = 899;
-    ui_default_Ungroup_aim_18->end_y = 736;
-
-    ui_default_Ungroup_DropLine->figure_tpye = 0;
-    ui_default_Ungroup_DropLine->layer = 3;
-    ui_default_Ungroup_DropLine->start_x = 960;
-    ui_default_Ungroup_DropLine->start_y = 542;
-    ui_default_Ungroup_DropLine->end_x = 960;
-    ui_default_Ungroup_DropLine->end_y = 400;
-    ui_default_Ungroup_DropLine->color = 0;
-    ui_default_Ungroup_DropLine->width = 3;
+    ui_default_Ungroup_shootleft_speed->figure_tpye = 6;
+    ui_default_Ungroup_shootleft_speed->layer = 2;
+    ui_default_Ungroup_shootleft_speed->font_size = 30;
+    ui_default_Ungroup_shootleft_speed->start_x = 286;
+    ui_default_Ungroup_shootleft_speed->start_y = 758;
+    ui_default_Ungroup_shootleft_speed->color = 0;
+    ui_default_Ungroup_shootleft_speed->number = 0;
+    ui_default_Ungroup_shootleft_speed->width = 3;
 
 
     CAT(ui_proc_, CAT(FRAME_OBJ_NUM, _frame))(&ui_default_Ungroup_4);

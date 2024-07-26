@@ -21,8 +21,8 @@ void _ui_init_default_Ungroup_1() {
     ui_default_Ungroup_1.option.figure_tpye = 7;
     ui_default_Ungroup_1.option.layer = 5;
     ui_default_Ungroup_1.option.font_size = 30;
-    ui_default_Ungroup_1.option.start_x = 115;
-    ui_default_Ungroup_1.option.start_y = 811;
+    ui_default_Ungroup_1.option.start_x = 113;
+    ui_default_Ungroup_1.option.start_y = 813;
     ui_default_Ungroup_1.option.color = 7;
     ui_default_Ungroup_1.option.str_length = 3;
     ui_default_Ungroup_1.option.width = 3;
