@@ -29,6 +29,8 @@ void ui_init(){
   osDelay(20);	
   _ui_init_default_aim_0();
   osDelay(20);	
+  _ui_init_default_close_aim_0();
+  osDelay(20);	
 }
 
 void ui_updata(){
@@ -48,8 +50,11 @@ void ui_updata(){
   osDelay(2);
   _ui_update_default_aim_0();
   osDelay(2);
-
+  _ui_update_default_close_aim_0();
+  osDelay(2);
 }
+
+
 
 void ui_supercap(float votage){
   float cnt=votage*votage;
@@ -169,11 +174,20 @@ void ui_pitch_angle(float angle)
   ui_default_gimbal_pitch_angle->number = angle;
 }
 //?????
-void ui_shoot_speed(int a,int b)
+void ui_shoot_speed(int a,int b,int c) //传入三个摩擦轮的速度
 {
+if(fabsf(a)>0)
 ui_default_shoot_shootup_speed->number = a;
+else
+ui_default_shoot_shootup_speed->number = 0;
+if(fabsf(b)>0 && (fabsf(c) - fabsf(b)) < 500)
 ui_default_shoot_shootleft_speed->number = b;
-
+else if((fabsf(c) - fabsf(b)) > 500)
+ui_default_shoot_shootleft_speed->number = 666;
+else
+ui_default_shoot_shootleft_speed->number = 0;
 }
+
+
 
 

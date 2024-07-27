@@ -27,21 +27,21 @@ void _ui_init_default_energy_0() {
 
     ui_default_energy_energycircle->figure_tpye = 1;
     ui_default_energy_energycircle->layer = 1;
-    ui_default_energy_energycircle->start_x = 528;
-    ui_default_energy_energycircle->start_y = 114;
+    ui_default_energy_energycircle->start_x = 572;
+    ui_default_energy_energycircle->start_y = 120;
     ui_default_energy_energycircle->color = 6;
     ui_default_energy_energycircle->width = 1;
-    ui_default_energy_energycircle->end_x = 1408;
-    ui_default_energy_energycircle->end_y = 152;
+    ui_default_energy_energycircle->end_x = 1384;
+    ui_default_energy_energycircle->end_y = 158;
 
     ui_default_energy_EnergyLine->figure_tpye = 1;
     ui_default_energy_EnergyLine->layer = 1;
-    ui_default_energy_EnergyLine->start_x = 529;
-    ui_default_energy_EnergyLine->start_y = 118;
+    ui_default_energy_EnergyLine->start_x = 576;
+    ui_default_energy_EnergyLine->start_y = 137;
     ui_default_energy_EnergyLine->color = 2;
     ui_default_energy_EnergyLine->width = 15;
-    ui_default_energy_EnergyLine->end_x = 1391;
-    ui_default_energy_EnergyLine->end_y = 133;
+    ui_default_energy_EnergyLine->end_x = 1369;
+    ui_default_energy_EnergyLine->end_y = 147;
 
 
     CAT(ui_proc_, CAT(FRAME_OBJ_NUM, _frame))(&ui_default_energy_0);

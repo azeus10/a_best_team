@@ -347,4 +347,6 @@ void Cap_Required_Data()
     else
       cap.set_max_power = REFEREE_DATA.Chassis_Power_Limit -1;
 
+    cap.cacheEnergylimit=30;
+
 }

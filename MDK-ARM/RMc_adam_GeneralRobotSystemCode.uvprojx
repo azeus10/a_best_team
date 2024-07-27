@@ -1075,6 +1075,16 @@
               <FileType>5</FileType>
               <FilePath>..\Applications\Software\UI\ui_default_state_2.h</FilePath>
             </File>
+            <File>
+              <FileName>ui_default_close_aim_0.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\Applications\Software\UI\ui_default_close_aim_0.c</FilePath>
+            </File>
+            <File>
+              <FileName>ui_default_close_aim_0.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\Applications\Software\UI\ui_default_close_aim_0.h</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>

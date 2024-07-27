@@ -7,11 +7,12 @@
 #define FRAME_ID 0
 #define GROUP_ID 4
 #define START_ID 0
-#define OBJ_NUM 1
-#define FRAME_OBJ_NUM 1
+#define OBJ_NUM 2
+#define FRAME_OBJ_NUM 2
 
 CAT(ui_, CAT(FRAME_OBJ_NUM, _frame_t)) ui_default_gimbal_0;
 ui_interface_number_t *ui_default_gimbal_pitch_angle = (ui_interface_number_t *)&(ui_default_gimbal_0.data[0]);
+ui_interface_rect_t *ui_default_gimbal_aim_5 = (ui_interface_rect_t *)&(ui_default_gimbal_0.data[1]);
 
 void _ui_init_default_gimbal_0() {
     for (int i = 0; i < OBJ_NUM; i++) {
@@ -32,6 +33,15 @@ void _ui_init_default_gimbal_0() {
     ui_default_gimbal_pitch_angle->color = 2;
     ui_default_gimbal_pitch_angle->number = 0;
     ui_default_gimbal_pitch_angle->width = 3;
+
+    ui_default_gimbal_aim_5->figure_tpye = 1;
+    ui_default_gimbal_aim_5->layer = 5;
+    ui_default_gimbal_aim_5->start_x = 923;
+    ui_default_gimbal_aim_5->start_y = 411;
+    ui_default_gimbal_aim_5->color = 6;
+    ui_default_gimbal_aim_5->width = 2;
+    ui_default_gimbal_aim_5->end_x = 953;
+    ui_default_gimbal_aim_5->end_y = 436;
 
 
     CAT(ui_proc_, CAT(FRAME_OBJ_NUM, _frame))(&ui_default_gimbal_0);
