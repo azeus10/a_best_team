@@ -1,7 +1,8 @@
 #ifndef UI_H
 #define UI_H
+#ifdef __cplusplus
 extern "C" {
-
+#endif
 
 #include "ui_interface.h"
 #include "ui_default_chassis_0.h"
@@ -58,8 +59,9 @@ void ui_chassis(float angle);
 void ui_chassisline();
 void ui_pitch_angle(float angle);
 
-
+#ifdef __cplusplus
 }
-
+#endif
 
 #endif // UI_H
+

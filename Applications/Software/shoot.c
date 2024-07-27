@@ -57,9 +57,9 @@ void shoot_init()
 	shoot.SetSpeedLeft = 0;
 	shoot.SetSpeedRight = 0;
 	shoot.compensate_angle=85;
-	shoot.speedUpLevel   = 5000;
-	shoot.speedRightLevel= 5200;
-	shoot.speedLeftLevel = 5200;
+	shoot.speedUpLevel   = 5300;
+	shoot.speedRightLevel= 5400;
+	shoot.speedLeftLevel = 5400;
 
 }
 // 更新拨弹电机数据
