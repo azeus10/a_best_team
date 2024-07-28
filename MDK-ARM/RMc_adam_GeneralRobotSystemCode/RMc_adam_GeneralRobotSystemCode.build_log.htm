@@ -27,26 +27,18 @@ Project File Date:  07/27/2024
 <h2>Output:</h2>
 *** Using Compiler 'V5.06 update 6 (build 750)', folder: 'E:\keil\core\ARM\ARMCC\Bin'
 Build target 'RMc_adam_GeneralRobotSystemCode'
-compiling ui_default_close_aim_0.c...
-..\Applications\Software\UI\ui_default_close_aim_0.h(12): warning:  #1295-D: Deprecated declaration _ui_init_default_close_aim_0 - give arg types
-  void _ui_init_default_close_aim_0();
-..\Applications\Software\UI\ui_default_close_aim_0.h(13): warning:  #1295-D: Deprecated declaration _ui_update_default_close_aim_0 - give arg types
-  void _ui_update_default_close_aim_0();
-..\Applications\Software\UI\ui_default_close_aim_0.h(14): warning:  #1295-D: Deprecated declaration _ui_remove_default_close_aim_0 - give arg types
-  void _ui_remove_default_close_aim_0();
-..\Applications\Software\UI\ui_default_close_aim_0.c: 3 warnings, 0 errors
-compiling ui_default_gimbal_0.c...
-..\Applications\Software\UI\ui_default_gimbal_0.h(13): warning:  #1295-D: Deprecated declaration _ui_init_default_gimbal_0 - give arg types
-  void _ui_init_default_gimbal_0();
-..\Applications\Software\UI\ui_default_gimbal_0.h(14): warning:  #1295-D: Deprecated declaration _ui_update_default_gimbal_0 - give arg types
-  void _ui_update_default_gimbal_0();
-..\Applications\Software\UI\ui_default_gimbal_0.h(15): warning:  #1295-D: Deprecated declaration _ui_remove_default_gimbal_0 - give arg types
-  void _ui_remove_default_gimbal_0();
-..\Applications\Software\UI\ui_default_gimbal_0.c: 3 warnings, 0 errors
+compiling gimbal.c...
+..\Applications\Software\Global_status.h(71): warning:  #1295-D: Deprecated declaration Global_status_init - give arg types
+  void Global_status_init();
+..\Applications\Software\gimbal.c(419): warning:  #1-D: last line of file ends without a newline
+  }
+..\Applications\Software\gimbal.c(227): warning:  #550-D: variable "last_set"  was set but never used
+  static float last_set;
+..\Applications\Software\gimbal.c: 3 warnings, 0 errors
 linking...
-Program Size: Code=77232 RO-data=3816 RW-data=924 ZI-data=58076  
+Program Size: Code=77296 RO-data=3816 RW-data=924 ZI-data=58076  
 FromELF: creating hex file...
-"RMc_adam_GeneralRobotSystemCode\RMc_adam_GeneralRobotSystemCode.axf" - 0 Error(s), 6 Warning(s).
+"RMc_adam_GeneralRobotSystemCode\RMc_adam_GeneralRobotSystemCode.axf" - 0 Error(s), 3 Warning(s).
 
 <h2>Software Packages used:</h2>
 

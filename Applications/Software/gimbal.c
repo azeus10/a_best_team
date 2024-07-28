@@ -287,7 +287,13 @@ void gimbal_pid_cal()
 	// 副云台pid计算
 	if(gimbal.small_pitch.state == 1)
 	{
-		if(Global.mode==LEAN_LOB && Global.input.ScopeisOpen==1 && IMU_data.AHRS.pitch*57.3f < 30)//打前哨站
+		if(Global.mode==LEAN_LOB && Global.input.ScopeisOpen==1 && IMU_data.AHRS.pitch*57.3f < 20)
+		{
+			gimbal.small_pitch.set += 5; 
+			if(gimbal.small_pitch.set > (gimbal.small_pitch.offset + 560))
+				gimbal.small_pitch.set = gimbal.small_pitch.offset + 560;
+		}
+		else if(Global.mode==LEAN_LOB && Global.input.ScopeisOpen==1 && IMU_data.AHRS.pitch*57.3f < 30 && IMU_data.AHRS.pitch*57.3f >=20)//打前哨站
 		{
 			gimbal.small_pitch.set += 5; 
 			if(gimbal.small_pitch.set > (gimbal.small_pitch.offset + 850))
@@ -296,8 +302,8 @@ void gimbal_pid_cal()
 		else if(Global.mode==LEAN_LOB && Global.input.ScopeisOpen==1 && IMU_data.AHRS.pitch*57.3f >= 30)//打基地
 		{
 			gimbal.small_pitch.set += 5; 
-			if(gimbal.small_pitch.set > (gimbal.small_pitch.offset + 1820))
-				gimbal.small_pitch.set = gimbal.small_pitch.offset + 1820;
+			if(gimbal.small_pitch.set > (gimbal.small_pitch.offset + 1650))
+				gimbal.small_pitch.set = gimbal.small_pitch.offset + 1650;
 		}
 		else//正常看前边
 		{
