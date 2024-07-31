@@ -118,7 +118,21 @@ else if(REFEREE_DATA.Chassis_Power_Limit > 100)
 	//模式切换区
 	//左上右上 键鼠模式
 	if (switch_is_up(RC_L_SW) && switch_is_up(RC_R_SW))
-		Global.input.ctl = PC;
+		{
+			Global.input.ctl = PC;
+			
+			if(RC_data.rc.ch[3] > 60)
+			{
+				Global.input.shooter_status = 1;
+				if(RC_data.rc.ch[3] > 500)
+					Global.input.shoot_fire = 1;
+			}
+			else
+			{
+				Global.input.shooter_status = 0;
+				Global.input.shoot_fire = 0;
+			}
+		}
 	//遥控器模式
 	else
 		Global.input.ctl = RC;
@@ -208,6 +222,7 @@ else if(REFEREE_DATA.Chassis_Power_Limit > 100)
 	//左中右上 开启摩擦轮
 	if(switch_is_mid(RC_L_SW) && switch_is_up(RC_R_SW))
 		Global.input.shooter_status = 1;
+
 	else
 		Global.input.shooter_status = 0;
 	//波轮向上拨 拨弹开关
