@@ -290,10 +290,10 @@ void gimbal_pid_cal()
 		if(Global.mode==LEAN_LOB && Global.input.ScopeisOpen==1 && IMU_data.AHRS.pitch*57.3f < 20)
 		{
 			gimbal.small_pitch.set += 5; 
-			if(gimbal.small_pitch.set > (gimbal.small_pitch.offset + 560))
-				gimbal.small_pitch.set = gimbal.small_pitch.offset + 560;
+			if(gimbal.small_pitch.set > (gimbal.small_pitch.offset + 500))
+				gimbal.small_pitch.set = gimbal.small_pitch.offset + 500;
 		}
-		else if(Global.mode==LEAN_LOB && Global.input.ScopeisOpen==1 && IMU_data.AHRS.pitch*57.3f < 30 && IMU_data.AHRS.pitch*57.3f >=20)//打前哨站
+		else if(Global.mode==LEAN_LOB && Global.input.ScopeisOpen==1 && IMU_data.AHRS.pitch*57.3f < 28 && IMU_data.AHRS.pitch*57.3f >=20)//打前哨站
 		{
 			gimbal.small_pitch.set += 5; 
 			if(gimbal.small_pitch.set > (gimbal.small_pitch.offset + 850))

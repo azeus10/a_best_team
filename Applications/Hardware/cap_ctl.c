@@ -1,6 +1,5 @@
 #include "cap_ctl.h"
 #include "CAN_receive&send.h"
-
 #include "string.h"
 
 cap_t cap;
@@ -9,6 +8,7 @@ typedef struct
 {
 	uint8_t setPower;
 	uint16_t cacheEnergy;
+  uint16_t cacheEnergylimit;
 } can_send_t;
 
 extern CAN_HandleTypeDef hcan1;
@@ -37,6 +37,7 @@ void cap_update()
 
 	send_data.setPower = cap.set_max_power;
 	send_data.cacheEnergy = cap.cache_energy;
+  send_data.cacheEnergylimit=cap.cacheEnergylimit;
 
 	memcpy(can_send_data, &send_data, sizeof(can_send_t));
 

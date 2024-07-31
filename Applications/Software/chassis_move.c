@@ -269,11 +269,20 @@ void chassis_moto_speed_calc()
 	// set_motor((chassis.wheel_current[FL]), chassis_FL);
   	// set_motor((chassis.wheel_current[FR]), chassis_FR);
 	// set_motor((chassis.wheel_current[BL]), chassis_BL);
-
+	if(fly_mode == 1)
+	{
+	set_motor((chassis.wheel_current[BR]), chassis_BR);
+	set_motor((chassis.wheel_current[FL]), chassis_FL);
+  	set_motor((chassis.wheel_current[FR]), chassis_FR);
+	set_motor((chassis.wheel_current[BL]), chassis_BL);
+	}
+	else
+	{
 	 set_motor((Plimit*chassis.wheel_current[BR]), chassis_BR);
 	 set_motor((Plimit*chassis.wheel_current[FL]), chassis_FL);
  	 set_motor((Plimit*chassis.wheel_current[FR]), chassis_FR);
-	 set_motor((Plimit*chassis.wheel_current[BL]), chassis_BL);
+	 set_motor((Plimit*chassis.wheel_current[BL]), chassis_BL);		
+	}
 
 	chassis.speed.last_x = chassis.speed.now_x;
 	chassis.speed.last_y = chassis.speed.now_y;

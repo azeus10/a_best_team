@@ -36,14 +36,14 @@ void _ui_init_default_chassis_0() {
     ui_default_chassis_Chassis->start_angle = 160;
     ui_default_chassis_Chassis->end_angle = 200;
 
-    ui_default_chassis_aim_18->figure_tpye = 1;
+    ui_default_chassis_aim_18->figure_tpye = 1;//12Ã×µõÉäÇ°ÉÚÕ¾
     ui_default_chassis_aim_18->layer = 3;
-    ui_default_chassis_aim_18->start_x = 875;
-    ui_default_chassis_aim_18->start_y = 721;
+    ui_default_chassis_aim_18->start_x = 981;
+    ui_default_chassis_aim_18->start_y = 573;
     ui_default_chassis_aim_18->color = 5;
     ui_default_chassis_aim_18->width = 4;
-    ui_default_chassis_aim_18->end_x = 932;
-    ui_default_chassis_aim_18->end_y = 763;
+    ui_default_chassis_aim_18->end_x = 1047;
+    ui_default_chassis_aim_18->end_y = 608;
 
 
     CAT(ui_proc_, CAT(FRAME_OBJ_NUM, _frame))(&ui_default_chassis_0);

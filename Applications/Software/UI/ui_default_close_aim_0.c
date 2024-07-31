@@ -26,12 +26,12 @@ void _ui_init_default_close_aim_0() {
 
     ui_default_close_aim_aim_10->figure_tpye = 1;
     ui_default_close_aim_aim_10->layer = 5;
-    ui_default_close_aim_aim_10->start_x = 932;
-    ui_default_close_aim_aim_10->start_y = 439;
+    ui_default_close_aim_aim_10->start_x = 764;
+    ui_default_close_aim_aim_10->start_y = 539;
     ui_default_close_aim_aim_10->color = 6;
     ui_default_close_aim_aim_10->width = 2;
-    ui_default_close_aim_aim_10->end_x = 952;
-    ui_default_close_aim_aim_10->end_y = 448;
+    ui_default_close_aim_aim_10->end_x = 1147;
+    ui_default_close_aim_aim_10->end_y = 627;
 
 
     CAT(ui_proc_, CAT(FRAME_OBJ_NUM, _frame))(&ui_default_close_aim_0);

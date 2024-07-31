@@ -7,8 +7,8 @@ typedef struct // μ?èY×′ì??á11ì?
 {
 	uint8_t set_max_power; // 最大功率
 	uint8_t cache_energy;  // 缓冲电量
-	uint16_t cacheEnergylimit;
-	uint8_t state;
+  uint16_t cacheEnergylimit;
+  uint8_t state;
 
 	float remain_vol;	   // 剩余电压
 	float prediect_energy; // 预测容量 0 - 100%

@@ -504,7 +504,7 @@ void RefereeTask_callback(void *argument)
 		// super_cap_speedup(Global.input.fly);                                    // 超电开关显示
 		// shoot_refresh(shoot.SpeedRight);                                  // 射击速度
 		// HeatLimitRefresh(Global.input.isHeatLimit);   
-		ui_shoot_speed((int)(get_motor_data(SHOOT_MOTOR1).speed_rpm),(int)(get_motor_data(SHOOT_MOTOR2).speed_rpm));                    // 热量限制
+		ui_shoot_speed((int)((shoot.speedUpLevel-5350)*1.0f),(int)((shoot.speedLeftLevel-5350)*1.0));                    // 热量限制
 		ui_pitch_angle(IMU_data.AHRS.pitch*57.3f*1000);
 	  	//PitchYawRefresh(IMU_data.AHRS.pitch*57.3f,IMU_data.AHRS.yaw);     //Pitch,yaw轴数据更新
 	  	//ShootDeltaRefresh((shoot.speedUpLevel-5100)*1.0f,shoot.speedLeftLevel-5300,shoot.speedRightLevel-5300);
