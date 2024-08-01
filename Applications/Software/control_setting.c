@@ -120,18 +120,7 @@ else if(REFEREE_DATA.Chassis_Power_Limit > 100)
 	if (switch_is_up(RC_L_SW) && switch_is_up(RC_R_SW))
 		{
 			Global.input.ctl = PC;
-			
-			if(RC_data.rc.ch[3] > 60)
-			{
-				Global.input.shooter_status = 1;
-				if(RC_data.rc.ch[3] > 500)
-					Global.input.shoot_fire = 1;
-			}
-			else
-			{
-				Global.input.shooter_status = 0;
-				Global.input.shoot_fire = 0;
-			}
+		
 		}
 	//Ò£¿ØÆ÷Ä£Ê½
 	else

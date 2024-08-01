@@ -719,12 +719,20 @@ void LockTask_callback(void *argument)
 		Global.input.yaw = 0;
 		Global.input.x = 0;
 		Global.input.y = 0;
-		Global.input.r = 0;
+		Global.input.r = 0;   
 
 		Global.input.isHeatLimit=0;
-
-		Global.input.shooter_status = 0;
-		Global.input.shoot_fire = 0;
+			if(RC_data.rc.ch[3] > 60)
+			{
+				Global.input.shooter_status = 1;
+				if(RC_data.rc.ch[3] > 500)
+					Global.input.shoot_fire = 1;
+			}
+			else
+			{
+				Global.input.shooter_status = 0;
+				Global.input.shoot_fire = 0;
+			}
 	}
   /* USER CODE END LockTask_callback */
 }
