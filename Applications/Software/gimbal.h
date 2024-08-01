@@ -8,8 +8,8 @@
  * @copyright Copyright (c) 2022
  *
  */
+#ifndef __GIMBAL_H__
 #define __GIMBAL_H__
-#ifdef __GIMBAL_H__
 
 #include "pid.h"
 #include "stdint.h"

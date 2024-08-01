@@ -118,6 +118,7 @@ void gimbal_set_offset(float pitch, float yaw)
 }
 void gimbal_updata()
 {
+		HT_small_pitch();//º£Ì©µç»ú
 	/*±àÂëÆ÷*/
 	if (gimbal.gimbal_source == ECD)
 	{

@@ -17,7 +17,7 @@
 #include "cmsis_os.h"
 #include "string.h"
 #include "LK_motor_process.h"
-
+#include "HT_drive.h"
 
 // 电机数据
 motor_measure_t motor_data[22];
@@ -55,7 +55,7 @@ void HAL_CAN_RxFifo0MsgPendingCallback(CAN_HandleTypeDef *hcan)
   uint8_t rx_data[8];            // 获取到的数据
 
   HAL_CAN_GetRxMessage(hcan, CAN_RX_FIFO0, &rx_header, rx_data); // 取得信息
-
+  CAN_ID_matching(rx_header.StdId,rx_data);
   // 超级电容
   if (rx_header.StdId == 0x307)  //0x307
   {
