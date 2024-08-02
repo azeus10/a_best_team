@@ -176,7 +176,7 @@ else if(REFEREE_DATA.Chassis_Power_Limit > 100)
 	{
 /******************底盘行为控制******************/
 		Global.input.x = RC_data.rc.ch[0] / 110.0f;
-		Global.input.y = RC_data.rc.ch[1] / 55.0f;
+		Global.input.y = RC_data.rc.ch[1] / 110.0f;
 /******************云台行为控制******************/
 	//左上右中 自瞄切换
 	if (switch_is_up(RC_L_SW) && switch_is_mid(RC_R_SW))
