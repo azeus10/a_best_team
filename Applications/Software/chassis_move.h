@@ -13,11 +13,6 @@
 
 #define __chassis_move_H_
 #ifdef __chassis_move_H_
-
-/* motorID 1 %++++++% 0
-				++++
-				++++
-			2 %++++++% 3 */
 #define chassis_FR CAN_1_1
 #define chassis_FL CAN_1_2
 #define chassis_BL CAN_1_3
@@ -55,16 +50,12 @@ struct cap
 extern struct chassis_status chassis;
 extern struct cap cap_chassis;
 extern ext_power_heat_data_t power_heat_data;
-
 extern float Power;
-extern uint16_t Engerny_buffer;
 extern float Plimit;
 extern int fly_mode;
 extern float CHASSIS_WZ_SET_SCALE;
-
 void chassis_move_init(void);		// 底盘初始化							//底盘移动初始化
 void chassis_moto_speed_calc(void); //计算马达速度
-int RampInc_float(int16_t *buffer, float now, float ramp);
 void val_limit(float *val, float MAX);
 void chassis_power_limit(void);
 

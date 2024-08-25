@@ -94,7 +94,12 @@ void Error_Handler(void);
 #define PIN_6 6
 #define PIN_7 7
 #define PIN_8 8
-
+#ifndef OPEN
+#define OPEN 1
+#endif
+#ifndef CLOSE
+#define CLOSE 0
+#endif
 
 /* USER CODE END Private defines */
 

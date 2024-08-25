@@ -4,6 +4,8 @@
         "gimbal.h": "c",
         "usbd_cdc.h": "c",
         "ui.h": "c",
-        "ui_default_state_0.h": "c"
+        "ui_default_state_0.h": "c",
+        "main.h": "c",
+        "freertos.h": "c"
     }
 }

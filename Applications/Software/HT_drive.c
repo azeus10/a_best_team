@@ -112,31 +112,32 @@ void CAN_ID_matching(uint32_t StdId ,uint8_t aData[])
 
 void HT_small_pitch()
 {
-	if(lock_power == 0)
+	if(lock_power == 0)//保证每次上电只设置一次零点
 	{
-		HT_CAN_power_TX(power_set);
-		if(fabs((float)GET_speed)< 10 && last_HT_time == 0)
+		HT_CAN_power_TX(power_set);//电流（力矩控制）控制往后转
+		if(fabs((float)GET_speed)< 10 && last_HT_time == 0)//转不动了就判断下是不是到位了
 		{
-			last_HT_time = Get_sys_time_s();
+			last_HT_time = Get_sys_time_s();//延时
 		}
 		
-		if((Get_sys_time_s()-last_HT_time) > 3 && fabs((float)GET_speed)< 10)
+		if((Get_sys_time_s()-last_HT_time) > 3 && fabs((float)GET_speed)< 10)//延时后还转不动真的就到位了
 		{	
 			{
-				HT_CAN_offset_TX();
-				lock_power = 1;
+				HT_CAN_offset_TX();//设置当前位置为零点
+				lock_power = 1;//保证上电后只设置一次零点
 			}
 			
 		}
 	}
+
+//Offset_judge为电机的返回值，可以判断下电机零点是否设置成功
 	if(Offset_judge == 1)
 	{
-//HT_CAN_location_speed_set_TX(5000);
-		if(gimbal.small_pitch.target == 1)
+		if(gimbal.small_pitch.target == 1)//1是打前哨站
 		{
 			HT_CAN_location_TX(-16383);
 		}
-		else if(gimbal.small_pitch.target == 2)
+		else if(gimbal.small_pitch.target == 2)//2是打基地
 		{
 			HT_CAN_location_TX(-20478);
 		}
@@ -145,13 +146,9 @@ void HT_small_pitch()
 			HT_CAN_location_TX(-7735);
 		}
 	}
-	else if(Offset_judge == 0)
+	else if(Offset_judge == 0)//没设置成功就把锁都开开，从新设置零点
 	{
 		lock_power = 0;
 		last_HT_time = 0;
-	}
-	else
-	{
-		lock_power = 0;
 	}
 }

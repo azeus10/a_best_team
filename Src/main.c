@@ -94,6 +94,7 @@ void MX_FREERTOS_Init(void);
   */
 int main(void)
 {
+
   /* USER CODE BEGIN 1 */
   /* USER CODE END 1 */
 
@@ -161,8 +162,6 @@ int main(void)
 	
 	Global_status_init();      //全局状态机初始化
   referee_usart_task_init(); // 裁判系统解算
-  // UI_task_init();            // UI图层初始化
-
   led_show(PINK);            // 初始化完毕
   HAL_Delay(100);
   /* USER CODE END 2 */
@@ -170,13 +169,14 @@ int main(void)
   /* Init scheduler */
   osKernelInitialize();
 
-  /* Call init function for freertos objects (in freertos.c) */
+  /* Call init function for freertos objects (in cmsis_os2.c) */
   MX_FREERTOS_Init();
 
   /* Start scheduler */
   osKernelStart();
 
   /* We should never get here as control is now taken by the scheduler */
+
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
   while (1)
