@@ -49,6 +49,19 @@ uint32_t Time_delay_press_F = 0;
 uint32_t Time_delay_press_R = 0;
 uint32_t Time_delay_tick_left = 0;
 uint32_t Time_delay_press_X_CTRL = 0;
+//定义一个函数用来消抖
+bool key_delay_ms(uint16_t time,int key)
+{
+	static uint32_t delay_time[30] = {0};
+	if (delay_time[key] - Get_sys_time_ms() > time)
+	{
+		delay_time[key] = Get_sys_time_ms();
+		return true;
+	}
+	else
+		return false;
+
+}
 // 微调量
 float tweaks_value = 0.01f;
 uint32_t last_shoot_time = 0;

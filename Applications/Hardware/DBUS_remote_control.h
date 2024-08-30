@@ -56,6 +56,25 @@
 #define KEY_PRESSED_OFFSET_V            ((uint16_t)1 << 14)
 #define KEY_PRESSED_OFFSET_B            ((uint16_t)1 << 15)
 
+//给各个按键编个号
+#define key_W 0
+#define key_s 1
+#define key_A 2
+#define key_d 3
+#define key_shift 4
+#define key_ctrl 5
+#define key_Q 6
+#define key_E 7
+#define key_R 8
+#define key_F 9
+#define key_G 10
+#define key_Z 11
+#define key_X 12
+#define key_C 13
+#define key_V 14
+#define key_B 15
+
+
 #define    IF_KEY_PRESSED         (  RC_data.key.v  )
 #define    IF_KEY_PRESSED_W       ( (RC_data.key.v & KEY_PRESSED_OFFSET_W)    != 0 )
 #define    IF_KEY_PRESSED_S       ( (RC_data.key.v & KEY_PRESSED_OFFSET_S)    != 0 )

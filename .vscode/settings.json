@@ -6,6 +6,7 @@
         "ui.h": "c",
         "ui_default_state_0.h": "c",
         "main.h": "c",
-        "freertos.h": "c"
+        "freertos.h": "c",
+        "dbus_remote_control.h": "c"
     }
 }
