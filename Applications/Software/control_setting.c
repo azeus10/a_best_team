@@ -49,18 +49,20 @@ uint32_t Time_delay_press_F = 0;
 uint32_t Time_delay_press_R = 0;
 uint32_t Time_delay_tick_left = 0;
 uint32_t Time_delay_press_X_CTRL = 0;
-//定义一个函数用来消抖
-bool key_delay_ms(uint16_t time,int key)
+// 定义一个函数用来消抖
+bool key_delay_ms(uint16_t time, int key, bool if_pess)
 {
-	static uint32_t delay_time[30] = {0};
-	if (delay_time[key] - Get_sys_time_ms() > time)
+	if (if_pess)
 	{
-		delay_time[key] = Get_sys_time_ms();
-		return true;
+		static uint32_t delay_time[30] = {0};
+		if (delay_time[key] - Get_sys_time_ms() > time)
+		{
+			delay_time[key] = Get_sys_time_ms();
+			return true;
+		}
+		else
+			return false;
 	}
-	else
-		return false;
-
 }
 // 微调量
 float tweaks_value = 0.01f;
@@ -73,7 +75,7 @@ float pressD_step = 0.001f;
 float pressShift_step = 0.01f;
 // 灵敏度
 // 遥控器
-float PitchCofficientFromRC = 800000.0f;
+float PitchCofficientFromRC = 2000000.0f;
 float YawCofficientFromRC = 600.0f;
 // 自瞄
 float PitchCofficientFromNUC = -1500.0f;
@@ -135,15 +137,15 @@ void remove_control_task()
 	// 左中右中 跟随模式
 	if (switch_is_mid(RC_L_SW) && switch_is_mid(RC_R_SW))
 		Global.mode = FLOW;
-	// 左下右下 锁定模式
-	if (switch_is_down(RC_L_SW) && switch_is_down(RC_R_SW))
-		Global.mode = LOCK;
 	// 左中右上 顺时针陀螺模式
 	if (switch_is_mid(RC_L_SW) && switch_is_down(RC_R_SW))
 		Global.mode = SPIN;
 	// 左下右中 逆时针陀螺模式
 	if (switch_is_down(RC_L_SW) && switch_is_mid(RC_R_SW))
 		Global.mode = SPIN;
+	// 左下右下 锁定模式
+	if (switch_is_down(RC_L_SW) && switch_is_down(RC_R_SW))
+		Global.mode = LOCK;
 	// 功能执行区
 	// 开火
 
@@ -254,9 +256,9 @@ void remove_control_task()
 					Global.input.pitch += MOUSE_Z_MOVE_SPEED / PitchLobCofficientFromPC;
 
 					// if(MOUSE_Z_MOVE_SPEED > 0)
-					// 	Global.input.pitch = 0.000000005;
 					// else if(MOUSE_Z_MOVE_SPEED < 0)
-					// 	Global.input.pitch = -0.000000005;
+					// 	Global.input.pitch = -0.000000005;					// 	Global.input.pitch = 0.000000005;
+
 					// else
 					// 	Global.input.pitch = 0;
 				}

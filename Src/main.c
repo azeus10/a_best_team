@@ -155,9 +155,10 @@ int main(void)
 
   // 初始化软件
   chassis_move_init();       // 初始化底盘
-  gimbal_init();             // 初始化云台
+  gimbal_init();             // 初始化云台0.0755438805
   
- gimbal_set_offset(8.5f, 105.8203125); // 步兵零点设置21
+// gimbal_set_offset(8.5f, 105.8203125); // 步兵零点设置21
+ gimbal_set_offset(0.0755438805f, -27.0513897); // 步兵零点设置21
   shoot_init();              // 初始化发射机构
 	
 	Global_status_init();      //全局状态机初始化

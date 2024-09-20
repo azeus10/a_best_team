@@ -452,13 +452,13 @@ void ModechangeTask_callback(void *argument)
 		decode_as_6020(PITCH_MOTOR);
 		if (Global.mode == FLOW)
 		{
-			if(fly_mode == OPEN)
-			pid_set(&chassis_follow,5, 0, 30, 50, 0);
-		else
-			pid_set(&chassis_follow,3, 0, 26, 50, 0);
+			if (fly_mode == OPEN)
+				pid_set(&chassis_follow, 5, 0, 30, 50, 0);
+			else
+				pid_set(&chassis_follow, 3, 0, 26, 50, 0);
 			relative_angle = -(get_motor_data(YAW_MOTOR).angle_cnt - gimbal.yaw.offset);
-			if (RC_data.rc.ch[2] == 0 && Global.input.yaw == 0)
-				relative_angle = 0; // 防止走不直
+//			if (RC_data.rc.ch[2] == 0 && Global.input.yaw == 0)
+//				relative_angle = 0; // 防止走不直
 		}
 		else if (Global.mode == SPIN)
 		{
@@ -509,11 +509,13 @@ void ModechangeTask_callback(void *argument)
 			else // 处于-180度
 				relative_angle += mul * 180;
 		}
-		if (fabs(relative_angle) > 0.3f)									  //
-			r_s = pid_cal(&chassis_follow, degree2rad(relative_angle), 0.0f); // degree2rad(relative_angle)
-		else
-			r_s = 0.0;
-
+		if(Global.mode != SPIN)
+		{
+			if (fabs(relative_angle) > 0.3f)									  //
+				r_s = pid_cal(&chassis_follow, degree2rad(relative_angle), 0.0f); // degree2rad(relative_angle)
+			else
+				r_s = 0.0;
+		}
 		if (fabs(Global.input.yaw) > 0.00f)
 		{
 			gimbal.yaw.set += Global.input.yaw;

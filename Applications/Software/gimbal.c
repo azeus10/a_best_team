@@ -277,11 +277,13 @@ void gimbal_pid_cal()
 		if (gimbal.pitch_status == LOCATION)
 		{
 			/*对gimbal.pitch.set进行低通滤波  尝试减少微调的抖动*/
-			gimbal.pitch.fist_set = lowPassFilter(gimbal.pitch.set, gimbal.pitch.last_low, 0.8f);
-			gimbal.set_pitch_speed = pid_cal(&pitch_location_pid, gimbal.pitch.now, gimbal.pitch.fist_set);
-			gimbal.pitch.last_low = gimbal.set_pitch_speed;
-
-			gimbal.set_scope_speed = pid_cal(&scope_location_pid, gimbal.scope.now, gimbal.scope.set);
+//			gimbal.pitch.fist_set = lowPassFilter(gimbal.pitch.set, gimbal.pitch.last_low, 0.8f);
+//			gimbal.set_pitch_speed = pid_cal(&pitch_location_pid, gimbal.pitch.now, gimbal.pitch.fist_set);
+//			gimbal.pitch.last_low = gimbal.set_pitch_speed;
+//			
+			
+			gimbal.set_pitch_speed = pid_cal(&pitch_location_pid, gimbal.pitch.now, gimbal.pitch.set);
+			gimbal.set_scope_speed = pid_cal(&scope_location_pid, gimbal.scope.now, gimbal.scope.set);			
 		}
 		else
 		{

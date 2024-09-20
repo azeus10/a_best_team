@@ -150,7 +150,8 @@ void chassis_moto_speed_calc()
 	else if (Global.mode == LEAN_LOB)
 	{
 		if (fly_mode == OPEN)
-			fly_mode == CLOSE;//防止飞坡和吊射同时开启
+			fly_mode = CLOSE;//防止飞坡和吊射同时开启
+		
 		pid_set(&motor_speed[FR], 16000, 0, 1000, MAX_CURRENT, 3000); // 16000 1000
 		pid_set(&motor_speed[FL], 16000, 0, 1000, MAX_CURRENT, 3000);
 		pid_set(&motor_speed[BL], 16000, 0, 1000, MAX_CURRENT, 3000);
@@ -199,7 +200,8 @@ void chassis_moto_speed_calc()
 		chassis.wheel_current[FL] = pid_cal(&motor_speed[FL], (get_motor_data(chassis_FL).speed_rpm) / 19.0f * 0.104719755 * WHEEL_RADIUS, wheel_mps[FL]);
 		chassis.wheel_current[BL] = pid_cal(&motor_speed[BL], (get_motor_data(chassis_BL).speed_rpm) / 19.0f * 0.104719755 * WHEEL_RADIUS, wheel_mps[BL]);
 	}
-	Plimit = power_limit(chassis.wheel_current);
+	
+	Plimit = 1;//power_limit(chassis.wheel_current);
 
 	// 	// 设定马达电流 （在freeRTOS中发送）
 	// set_motor((chassis.wheel_current[BR]), chassis_BR);
@@ -227,7 +229,7 @@ void chassis_moto_speed_calc()
 }
 
 /*此函数用来按等级提升小陀螺转速*/
-float chassis_spin_speed_level_up()
+float chassis_spin_speed_level_up(void)
 {
 	float r_s = 0.0f;
 	if (Global.cap == FULL)
@@ -273,5 +275,8 @@ float chassis_spin_speed_level_up()
 	{
 		r_s = -r_s;
 	}
+	if(Global.mode != SPIN)
+		r_s = 0;
+		
 	return r_s;
 }

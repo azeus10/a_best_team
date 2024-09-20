@@ -59,6 +59,8 @@ void chassis_moto_speed_calc(void); //计算马达速度
 void val_limit(float *val, float MAX);
 void chassis_power_limit(void);
 
+float chassis_spin_speed_level_up(void);
+
 #endif
 
 
