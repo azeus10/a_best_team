@@ -10,7 +10,7 @@
 #include "CAN_receive&send.h"
 #include "shoot.h"
 #include "math.h"
-
+#include "CAN_ID_Library.h"
 void ui_init()
 {
   ui_self_id = get_robot_id();

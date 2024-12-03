@@ -21,40 +21,18 @@ Target DLL:      CMSIS_AGDI.dll V1.33.0.0
 Dialog DLL:      TCM.DLL V1.53.0.0
  
 <h2>Project:</h2>
-D:\Project\ADAM\HERO\Fly_hero\MDK-ARM\RMc_adam_GeneralRobotSystemCode.uvprojx
-Project File Date:  09/02/2024
+D:\Project\ADAM\HERO\TEST\HERO_DM_CAN\MDK-ARM\RMc_adam_GeneralRobotSystemCode.uvprojx
+Project File Date:  11/11/2024
 
 <h2>Output:</h2>
 *** Using Compiler 'V5.06 update 7 (build 960)', folder: 'C:\Keil_v5\ARM\ARMCC\Bin'
 Build target 'RMc_adam_GeneralRobotSystemCode'
-compiling chassis_move.c...
-..\Applications\Software\referee_handle_pack.h(595): warning:  #1295-D: Deprecated declaration Required_Data - give arg types
-  void Required_Data();
-..\Applications\Software\referee_handle_pack.h(596): warning:  #1295-D: Deprecated declaration Cap_Required_Data - give arg types
-  void Cap_Required_Data();
-..\Applications\Software\referee_handle_pack.h(597): warning:  #1-D: last line of file ends without a newline
-  #endif
-..\Applications\Software\Global_status.h(71): warning:  #1295-D: Deprecated declaration Global_status_init - give arg types
-  void Global_status_init();
-..\Applications\Software\chassis_move.c(126): warning:  #188-D: enumerated type mixed with another type
-  		now_p += (fabs(current[i] * toque_coefficient * get_motor_data(i).speed_rpm) +
-..\Applications\Software\chassis_move.c(127): warning:  #188-D: enumerated type mixed with another type
-  				  fabs(k2 * get_motor_data(i).speed_rpm * get_motor_data(i).speed_rpm) +
-..\Applications\Software\chassis_move.c(127): warning:  #188-D: enumerated type mixed with another type
-  				  fabs(k2 * get_motor_data(i).speed_rpm * get_motor_data(i).speed_rpm) +
-..\Applications\Software\chassis_move.c(198): warning:  #1035-D: single-precision operand implicitly converted to double-precision
-  		chassis.wheel_current[FR] = pid_cal(&motor_speed[FR], (get_motor_data(chassis_FR).speed_rpm) / 19.0f * 0.104719755 * WHEEL_RADIUS, wheel_mps[FR]);
-..\Applications\Software\chassis_move.c(199): warning:  #1035-D: single-precision operand implicitly converted to double-precision
-  		chassis.wheel_current[BR] = pid_cal(&motor_speed[BR], (get_motor_data(chassis_BR).speed_rpm) / 19.0f * 0.104719755 * WHEEL_RADIUS, wheel_mps[BR]);
-..\Applications\Software\chassis_move.c(200): warning:  #1035-D: single-precision operand implicitly converted to double-precision
-  		chassis.wheel_current[FL] = pid_cal(&motor_speed[FL], (get_motor_data(chassis_FL).speed_rpm) / 19.0f * 0.104719755 * WHEEL_RADIUS, wheel_mps[FL]);
-..\Applications\Software\chassis_move.c(201): warning:  #1035-D: single-precision operand implicitly converted to double-precision
-  		chassis.wheel_current[BL] = pid_cal(&motor_speed[BL], (get_motor_data(chassis_BL).speed_rpm) / 19.0f * 0.104719755 * WHEEL_RADIUS, wheel_mps[BL]);
-..\Applications\Software\chassis_move.c: 11 warnings, 0 errors
+Note: source file '..\Applications\Hardware\dm4310_drv.c' - object file renamed from 'RMc_adam_GeneralRobotSystemCode\dm4310_drv.o' to 'RMc_adam_GeneralRobotSystemCode\dm4310_drv_1.o'.
+compiling dm4310_drv.c...
 linking...
-Program Size: Code=73520 RO-data=3616 RW-data=936 ZI-data=57656  
+Program Size: Code=74232 RO-data=3616 RW-data=960 ZI-data=57840  
 FromELF: creating hex file...
-"RMc_adam_GeneralRobotSystemCode\RMc_adam_GeneralRobotSystemCode.axf" - 0 Error(s), 11 Warning(s).
+"RMc_adam_GeneralRobotSystemCode\RMc_adam_GeneralRobotSystemCode.axf" - 0 Error(s), 0 Warning(s).
 
 <h2>Software Packages used:</h2>
 
@@ -80,9 +58,9 @@ Package Vendor: Keil
    * Component: ARM::CMSIS:CORE:4.3.0
 
    * Component: ARM::CMSIS:DSP:1.4.6
-      Library file:  CMSIS\Lib\ARM\arm_cortexM4lf_math.lib
       Include file:  CMSIS\Include\arm_math.h
-Build Time Elapsed:  00:00:02
+      Library file:  CMSIS\Lib\ARM\arm_cortexM4lf_math.lib
+Build Time Elapsed:  00:00:03
 </pre>
 </body>
 </html>

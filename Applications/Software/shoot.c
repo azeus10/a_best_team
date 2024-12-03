@@ -9,6 +9,9 @@
  *
  */
 
+#include "CAN_ID_Library.h"
+
+
 #include "Global_status.h"
 #include "CAN_receive&send.h"
 #include "shoot.h"
@@ -33,6 +36,10 @@ static int BulletCnt = 0;
 // 初始化
 void shoot_init()
 {
+	#define USE_3508_AS_SHOOT_MOTOR
+	
+	
+	
 #ifdef USE_3508_AS_SHOOT_MOTOR
 	pid_set(&shoot1_speed_pid, 25, 0, 0.0, 3000, 0.0);
 	pid_set(&shoot2_speed_pid, 25, 0, 0.0, 3000, 0.0);
@@ -40,7 +47,7 @@ void shoot_init()
 #endif
 
 	pid_set(&trigger_speed_pid, 3, 0, 63, 15000, 0); // 16000
-	pid_set(&trigger_location_pid, 0.5, 0, 0.0, 16000, 0);
+	pid_set(&trigger_location_pid, 0.5, 0, 0.0, 16000, 0);//0.5
 
 	shoot.trigger_status = SPEEDS;
 	shoot.last_status = SPEEDS;
@@ -51,8 +58,8 @@ void shoot_init()
 	shoot.SetSpeedRight = 0;
 	shoot.compensate_angle = 85;
 	shoot.speedUpLevel = 5150;
-	shoot.speedRightLevel = 5250;
-	shoot.speedLeftLevel = 5250;
+	shoot.speedRightLevel = -5250;
+	shoot.speedLeftLevel = -5250;
 }
 // 更新拨弹电机数据
 void shoot_update()
@@ -133,6 +140,7 @@ void shoot_pid_cal()
 
 	last_status = shoot.trigger_status;
 }
+
 // 内部调用，射出子弹0'0
 void shoot_set_trigger_location(int n)
 {
@@ -147,7 +155,10 @@ void shoot_set_trigger_location(int n)
 int shoot_Bullets(int n)
 {
 	shoot.trigger_status = LOCATIONS;
-	shoot_set_trigger_location(n);
+	if(abs(get_motor_data(TRIGGER_MOTOR).given_current) < 800)
+		shoot_set_trigger_location(n);
+	else
+		Global.shoot_delay_num += 1;
 	return n;
 	//	}
 }

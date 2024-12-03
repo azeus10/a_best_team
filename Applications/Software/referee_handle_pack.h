@@ -592,6 +592,7 @@ const ext_robot_status_t *get_robot_state_point(void);
 const ext_power_heat_data_t *get_power_heat_data_point(void);
 const ext_shoot_data_t *get_shoot_data_point(void);
 
-void Required_Data();
-void Cap_Required_Data();
+void Required_Data(void);
+void Cap_Required_Data(void);
 #endif
+

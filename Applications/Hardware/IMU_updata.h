@@ -60,7 +60,7 @@ void IMU_updata(void); // IMU数据更新
 void MagUpdate(void);  // 磁力计数据更新
 void MagZero(void); // 清零地磁计
 void Get_angle(fp32 q[4], fp32 *yaw, fp32 *pitch, fp32 *roll);//非调用Lib版本
-void process_IMU_data();
+void process_IMU_data(void);
 float rad2degree(float a);
 float degree2rad(float a);
 #endif

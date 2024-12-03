@@ -16,7 +16,7 @@ void UploadData_vofa(float data1,float data2,float data3,float data4)
 	temp[2]=data3;
 	temp[3]=data4;
 	memcpy(tempData, (uint8_t *)&temp, sizeof(temp));
-//	UART_send_data(UART1_data, tempData,20);
+	UART_send_data(UART1_data, tempData,20);
 }
 
 

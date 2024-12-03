@@ -1,4 +1,4 @@
-doc/¶¨ÒåÎ»ºÅÍ¼.psd
+doc/ï¿½ï¿½ï¿½ï¿½Î»ï¿½ï¿½Í¼.psd
 
 # keil5
 *.crf
@@ -54,3 +54,5 @@ modules.order
 Module.symvers
 Mkfile.old
 dkms.conf
+MDK-ARM/
+.history/

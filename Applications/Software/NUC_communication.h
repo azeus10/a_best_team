@@ -2,30 +2,6 @@
 #include "referee_handle_pack.h"
  __packed typedef struct 
  {
-// 	uint8_t header;
-//	 
-// 	float Q0,Q1,Q2,Q3;
-//	 
-// 	float yaw,pitch;	 
-//	 
-// 	float x_speed,y_speed,r_speed;
-//	 
-// 	uint8_t bullet;
-
-// 	uint8_t distance;
-//	 
-//	float robot_speed_mps;
-
-//	uint8_t mode;
-//	
-//  uint8_t	enemy_color;
-
-//	uint8_t enemy_blood_[6];
-
-// 	char unknow[11];
-//	
-//	uint16_t checksum;
-	//char header;
 	float yaw,pitch;
 	float b_speed;
 	int mode;
@@ -40,7 +16,7 @@ typedef struct
 	//char header;
 	float yaw;
 	float pitch;
-  uint8_t shoot;//发弹标志位
+    uint8_t shoot;//发弹标志位
 	uint16_t checksum;
 	char unknown[21];
 	

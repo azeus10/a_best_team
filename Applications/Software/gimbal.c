@@ -8,6 +8,7 @@
  * @copyright Copyright (c) 2022
  *
  */
+#define USE_DJI60320_AS_PITCH_MOTOR//使用6020作为pitch电机
 
 #include "Global_status.h"
 #include "IMU_updata.h"
@@ -16,6 +17,10 @@
 #include "RampFunc.h"
 #include "control_setting.h"
 #include <stdio.h>
+
+#include "dm4310_drv.h"
+
+#include "CAN_ID_Library.h"
 struct gimbal_status gimbal;
 
 // pitch
@@ -77,7 +82,9 @@ void gimbal_init()
 	gimbal.small_pitch.offset = 0;
 
 	gimbal.yaw_status = gimbal.pitch_status = LOCATION; // 默认为位置控制模式
+ 
 	gimbal.gimbal_source = IMU;
+
 }
 // 用来设置yaw原点,pitch如果用纯陀螺仪就无所谓了，如果有编码器的话也需要这个零点
 void gimbal_set_offset(float pitch, float yaw)
@@ -85,9 +92,8 @@ void gimbal_set_offset(float pitch, float yaw)
 	gimbal.pitch.offset = pitch;
 	gimbal.yaw.offset = yaw;
 }
-
 void gimbal_updata()
-{
+{	
 	HT_small_pitch(); // 海泰电机小云台的控制都在这个函数里
 	/*编码器*/
 	if (gimbal.gimbal_source == ECD)
@@ -215,9 +221,13 @@ void gimbal_pid_cal()
 	{
 		pid_set(&yaw_speed_pid, 500, 0.00f, 0.0f, 29000.0f, 0.0f);
 		pid_set(&yaw_location_pid, 14.0f, 0.0f, 0.0f, 29000.0f, 0.0f);
-
+		#ifdef USE_DJI60320_AS_PITCH_MOTOR
 		pid_set(&pitch_speed_pid, 400.0f, 0.0f, 15000.0f, 29000.0f, 0.0f);
 		pid_set(&pitch_location_pid, 900.0f, 0.0f, 5000.0f, 100.0, 0.0f);
+	
+		#elif USE_DM4310_AS_PITCH_MOTOR
+			//DM_Motor_set(CAN_2_2,gimbal.pitch.set,1);//pitch
+		#endif
 	}
 	else if (Global.mode == LEAN_LOB)
 	{
@@ -281,6 +291,8 @@ void gimbal_pid_cal()
 //			gimbal.set_pitch_speed = pid_cal(&pitch_location_pid, gimbal.pitch.now, gimbal.pitch.fist_set);
 //			gimbal.pitch.last_low = gimbal.set_pitch_speed;
 //			
+			DM_Motor_set(CAN_2_2,gimbal.pitch.set,10);//pitch
+			
 			
 			gimbal.set_pitch_speed = pid_cal(&pitch_location_pid, gimbal.pitch.now, gimbal.pitch.set);
 			gimbal.set_scope_speed = pid_cal(&scope_location_pid, gimbal.scope.now, gimbal.scope.set);			
@@ -322,4 +334,7 @@ void gimbal_pid_cal()
 		set_motor(pid_cal(&pitch_speed_pid, gimbal.pitch_speed, gimbal.set_pitch_speed), PITCH_MOTOR);
 		set_motor(pid_cal(&scope_speed_pid, gimbal.scope_speed, gimbal.set_scope_speed), SCOPE_MOTOR);
 	}
+	
+	
+
 }

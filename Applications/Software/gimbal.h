@@ -15,11 +15,11 @@
 #include "stdint.h"
 
 //云台电机数据
-#define PITCH_MOTOR CAN_2_6
-#define YAW_MOTOR CAN_1_5
-#define SMALL_PITCH CAN_2_4
+//#define PITCH_MOTOR 	CAN_2_6
+//#define YAW_MOTOR 		CAN_1_5
+//#define SMALL_PITCH 	CAN_2_4
 
-#define SCOPE_MOTOR CAN_2_7
+//#define SCOPE_MOTOR 	CAN_2_7
 
 
 enum gimbal_status_e

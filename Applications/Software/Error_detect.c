@@ -14,6 +14,7 @@
 #include "chassis_move.h"
 #include "gimbal.h"
 #include "shoot.h"
+#include "CAN_ID_Library.h"
 
 struct Error_detect_t Error_detect;
 

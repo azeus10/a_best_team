@@ -13,10 +13,7 @@
 
 #define __chassis_move_H_
 #ifdef __chassis_move_H_
-#define chassis_FR CAN_1_1
-#define chassis_FL CAN_1_2
-#define chassis_BL CAN_1_3
-#define chassis_BR CAN_1_4
+
 
 struct chassis_status
 {

@@ -17,8 +17,8 @@ void HT_CAN_location_TX(uint32_t location);
 void HT_CAN_speed_TX( int16_t speed);
 void HT_CAN_location_speed_set_TX(uint32_t speed_set);
 void HT_CAN_power_TX(uint32_t power);
-void HT_CAN_offset_TX();
+void HT_CAN_offset_TX(void);
 void HT_CAN_offset_RX(uint8_t aData[]);
 void CAN_ID_matching(uint32_t StdId ,uint8_t aData[]);
-void HT_small_pitch();
+void HT_small_pitch(void);
 #endif

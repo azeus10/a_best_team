@@ -64,11 +64,12 @@ struct GlobalStatus_t
 			uint8_t fly;
     } input;
 
+	uint32_t shoot_delay_num;
 };
 
 extern struct GlobalStatus_t Global;
 //全局状态机初始化
-void Global_status_init();
+void Global_status_init(void);
 void Global_set_err(enum err_e err, uint8_t status);
 
 #endif

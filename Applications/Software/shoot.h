@@ -13,24 +13,17 @@
 #define _SHOOT_H_
 #ifdef _SHOOT_H_
 
-#define USE_3508_AS_SHOOT_MOTOR
-//摩擦轮电机标识 从枪管正面看
-//Can id值
-//   1
-// 2   3     
-// 拨弹电机配置
-#define TRIGGER_MOTOR CAN_1_7
+//#define USE_3508_AS_SHOOT_MOTOR
+
 // #define A_BULLET_ANGEL -25502
 #define A_BULLET_ANGEL -26225
 
-// 摩擦轮电机配置 3508
-#ifdef USE_3508_AS_SHOOT_MOTOR
+//// 摩擦轮电机配置 3508
+//#ifdef USE_3508_AS_SHOOT_MOTOR
 
-#define SHOOT_MOTOR1 CAN_2_1
-#define SHOOT_MOTOR2 CAN_2_3
-#define SHOOT_MOTOR3 CAN_2_2
 
-#endif
+
+//#endif
 
 #pragma anon_unions
 

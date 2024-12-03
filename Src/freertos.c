@@ -53,6 +53,8 @@
 #include "AHRS_MiddleWare.h"
 #include "control_setting.h"
 
+#include "CAN_ID_Library.h"
+
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -273,8 +275,16 @@ void CAN_sendTask_callback(void *argument)
 	/* Infinite loop */
 	for (;;)
 	{
-		CAN1_send_current();
-		CAN2_send_current();
+    if (Global.mode == LOCK)
+    {
+      CAN1_send_ZERO_current();
+      CAN2_send_ZER0_current();
+    } // 发送电机控制电流		}
+    else
+    {
+      CAN1_send_current();
+      CAN2_send_current();
+    }
 		osDelay(5);
 	}
 	/* USER CODE END CAN_sendTask_callback */
@@ -354,7 +364,9 @@ void NUCcontrolTask_callback(void *argument)
 	/* USER CODE BEGIN NUCcontrolTask_callback */
 	/* Infinite loop */
 	// 视觉通信
-	char data[128];
+	
+	unsigned char data[128];
+//	char data[128];
 	// 串口显示波形（Vofa+）
 	ext_robot_status_t robot_status;
 	for (;;)
@@ -365,7 +377,7 @@ void NUCcontrolTask_callback(void *argument)
 		else
 			toNUC.enemy = 0; // 0      //蓝色
 		toNUC.b_speed = 15.5f;
-		toNUC.mode = 1;
+		toNUC.mode = 2;
 		toNUC.yaw = rad2degree(IMU_data.AHRS.yaw);
 		toNUC.pitch = rad2degree(IMU_data.AHRS.pitch);
 

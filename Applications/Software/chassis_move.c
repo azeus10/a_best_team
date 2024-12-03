@@ -21,6 +21,8 @@
 #include "cap_ctl.h"
 #include "Global_status.h"
 
+#include "CAN_ID_Library.h"
+
 // wheel conf
 #define WHEEL_RADIUS 0.0875f // m
 #define PI 3.1415926f
@@ -202,7 +204,7 @@ void chassis_moto_speed_calc()
 	}
 	
 	Plimit = 1;//power_limit(chassis.wheel_current);
-
+//	Plimit = 0;//零飘，地盘跑，给关了
 	// 	// 设定马达电流 （在freeRTOS中发送）
 	// set_motor((chassis.wheel_current[BR]), chassis_BR);
 	// set_motor((chassis.wheel_current[FL]), chassis_FL);

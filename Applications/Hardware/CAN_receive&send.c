@@ -1,13 +1,3 @@
-/**
- * @file CAN_receive&send.c
- * @author sethome
- * @brief (CAN_motor & surper_cap) control & send_rev
- * @version 0.1
- * @date 2021-12-13
- *
- * @copyright Copyright (c) 2021 sethome
- *
- */
 #include "CAN_receive&send.h"
 #include "IMU_updata.h"
 #include "cap_ctl.h"
@@ -16,17 +6,20 @@
 #include "stdlib.h"
 #include "cmsis_os.h"
 #include "string.h"
-#include "LK_motor_process.h"
-#include "HT_drive.h"
 
-// 电机数据
-motor_measure_t motor_data[22];
+//电机驱动
+//#include "LK_motor_process.h"
+//#include "HT_drive.h"
+//#include "dm4310_drv.h"
+//#include "can_bsp.h"
 
+//内部调用
+void DM_send_motordata(can_id ID,float _pos, float _vel);
 // CAN寄存器及控制器
 extern CAN_HandleTypeDef hcan1;
 extern CAN_HandleTypeDef hcan2; // 定义原型在can.c文件
 
-
+/****************************DJI电机数据获取******************************************************/
 // 电机数据读取
 void get_motor_measure(motor_measure_t *ptr, uint8_t data[])
 {
@@ -36,7 +29,6 @@ void get_motor_measure(motor_measure_t *ptr, uint8_t data[])
   (ptr)->given_current = (uint16_t)((data)[4] << 8 | (data)[5]);
   (ptr)->temperate = (data)[6];
 }
-
 
 void process_motor_data(motor_measure_t *motor_data)
 {
@@ -48,46 +40,19 @@ void process_motor_data(motor_measure_t *motor_data)
   else
     motor_data->ecd_cnt += (motor_data->ecd - motor_data->last_ecd);
 }
-// HAL库中断回调指针
-void HAL_CAN_RxFifo0MsgPendingCallback(CAN_HandleTypeDef *hcan)
+/************************************CAN接收******************************************************/
+void DJI_CAN1_handle_message(uint32_t StdId,uint8_t *data)
 {
-  CAN_RxHeaderTypeDef rx_header; // CAN 数据指针
-  uint8_t rx_data[8];            // 获取到的数据
-
-  HAL_CAN_GetRxMessage(hcan, CAN_RX_FIFO0, &rx_header, rx_data); // 取得信息
-  CAN_ID_matching(rx_header.StdId,rx_data);
-  // 超级电容
-  if (rx_header.StdId == 0x307)  //0x307
-  {
-    cap_handle_message(rx_data);
-    return;
-  }
-	//领控电机4015V3
-  if(rx_header.StdId == 0x141)
-	{
-		
-		LK_handle_message(rx_data);
-		return;
-	}
-	// DJI电机
-
-  if (hcan == &hcan1) // CAN1/2判断
-  {
-    get_motor_measure(&motor_data[rx_header.StdId - CAN_ID1], rx_data);
-    process_motor_data(&motor_data[rx_header.StdId - CAN_ID1]);
-  }
-  else
-  {
-    get_motor_measure(&motor_data[CAN_1_6020_7 + 1 + rx_header.StdId - CAN_ID1], rx_data);
-    process_motor_data(&motor_data[CAN_1_6020_7 + 1 + rx_header.StdId - CAN_ID1]);
-  }
+		get_motor_measure(&motor_data[StdId - CAN_ID1], data);
+		process_motor_data(&motor_data[StdId - CAN_ID1]);
+}
+void DJI_CAN2_handle_message(uint32_t StdId,uint8_t *data)
+{
+    get_motor_measure(&motor_data[CAN_1_6020_7 + 1 + StdId - CAN_ID1], data);
+    process_motor_data(&motor_data[CAN_1_6020_7 + 1 + StdId - CAN_ID1]);
 }
 
-// 返回马达数据（还不够安全。。。）
-motor_measure_t get_motor_data(can_id motorID) // 获取马达数据
-{
-  return motor_data[motorID];
-}
+
 
 // 设置马达电流
 void set_motor(int16_t val, can_id motorID) // 设定马达电流
@@ -100,42 +65,36 @@ void CAN1_send_current() // 发送电机控制电流
 {
   uint8_t can_send_data[8];
   static CAN_TxHeaderTypeDef tx_message;
-  uint32_t send_mail_box;
 
-  // 发送前4个
-  tx_message.StdId = CAN_1_4_SIGN_ID;
-  tx_message.IDE = CAN_ID_STD;
-  tx_message.RTR = CAN_RTR_DATA;
-  tx_message.DLC = 0x08;
+//DJI发送前四个
+	can_send_data[0] = (motor_data[CAN_1_1].set >> 8);
+	can_send_data[1] = motor_data[CAN_1_1].set;
 
-  can_send_data[0] = (motor_data[CAN_1_1].set >> 8);
-  can_send_data[1] = motor_data[CAN_1_1].set;
+	can_send_data[2] = (motor_data[CAN_1_2].set >> 8);
+	can_send_data[3] = motor_data[CAN_1_2].set;
 
-  can_send_data[2] = (motor_data[CAN_1_2].set >> 8);
-  can_send_data[3] = motor_data[CAN_1_2].set;
+	can_send_data[4] = (motor_data[CAN_1_3].set >> 8);
+	can_send_data[5] = motor_data[CAN_1_3].set;
 
-  can_send_data[4] = (motor_data[CAN_1_3].set >> 8);
-  can_send_data[5] = motor_data[CAN_1_3].set;
+	can_send_data[6] = (motor_data[CAN_1_4].set >> 8);
+	can_send_data[7] = motor_data[CAN_1_4].set;
+  
+	canx_send_data(&hcan1,CAN_1_4_SIGN_ID,can_send_data,0x08);
 
-  can_send_data[6] = (motor_data[CAN_1_4].set >> 8);
-  can_send_data[7] = motor_data[CAN_1_4].set;
-  HAL_CAN_AddTxMessage(&hcan1, &tx_message, can_send_data, &send_mail_box);
+	// 发送后4个
+	can_send_data[0] = (motor_data[CAN_1_5].set >> 8);
+	can_send_data[1] = motor_data[CAN_1_5].set;
 
-  // 发送后4个
-  tx_message.StdId = CAN_5_8_SIGN_ID;
+	can_send_data[2] = (motor_data[CAN_1_6].set >> 8);
+	can_send_data[3] = motor_data[CAN_1_6].set;
 
-  can_send_data[0] = (motor_data[CAN_1_5].set >> 8);
-  can_send_data[1] = motor_data[CAN_1_5].set;
+	can_send_data[4] = (motor_data[CAN_1_7].set >> 8);
+	can_send_data[5] = motor_data[CAN_1_7].set;
 
-  can_send_data[2] = (motor_data[CAN_1_6].set >> 8);
-  can_send_data[3] = motor_data[CAN_1_6].set;
-
-  can_send_data[4] = (motor_data[CAN_1_7].set >> 8);
-  can_send_data[5] = motor_data[CAN_1_7].set;
-
-  can_send_data[6] = (motor_data[CAN_1_8].set >> 8);
-  can_send_data[7] = motor_data[CAN_1_8].set;
-  HAL_CAN_AddTxMessage(&hcan1, &tx_message, can_send_data, &send_mail_box);
+	can_send_data[6] = (motor_data[CAN_1_8].set >> 8);
+	can_send_data[7] = motor_data[CAN_1_8].set;
+	canx_send_data(&hcan1,CAN_5_8_SIGN_ID,can_send_data,0x08);
+	
 
 #ifdef USE_CAN_1_6020
 
@@ -222,6 +181,90 @@ void CAN2_send_current() // 发送电机控制电流
 
   can_send_data[6] = 0;
   can_send_data[7] = 0;
+
+#ifdef USE_NOP_DELAY
+  while (HAL_CAN_GetTxMailboxesFreeLevel(&hcan2) == 0)
+  {
+  };
+    // uint32_t delay = 250 * 168 / 4; //延时250ns
+    // do
+    // {
+    //   __NOP();
+    // } while (delay--);
+#endif
+#ifdef USE_FREERTOS_DELAY
+  osDelay(1); // 延时1ms
+#endif
+  HAL_CAN_AddTxMessage(&hcan2, &tx_message, can_send_data, &send_mail_box);
+#endif
+}
+
+
+void CAN1_send_ZERO_current() // 发送电机控制电流
+{
+  uint8_t can_send_data[8];
+  static CAN_TxHeaderTypeDef tx_message;
+  uint32_t send_mail_box;
+
+  // 发送前4个
+  tx_message.StdId = CAN_1_4_SIGN_ID;
+  tx_message.IDE = CAN_ID_STD;
+  tx_message.RTR = CAN_RTR_DATA;
+  tx_message.DLC = 0x08;
+
+  memset(can_send_data,0,8);
+  HAL_CAN_AddTxMessage(&hcan1, &tx_message, can_send_data, &send_mail_box);
+
+  // 发送后4个
+  tx_message.StdId = CAN_5_8_SIGN_ID;
+
+   memset(can_send_data,0,8);
+  HAL_CAN_AddTxMessage(&hcan1, &tx_message, can_send_data, &send_mail_box);
+
+#ifdef USE_CAN_1_6020
+
+  tx_message.StdId = CAN_6020_SIGN_ID;
+
+   memset(can_send_data,0,8);
+
+
+#ifdef USE_NOP_DELAY
+  while (HAL_CAN_GetTxMailboxesFreeLevel(&hcan1) == 0)
+  {
+  };
+#endif
+#ifdef USE_FREERTOS_DELAY
+  osDelay(1); // 延时1ms
+#endif
+
+  HAL_CAN_AddTxMessage(&hcan1, &tx_message, can_send_data, &send_mail_box);
+#endif
+}
+void CAN2_send_ZER0_current() // 发送电机控制电流
+{
+  uint8_t can_send_data[8];
+  static CAN_TxHeaderTypeDef tx_message;
+  uint32_t send_mail_box;
+
+  // 发送前4个
+  tx_message.StdId = CAN_1_4_SIGN_ID;
+  tx_message.IDE = CAN_ID_STD;
+  tx_message.RTR = CAN_RTR_DATA;
+  tx_message.DLC = 0x08;
+
+  memset(can_send_data,0,8);
+  HAL_CAN_AddTxMessage(&hcan2, &tx_message, can_send_data, &send_mail_box);
+
+  // 发送后4个
+  tx_message.StdId = CAN_5_8_SIGN_ID;
+
+  memset(can_send_data,0,8);
+  HAL_CAN_AddTxMessage(&hcan2, &tx_message, can_send_data, &send_mail_box);
+
+#ifdef USE_CAN_2_6020
+  tx_message.StdId = CAN_6020_SIGN_ID;
+
+    memset(can_send_data,0,8);
 
 #ifdef USE_NOP_DELAY
   while (HAL_CAN_GetTxMailboxesFreeLevel(&hcan2) == 0)

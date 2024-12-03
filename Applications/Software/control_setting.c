@@ -25,7 +25,10 @@
 #include "fifo.h"
 #include "AHRS_MiddleWare.h"
 #include "CAN_receive&send.h"
-#include "LK_motor_process.h"
+#include "LK_motor_process.h"	
+
+#include "vofa.h"
+
 
 // 消抖
 uint32_t Time_delay_LEAN = 0;
@@ -49,6 +52,14 @@ uint32_t Time_delay_press_F = 0;
 uint32_t Time_delay_press_R = 0;
 uint32_t Time_delay_tick_left = 0;
 uint32_t Time_delay_press_X_CTRL = 0;
+
+
+uint32_t Time_vision_shoot = 0;
+uint32_t Last_time_vision_shoot = 0;
+
+uint32_t Time_delay_protect = 0;
+
+uint32_t shoot_num;//做自瞄发弹计数
 // 定义一个函数用来消抖
 bool key_delay_ms(uint16_t time, int key, bool if_pess)
 {
@@ -76,7 +87,7 @@ float pressShift_step = 0.01f;
 // 灵敏度
 // 遥控器
 float PitchCofficientFromRC = 2000000.0f;
-float YawCofficientFromRC = 600.0f;
+float YawCofficientFromRC = 12000.0f;
 // 自瞄
 float PitchCofficientFromNUC = -1500.0f;
 float YawCofficientFromNUC = 20.0f;
@@ -146,9 +157,10 @@ void remove_control_task()
 	// 左下右下 锁定模式
 	if (switch_is_down(RC_L_SW) && switch_is_down(RC_R_SW))
 		Global.mode = LOCK;
-	// 功能执行区
-	// 开火
+// 功能执行区
+	
 
+// 开火
 	if (Global.input.shoot_fire)
 	{
 		if (Global.input.isHeatLimit == 1)
@@ -167,7 +179,12 @@ void remove_control_task()
 				last_shoot_time = Get_sys_time_ms();
 			}
 		}
+//		shoot_num++;
 	}
+
+//	shoot_num++;
+//	UploadData_vofa(last_shoot_time - Last_time_vision_shoot,shoot_num,0,0);	
+	
 	// 瞄准镜开关
 	if (Global.input.ScopeisOpen == 0) // 开瞄准镜 副云台保持水平
 	{
@@ -184,15 +201,16 @@ void remove_control_task()
 		Global.input.x = RC_data.rc.ch[0] / 110.0f;
 		Global.input.y = RC_data.rc.ch[1] / 110.0f;
 		/******************云台行为控制******************/
-		// 左上右中 自瞄切换
+	//左上右中 自瞄切换
 		if (switch_is_up(RC_L_SW) && switch_is_mid(RC_R_SW))
 			Global.input.vision_status = 1;
 		else
 			Global.input.vision_status = 0;
-		// 自瞄控制
+	
+	//自瞄控制//只在遥控模式下测试
 		if (Global.input.vision_status == 1)
 		{
-			Global.input.shooter_status = 1;
+			//云台控制逻辑	
 			if (fabs(fromNUC.yaw) > 0.0f)
 			{
 				Global.input.yaw = fromNUC.yaw / YawCofficientFromNUC;
@@ -205,6 +223,28 @@ void remove_control_task()
 			}
 			else
 				Global.input.pitch = 0.0f;
+			//打开摩擦轮
+			if (RC_data.rc.ch[4] == -660)
+				Global.input.shooter_status = 1;
+			else
+				Global.input.shooter_status = 0;
+//			vision_mode = 2;
+		//发射逻辑	
+			if(fromNUC.shoot == 2)//自瞄吊着前哨站
+			{
+//				Global.input.shoot_fire = 1;	
+				Time_vision_shoot = Get_sys_time_ms();
+				if(Time_vision_shoot - Last_time_vision_shoot > 1500)//限制每秒发弹数量，防止同时接到NUC多个开火信号
+				{
+					Global.input.shoot_fire = 1;
+					Last_time_vision_shoot = Time_vision_shoot;
+				}
+				else
+					Global.input.shoot_fire = 0;	
+			}
+			else
+				Global.input.shoot_fire = 0;	
+//			Global.input.shooter_status = 1;
 		}
 		// 正常控制
 		else
@@ -212,19 +252,24 @@ void remove_control_task()
 			// 角度制
 			Global.input.yaw = (RC_data.rc.ch[2] / YawCofficientFromRC);
 			Global.input.pitch = (RC_data.rc.ch[3] / PitchCofficientFromRC) * 57.3f;
+			
+			
 		}
 		/******************射击行为控制******************/
-		// 左中右上 开启摩擦轮
-		if (switch_is_mid(RC_L_SW) && switch_is_up(RC_R_SW))
-			Global.input.shooter_status = 1;
+		if(Global.input.vision_status != 1)
+		{
+			// 左中右上 开启摩擦轮
+			if (switch_is_mid(RC_L_SW) && switch_is_up(RC_R_SW))
+				Global.input.shooter_status = 1;
 
-		else
-			Global.input.shooter_status = 0;
-		// 波轮向上拨 拨弹开关
-		if (RC_data.rc.ch[4] == -660)
-			Global.input.shoot_fire = 1;
-		else
-			Global.input.shoot_fire = 0;
+			else
+				Global.input.shooter_status = 0;
+			// 波轮向上拨 拨弹开关
+			if (RC_data.rc.ch[4] == -660)
+				Global.input.shoot_fire = 1;
+			else
+				Global.input.shoot_fire = 0;
+		}
 	}
 	/****************************PC操作*************************************************/
 	else if (Global.input.ctl == PC)
@@ -575,4 +620,26 @@ void remove_control_task()
 			}
 		}
 	}
+}
+
+float gimbal_protect(float target)//专门写给小电脑判断是否断连
+{
+	float last_target;
+	if(Get_sys_time_ms() - Time_delay_protect > 500)
+	{
+		if(target == last_target && target != 0)//如果0.5秒之内目标值不变，则代表nuc数据卡死，给赋零
+		{
+			target = 0;
+		}
+		else
+		{
+			last_target = target;
+		}
+		Time_delay_protect = Get_sys_time_ms();
+	}
+	else
+	{	
+	}
+
+	return target;
 }
