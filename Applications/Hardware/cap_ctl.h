@@ -3,6 +3,8 @@
 
 #include "stdint.h"
 
+//#define USE_DOUBLE_CTL_MODE
+
 typedef struct // μ?èY×′ì??á11ì?
 {
 	uint8_t set_max_power; // 最大功率
@@ -21,4 +23,9 @@ void cap_update(void);
 int cap_set_power(uint8_t set);
 float cap_get_remain_vol(void);
 float cap_get_predict_energy(void);
+
+void data_send();
+void float_to_bytes(float f, uint8_t *bytes);
+void data_receive(uint8_t data[8]);
+float bytes_to_float(uint8_t *bytes);
 #endif

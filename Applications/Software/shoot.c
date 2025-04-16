@@ -41,25 +41,30 @@ void shoot_init()
 	
 	
 #ifdef USE_3508_AS_SHOOT_MOTOR
-	pid_set(&shoot1_speed_pid, 25, 0, 0.0, 3000, 0.0);
-	pid_set(&shoot2_speed_pid, 25, 0, 0.0, 3000, 0.0);
-	pid_set(&shoot3_speed_pid, 25, 0, 0.0, 3000, 0.0);
+	pid_set(&shoot1_speed_pid, 20, 0, 0.0, 5000, 0.0);
+	pid_set(&shoot2_speed_pid, 20, 0, 0.0, 5000, 0.0);
+	pid_set(&shoot3_speed_pid, 20, 0, 0.0, 5000, 0.0);
 #endif
-
-	pid_set(&trigger_speed_pid, 3, 0, 63, 15000, 0); // 16000
-	pid_set(&trigger_location_pid, 0.5, 0, 0.0, 16000, 0);//0.5
-
+	
+//	pid_set(&trigger_speed_pid, 2.20000005, 0, 50, 16000, 0); // 16000
+//	pid_set(&trigger_location_pid, 0.75, 0, 1.20000005, 15000, 0);//0.5
+	pid_set(&trigger_speed_pid, 2.5,0,67, 16000, 0); // 16000
+	pid_set(&trigger_location_pid, 0.75, 0, 1.2, 15000, 0);//0.5
+	
 	shoot.trigger_status = SPEEDS;
+//	shoot.trigger_status = LOCATIONS;
 	shoot.last_status = SPEEDS;
+//	shoot.last_status = LOCATIONS;
 	shoot.trigger_location.set = 0;
 	shoot.trigger_location.now = 0;
 	shoot.SetSpeedUp = 0;
 	shoot.SetSpeedLeft = 0;
 	shoot.SetSpeedRight = 0;
-	shoot.compensate_angle = 85;
-	shoot.speedUpLevel = 5150;
-	shoot.speedRightLevel = -5250;
-	shoot.speedLeftLevel = -5250;
+	shoot.compensate_angle = 85;		///compensate补偿角度
+	shoot.speedUpLevel = 5100;//6000;
+	shoot.speedRightLevel = -5300;//-6150;
+	shoot.speedLeftLevel = -5300;//-6150;
+	
 }
 // 更新拨弹电机数据
 void shoot_update()
@@ -86,6 +91,9 @@ void shoot_set_shoot_Motor_speed(float SpeedUp, float SpeedLeft, float SpeedRigh
 	set_motor(pid_cal(&shoot1_speed_pid, get_motor_data(SHOOT_MOTOR1).speed_rpm, -SpeedUp), SHOOT_MOTOR1);
 	set_motor(pid_cal(&shoot2_speed_pid, get_motor_data(SHOOT_MOTOR2).speed_rpm, -SpeedRight), SHOOT_MOTOR2);
 	set_motor(pid_cal(&shoot3_speed_pid, get_motor_data(SHOOT_MOTOR3).speed_rpm, SpeedLeft), SHOOT_MOTOR3);
+	
+	
+	UploadData_vofa(trigger_location_pid.err * 60 / 26219,trigger_location_pid.set,trigger_location_pid.total_out,0);	///vofa+调试吗
 #else
 	// 适配其他拨弹电机
 	PWM_snaill_set(PIN_2, (uint16_t)speed);
@@ -107,6 +115,12 @@ void shoot_pid_cal()
 		shoot.SetSpeedLeft = 0;
 		shoot.SetSpeedRight = 0;
 	}
+	
+//		/*************测试*************/	
+//		shoot.SetSpeedUp = 200;
+//		shoot.SetSpeedLeft = 200;
+//		shoot.SetSpeedRight = 200;
+	
 	// 摩擦轮设定
 	decode_as_3508(TRIGGER_MOTOR);
 	shoot_set_shoot_Motor_speed((float)(shoot.SetSpeedUp), (float)(shoot.SetSpeedLeft), (float)(shoot.SetSpeedRight));
@@ -124,7 +138,7 @@ void shoot_pid_cal()
 	}
 	else if (shoot.trigger_status == SPEEDS) // 速度控制
 	{
-		shoot.trigger_speed = shoot.set_trigger_speed;
+		shoot.trigger_speed = shoot.set_trigger_speed;	///shoot.set_trigger_speed这个在哪定义的？
 	}
 
 	// 速度环
@@ -136,30 +150,42 @@ void shoot_pid_cal()
 	else if (Global.input.isOnForce == CLOSE)
 	{
 		set_motor(0, TRIGGER_MOTOR);
+//		rampInit(&shootRamp, shoot.trigger_location.now, shoot.trigger_location.now, -1, 1);//以屎克屎的办法，有时间找找原因
+		shootRamp.currentValue = shoot.trigger_location.now;	//currentValue 是当前值
+		shootRamp.isBusy = 0;
+		shoot.shoot_flag = 0;
 	}
-
 	last_status = shoot.trigger_status;
 }
-
 // 内部调用，射出子弹0'0
 void shoot_set_trigger_location(int n)
 {
 	// 保证摩擦轮达到要求转速
 	if (/*摩擦轮转速判断*/ shoot.SpeedUp < -4500 && /*卸力模式判断*/ Global.input.isOnForce == 1 /*拨弹盘卡弹判断*/) 
 	{
-		rampInit(&shootRamp, shoot.trigger_location.set, shoot.trigger_location.set + A_BULLET_ANGEL, -1, 1);
-		shoot.trigger_location.set += n * A_BULLET_ANGEL; // 拨弹盘转动
-		shoot.trigger_location.last_now = shoot.trigger_location.now;
+		if(shoot.shoot_flag == 1)
+		{
+			rampInit(&shootRamp, shoot.trigger_location.set, shoot.trigger_location.set + A_BULLET_ANGEL, -1, 1);
+			shoot.trigger_location.set += n * A_BULLET_ANGEL; // 拨弹盘转动
+			shoot.trigger_location.last_now = shoot.trigger_location.now;
+		}
+		else if(shoot.shoot_flag == 0)
+		{
+			rampInit(&shootRamp, shoot.trigger_location.set, shoot.trigger_location.set + A_BULLET_ANGEL/30, -1, 1);
+			shoot.trigger_location.set += n * A_BULLET_ANGEL/60; // 拨弹盘转动
+			shoot.trigger_location.last_now = shoot.trigger_location.now;
+			shoot.shoot_flag = 1;
+		}
 	}
 }
 int shoot_Bullets(int n)
 {
 	shoot.trigger_status = LOCATIONS;
-	if(abs(get_motor_data(TRIGGER_MOTOR).given_current) < 800)
+	if(abs(get_motor_data(TRIGGER_MOTOR).given_current) < 2000)//防止卡弹多发
+	{
 		shoot_set_trigger_location(n);
-	else
-		Global.shoot_delay_num += 1;
+	}
 	return n;
 	//	}
-}
+}		///在control_setting中使用
 // end of file

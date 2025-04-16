@@ -142,33 +142,35 @@ int main(void)
   MX_TIM6_Init();
   /* USER CODE BEGIN 2 */
 
-  // ³õÊ¼»¯¸÷ÏîÓ¦ÓÃ
+  // ï¿½ï¿½Ê¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ó¦ï¿½ï¿½
   led_init();               // LED
-  led_show(YELLOW);         // ³õÊ¼»¯Ö¸Ê¾
+  led_show(YELLOW);         // ï¿½ï¿½Ê¼ï¿½ï¿½Ö¸Ê¾
 	HAL_GPIO_WritePin(Laser_GPIO_Port, Laser_Pin, GPIO_PIN_SET);
 
-  // ³õÊ¼»¯Ó²¼þ
-  can_filter_init();        // can ¹ýÂËÆ÷
-  remote_control_init();    // Ò£¿ØÆ÷³õÊ¼»¯
+  // ï¿½ï¿½Ê¼ï¿½ï¿½Ó²ï¿½ï¿½
+  can_filter_init();        // can ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+  remote_control_init();    // Ò£ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê¼ï¿½ï¿½
   PWM_servo_control_init(); // PWM
-  IMU_init();               // IMU ¼ÓËÙ¶È¼Æ£¬ÍÓÂÝÒÇ£¬µØ´Å¼Æ
-  uart_init();              // ³õÊ¼»¯´®¿Ú
+  IMU_init();               // IMU ï¿½ï¿½ï¿½Ù¶È¼Æ£ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ç£ï¿½ï¿½Ø´Å¼ï¿½
+  uart_init();              // ï¿½ï¿½Ê¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 
-  // ³õÊ¼»¯Èí¼þ
-  chassis_move_init();       // ³õÊ¼»¯µ×ÅÌ
-  gimbal_init();             // ³õÊ¼»¯ÔÆÌ¨0.0755438805
+  // ï¿½ï¿½Ê¼ï¿½ï¿½ï¿½ï¿½ï¿½
+  chassis_move_init();       // ï¿½ï¿½Ê¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+  gimbal_init();             // ï¿½ï¿½Ê¼ï¿½ï¿½ï¿½ï¿½Ì¨0.0755438805
   
+  //ï¿½ï¿½UI 
+  UI_task_init();
   DM_Init();
   
 
- gimbal_set_offset(0.0755438805f,-70.576171875); // ²½±øÁãµãÉèÖÃ21
- 
-  gimbal_set_offset(0.0755438805f,290); // ²½±øÁãµãÉèÖÃ21
-  shoot_init();              // ³õÊ¼»¯·¢Éä»ú¹¹
+// gimbal_set_offset(0.0755438805f,-70.576171875); // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½21
+// 
+  gimbal_set_offset(0.08129327,-65.46127343); // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½21
+  shoot_init();              // ï¿½ï¿½Ê¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	
-	Global_status_init();      //È«¾Ö×´Ì¬»ú³õÊ¼»¯
-  referee_usart_task_init(); // ²ÃÅÐÏµÍ³½âËã
-  led_show(PINK);            // ³õÊ¼»¯Íê±Ï
+	Global_status_init();      //È«ï¿½ï¿½×´Ì¬ï¿½ï¿½ï¿½ï¿½Ê¼ï¿½ï¿½
+  referee_usart_task_init(); // ï¿½ï¿½ï¿½ï¿½ÏµÍ³ï¿½ï¿½ï¿½ï¿½
+  led_show(PINK);            // ï¿½ï¿½Ê¼ï¿½ï¿½ï¿½ï¿½ï¿½
   HAL_Delay(100);
   /* USER CODE END 2 */
 
@@ -258,7 +260,8 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
   /* USER CODE BEGIN Callback 0 */
 
   /* USER CODE END Callback 0 */
-  if (htim->Instance == TIM2) {
+  if (htim->Instance == TIM2)
+  {
     HAL_IncTick();
   }
   /* USER CODE BEGIN Callback 1 */

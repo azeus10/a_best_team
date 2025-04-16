@@ -3,32 +3,46 @@
 #include "cmsis_os.h"
 #include "can_bsp.h"
 
+#include "Stm32_time.h"
 #include "IMU_updata.h"
 
-void DM_start(uint8_t mode,can_id Motor_ID);//ÄÚ²¿µ÷ÓÃ
+#include "CAN_ID_Library.h"
+uint32_t Time_delay_trs = 0;
+uint32_t Time_delay_ENABLE = 0;
 
+DM_can_recive_message DM_motor_data[5];
+uint8_t DM_Mode[22] = {0};
 /**********************************ÓÃ»§µ÷ÓÃº¯Êı**************************************/
 /*
 	´ïÃëµç»úµÄ³õÊ¼»¯º¯Êı
 */
-void DM_Init()//Ê¹ÓÃMDµç»úĞèÒªÔÚÕâ³õÊ¼»¯²ÅÄÜÕı³£Ê¹ÓÃ
+#define MIT      1
+#define LOCATION 2
+#define SPEED    3
+#define E_MIT    4
+void DM_Enable(can_id Motor_ID)
 {
-	DM_start(2,CAN_2_2);
+	if(Motor_ID >= CAN_2_1)//can2
+	{
+		if (Get_sys_time_ms() - Time_delay_ENABLE > 50)
+		{
+			DM_enable_TX((can_id)Motor_ID);
+			Time_delay_ENABLE = Get_sys_time_ms();
+		}	
+	}
+	else
+	{
+	
+	}
 
 }
-uint8_t DM_Mode[22] = {0};
-/* 
-³õÊ¼»¯´ïÃëµç»ú£¬°üÀ¨¿ØÖÆÄ£Ê½¸úÊ¹ÄÜ
 
-mode:Ä£Ê½£º1.MITÄ£Ê½,2ËÙ¶ÈÎ»ÖÃÄ£Ê½£¬3ËÙ¶ÈÄ£Ê½,4.E-MITÄ£Ê½
-Motor_ID£º´ïÃëµç»ú·µ»ØÀ´Êı¾İµÄID
-*/
-void DM_start(uint8_t mode,can_id Motor_ID)
+void DM_Init()
 {
-		DM_Mode[Motor_ID] = mode;
-
-		DM_enable_TX((can_id)(Motor_ID + 1));
+		DM_Mode[PITCH_MOTOR] = LOCATION;
+	DM_enable_TX(PITCH_MOTOR);
 }
+
 
 /*
 ÉèÖÃÄ³¸öµç»úµÄÎ»ÖÃ¸úËÙ¶È£¬¿ØÖÆµç»úÖ÷Òª¾Íµ÷ÓÃÕâ¸ö¾ÍĞĞÁË
@@ -38,12 +52,15 @@ vel£ºËÙ¶È
 */
 void DM_Motor_set(can_id Motor_ID,float pos,float vel)//Èç¹ûÊÇËÙ¶ÈÄ£Ê½posËæ±ã¸ø¾Í¿ÉÒÔÁË£¬ÒòÎª¾ÍËã¸³ÖµÁËÒ²·¢²»³öÈ¥
 {
-	if(DM_Mode[Motor_ID] == 2)//Î»ÖÃËÙ¶ÈÄ£Ê½
+	if(DM_motor_data[Motor_ID - CAN_2_1].state == 0)//Èç¹ûµç»úÎ´Ê¹ÄÜ
+		DM_Enable(Motor_ID);
+	else
 	{
-		DM_CAN_location_TX(Motor_ID,pos,vel);
+		if(DM_Mode[Motor_ID] == LOCATION)//Î»ÖÃËÙ¶ÈÄ£Ê½
+			DM_CAN_location_TX(Motor_ID,pos,vel);
+		else if(DM_Mode[Motor_ID] == SPEED)//ËÙ¶ÈÄ£Ê½
+			DM_CAN_speed_TX(Motor_ID,vel);
 	}
-	else if(DM_Mode[Motor_ID] == 3)//ËÙ¶ÈÄ£Ê½
-		DM_CAN_speed_TX(Motor_ID,vel);
 }
 
 /**********************************DMµç»úÇı¶¯****************************************/
@@ -51,7 +68,7 @@ void DM_Motor_set(can_id Motor_ID,float pos,float vel)//Èç¹ûÊÇËÙ¶ÈÄ£Ê½posËæ±ã¸ø¾
 extern CAN_HandleTypeDef hcan1;
 extern CAN_HandleTypeDef hcan2;
 
-DM_can_recive_message DM_motor_data[3];
+
 CAN_TxHeaderTypeDef DM_message_Tx;
 CAN_TxHeaderTypeDef DM_message_Rx;
 
@@ -86,7 +103,7 @@ void DM_enable_TX(can_id ID)
 {
 		uint32_t send_mail_box;
 		uint8_t data[8]; 
-
+		
 		DM_message_Tx.IDE = CAN_ID_STD;
 		DM_message_Tx.RTR = CAN_RTR_DATA;
 		DM_message_Tx.DLC = 0x08;
@@ -98,15 +115,15 @@ void DM_enable_TX(can_id ID)
 		data[5] = 0xFF;
 		data[6] = 0xFF;
 		data[7] = 0xFC;
-		if(ID > CAN_2_1)//can2
+		if(ID < CAN_2_1)
 		{
-			DM_message_Tx.StdId = 0x200+ID - CAN_2_1;
-			HAL_CAN_AddTxMessage(&hcan2, &DM_message_Tx, data, &send_mail_box);
-		}
-		else//can1
-		{
-			DM_message_Tx.StdId = 0x200+ID;
+			DM_message_Tx.StdId = ID + 1;
 			HAL_CAN_AddTxMessage(&hcan1, &DM_message_Tx, data, &send_mail_box);
+		}
+		else
+		{
+			DM_message_Tx.StdId = ID - CAN_2_1 + 1;
+			HAL_CAN_AddTxMessage(&hcan2, &DM_message_Tx, data, &send_mail_box);
 		}
 }
 
@@ -145,6 +162,8 @@ void DM_disable_TX(can_id ID)
 * @retval:     	void
 * @details:    	Í¨¹ıCAN×ÜÏßÏòµç»ú·¢ËÍÎ»ÖÃËÙ¶È¿ØÖÆÃüÁî
 **************************************************************************/
+
+
 void DM_CAN_location_TX(can_id ID,float _pos, float _vel)
 {
 	uint8_t *pbuf,*vbuf;
@@ -160,11 +179,20 @@ void DM_CAN_location_TX(can_id ID,float _pos, float _vel)
 	DM_pos_ves_data[5] = *(vbuf+1);
 	DM_pos_ves_data[6] = *(vbuf+2);
 	DM_pos_ves_data[7] = *(vbuf+3);	
-	
-	if(ID > CAN_1_6020_7)//can2
-		canx_send_data(&hcan2,POS_MODE+ID-CAN_2_1,DM_pos_ves_data,0x08);
-	else//can1
-		canx_send_data(&hcan1,POS_MODE+ID,DM_pos_ves_data,0x08);
+
+
+//	if(Get_sys_time_ms() - Time_delay_trs > 0.5)
+//	{
+		if(ID > CAN_1_6020_7)//can2
+		{	
+			canx_send_data(&hcan2,POS_MODE+ID-CAN_2_1,DM_pos_ves_data,0x08);
+		}
+		else//can1
+		{
+			canx_send_data(&hcan1,POS_MODE+ID,DM_pos_ves_data,0x08);
+		}
+		Time_delay_trs = Get_sys_time_ms();
+//+
 }
 
 /**************************************************************************
@@ -188,10 +216,18 @@ void DM_CAN_speed_TX(can_id ID,float _vel)
 		DM_speed_data[2] = *(vbuf+2);
 		DM_speed_data[3] = *(vbuf+3);
 
-		if(ID > CAN_1_6020_7)
-			canx_send_data(&hcan2,SPEED_MODE+ID-CAN_2_1,DM_speed_data,0x04);
-		else
-			canx_send_data(&hcan1,SPEED_MODE+ID,DM_speed_data,0x04);
+	if(Get_sys_time_ms() - Time_delay_trs > 2)
+	{
+		if(ID > CAN_1_6020_7)//can2
+		{	
+			canx_send_data(&hcan2,POS_MODE+ID-CAN_2_1,DM_speed_data,0x04);
+		}
+		else//can1
+		{
+			canx_send_data(&hcan1,POS_MODE+ID,DM_speed_data,0x04);	
+		}
+		Time_delay_trs = Get_sys_time_ms();
+	}
 }
 /**************************************************************************
 * @brief:      	DM_CAN_Callback: »ñÈ¡DM4310µç»ú·´À¡Êı¾İº¯Êı
@@ -221,8 +257,5 @@ void DM_CAN_Callback(can_id master_ID,uint8_t data[8])
 		DM_motor_data[master_ID].Tmos=(float)(data[6]);
 		DM_motor_data[master_ID].Tcoil=(float)(data[7]);	
 	
-//		motor_data[master_ID].angle = rad2degree(uint_to_float(DM_motor_data[master_ID].p_int, P_MIN, P_MAX, 16));// Ã»×ĞÏ¸¿´´ïÃîµç»úÊı¾İÔõÃ´½âËãµÄ£¬ÏÈÕâÑùÓÃ
-//		motor_data[master_ID].temperate = (data[7]);
-//		motor_data[master_ID].speed_rpm = uint_to_float(DM_motor_data[master_ID].v_int, V_MIN, V_MAX, 12);
 }
 

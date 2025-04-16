@@ -47,6 +47,7 @@ struct gimbal_status
     {
         float set,last_low, now,fist_set, last, offset;
         float stable;
+		float up_angle,down_angle;
     } pitch;
     struct
     {
@@ -90,7 +91,7 @@ void gimbal_init(void);                         //初始化云台
 void gimbal_set_offset(float pitch, float yaw); //初始化零点
 void image_set_offset(void);                    //初始化
 void gimbal_set(float pitch, float yaw); //设置角度
-void gimbal_set_pitch(float pitch,float up_angle,float down_angle);
+void gimbal_set_pitch(float up_angle, float down_angle);
 void image_set(void);                    //设定图传模式
 void gimbal_set_speed(float pitch, float yaw); //设定速度
 void gimbal_set_yaw_speed(float yaw);          //设定yaw速度

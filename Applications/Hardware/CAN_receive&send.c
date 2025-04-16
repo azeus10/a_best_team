@@ -6,6 +6,8 @@
 #include "stdlib.h"
 #include "cmsis_os.h"
 #include "string.h"
+/*大疆电机数据处理文件*/
+
 
 //电机驱动
 //#include "LK_motor_process.h"
@@ -63,7 +65,7 @@ void set_motor(int16_t val, can_id motorID) // 设定马达电流
 // CAN1发送电流
 void CAN1_send_current() // 发送电机控制电流
 {
-  uint8_t can_send_data[8];
+  uint8_t can_send_data[8] = {0};
   static CAN_TxHeaderTypeDef tx_message;
 
 //DJI发送前四个
@@ -80,7 +82,7 @@ void CAN1_send_current() // 发送电机控制电流
 	can_send_data[7] = motor_data[CAN_1_4].set;
   
 	canx_send_data(&hcan1,CAN_1_4_SIGN_ID,can_send_data,0x08);
-
+	osDelay(5);
 	// 发送后4个
 	can_send_data[0] = (motor_data[CAN_1_5].set >> 8);
 	can_send_data[1] = motor_data[CAN_1_5].set;

@@ -27,6 +27,7 @@
 #include "CAN_receive&send.h"
 #include "LK_motor_process.h"	
 
+#include "ui.h"
 #include "vofa.h"
 
 
@@ -61,38 +62,38 @@ uint32_t Time_delay_protect = 0;
 
 uint32_t shoot_num;//做自瞄发弹计数
 // 定义一个函数用来消抖
-bool key_delay_ms(uint16_t time, int key, bool if_pess)
-{
-	if (if_pess)
-	{
-		static uint32_t delay_time[30] = {0};
-		if (delay_time[key] - Get_sys_time_ms() > time)
-		{
-			delay_time[key] = Get_sys_time_ms();
-			return true;
-		}
-		else
-			return false;
-	}
-}
+//bool key_delay_ms(uint16_t time, int key, bool if_pess)
+//{
+//	if (if_pess)
+//	{
+//		static uint32_t delay_time[30] = {0};
+//		if (delay_time[key] - Get_sys_time_ms() > time)
+//		{
+//			delay_time[key] = Get_sys_time_ms();
+//			return true;
+//		}
+//		else
+//			return false;
+//	}
+//}
 // 微调量
 float tweaks_value = 0.01f;
 uint32_t last_shoot_time = 0;
 // 步长
-float pressW_step = 0.001f;
-float pressS_step = 0.005f;
+float pressW_step = 0.0015f;
+float pressS_step = 0.001f;
 float pressA_step = 0.001f;
 float pressD_step = 0.001f;
-float pressShift_step = 0.01f;
+float pressShift_step = 0.010f;
 // 灵敏度
 // 遥控器
-float PitchCofficientFromRC = 2000000.0f;
-float YawCofficientFromRC = 12000.0f;
+float PitchCofficientFromRC = 7000000.0f;
+float YawCofficientFromRC = 1000;//5000.0f;
 // 自瞄
-float PitchCofficientFromNUC = -1500.0f;
-float YawCofficientFromNUC = 20.0f;
+float PitchCofficientFromNUC = -3000.0f;
+float YawCofficientFromNUC = 10.0f;
 // 客户端
-float PitchCofficientFromPC = -12000.0f;
+float PitchCofficientFromPC = -5000.0f;
 float YawCofficientFromPC = 120.0f;
 float PitchLobCofficientFromPC = -4600000.0f;
 float max_cap_speed;
@@ -121,19 +122,19 @@ void remove_control_task()
 
 	if (REFEREE_DATA.Chassis_Power_Limit <= 55)
 	{
-		max_cap_speed = 5.0f;
+		max_cap_speed = 3.0f;
 	}
 	else if (REFEREE_DATA.Chassis_Power_Limit > 55 && REFEREE_DATA.Chassis_Power_Limit <= 85)
 	{
-		max_cap_speed = 5.5f;
+		max_cap_speed = 3.5f;
 	}
 	else if (REFEREE_DATA.Chassis_Power_Limit > 85 && REFEREE_DATA.Chassis_Power_Limit <= 100)
 	{
-		max_cap_speed = 6.0f;
+		max_cap_speed = 4.5f;
 	}
 	else if (REFEREE_DATA.Chassis_Power_Limit > 100)
 	{
-		max_cap_speed = 7.0f;
+		max_cap_speed = 5.5f;
 	}
 
 	// 模式切换区
@@ -148,12 +149,12 @@ void remove_control_task()
 	// 左中右中 跟随模式
 	if (switch_is_mid(RC_L_SW) && switch_is_mid(RC_R_SW))
 		Global.mode = FLOW;
-	// 左中右上 顺时针陀螺模式
+	// 左中右下 顺时针陀螺模式
 	if (switch_is_mid(RC_L_SW) && switch_is_down(RC_R_SW))
 		Global.mode = SPIN;
-	// 左下右中 逆时针陀螺模式
-	if (switch_is_down(RC_L_SW) && switch_is_mid(RC_R_SW))
-		Global.mode = SPIN;
+//	// 左下右中 逆时针陀螺模式
+//	if (switch_is_down(RC_L_SW) && switch_is_mid(RC_R_SW))
+//		Global.mode = SPIN;
 	// 左下右下 锁定模式
 	if (switch_is_down(RC_L_SW) && switch_is_down(RC_R_SW))
 		Global.mode = LOCK;
@@ -173,31 +174,28 @@ void remove_control_task()
 		}
 		else
 		{
-			if (Get_sys_time_ms() - last_shoot_time > 200)
+			if (Get_sys_time_ms() - last_shoot_time > 500)
 			{
 				shoot_Bullets(1);
 				last_shoot_time = Get_sys_time_ms();
 			}
 		}
-//		shoot_num++;
 	}
-
-//	shoot_num++;
-//	UploadData_vofa(last_shoot_time - Last_time_vision_shoot,shoot_num,0,0);	
+//Global.input.ScopeisOpen = 1;
 	
 	// 瞄准镜开关
 	if (Global.input.ScopeisOpen == 0) // 开瞄准镜 副云台保持水平
 	{
-		gimbal.scope.set = (gimbal.scope.offset - 10000.0f);
+		gimbal.scope.set = (gimbal.scope.offset - 80.5f);//78.5效果也挺好，+是逆时针
 	}
 	else
 	{
-		gimbal.scope.set = gimbal.scope.offset + 10000.0f;
+		gimbal.scope.set = gimbal.scope.offset + 80.5f;
 	}
 	/****************************RC操作*************************************************/
 	if (Global.input.ctl == RC)
 	{
-		/******************底盘行为控制******************/
+		/******************底盘行为控制******************
 		Global.input.x = RC_data.rc.ch[0] / 110.0f;
 		Global.input.y = RC_data.rc.ch[1] / 110.0f;
 		/******************云台行为控制******************/
@@ -206,6 +204,11 @@ void remove_control_task()
 			Global.input.vision_status = 1;
 		else
 			Global.input.vision_status = 0;
+			//左down右中 ////////////拨弹盘泄力////////////////////////////////////////
+		if (switch_is_down(RC_L_SW) && switch_is_mid(RC_R_SW))
+					Global.input.isOnForce = 0;
+		else
+					Global.input.isOnForce = 1;
 	
 	//自瞄控制//只在遥控模式下测试
 		if (Global.input.vision_status == 1)
@@ -223,35 +226,47 @@ void remove_control_task()
 			}
 			else
 				Global.input.pitch = 0.0f;
-			//打开摩擦轮
+			//开火
 			if (RC_data.rc.ch[4] == -660)
 				Global.input.shooter_status = 1;
 			else
 				Global.input.shooter_status = 0;
 //			vision_mode = 2;
 		//发射逻辑	
-			if(fromNUC.shoot == 2)//自瞄吊着前哨站
-			{
+//			if(fromNUC.shoot == 2)//自瞄吊着前哨站
+//			{
 //				Global.input.shoot_fire = 1;	
-				Time_vision_shoot = Get_sys_time_ms();
-				if(Time_vision_shoot - Last_time_vision_shoot > 1500)//限制每秒发弹数量，防止同时接到NUC多个开火信号
-				{
-					Global.input.shoot_fire = 1;
-					Last_time_vision_shoot = Time_vision_shoot;
-				}
-				else
-					Global.input.shoot_fire = 0;	
+//				Time_vision_shoot = Get_sys_time_ms();
+//				if(Time_vision_shoot - Last_time_vision_shoot > 1500)//限制每秒发弹数量，防止同时接到NUC多个开火信号
+//				{
+//					Global.input.shoot_fire = 1;//发弹
+//					Last_time_vision_shoot = Time_vision_shoot;
+//				}
+							//开火
+//			}
+//			else
+//				Global.input.shoot_fire = 0;	
+			Time_vision_shoot = Get_sys_time_ms();
+			if (RC_data.rc.ch[4] == -660&&Time_vision_shoot - Last_time_vision_shoot > 1500)
+				
+			{
+				Global.input.shoot_fire = 1;//发弹
+				Last_time_vision_shoot = Time_vision_shoot;
 			}
 			else
-				Global.input.shoot_fire = 0;	
+				Global.input.shoot_fire = 0;
 //			Global.input.shooter_status = 1;
 		}
 		// 正常控制
 		else
 		{
 			// 角度制
+			if(RC_data.rc.ch[4] == 660)
+				Global.input.pitch = (RC_data.rc.ch[3] / PitchCofficientFromRC) * 57.3f;
+			else
+				Global.input.pitch = 0;
+			
 			Global.input.yaw = (RC_data.rc.ch[2] / YawCofficientFromRC);
-			Global.input.pitch = (RC_data.rc.ch[3] / PitchCofficientFromRC) * 57.3f;
 			
 			
 		}
@@ -269,6 +284,10 @@ void remove_control_task()
 				Global.input.shoot_fire = 1;
 			else
 				Global.input.shoot_fire = 0;
+		}
+		else if(Global.input.vision_status == 1)
+		{
+			Global.input.shooter_status = 1;
 		}
 	}
 	/****************************PC操作*************************************************/
@@ -359,19 +378,25 @@ void remove_control_task()
 		}
 		/******************底盘行为控制******************/
 		/*按下Q键进入陀螺模式*/
+//		if (IF_KEY_PRESSED_Q)
+//		{
+//			if (Get_sys_time_ms() - Time_delay_press_Q > 350)
+//			{
+//				if (Global.mode == SPIN)
+//					Global.mode = FLOW;
+//				else if (Global.mode != SPIN)
+//				{
+//					Global.mode = SPIN;
+//				}
+//				Time_delay_press_Q = Get_sys_time_ms();
+//			}
+//		}
 		if (IF_KEY_PRESSED_Q)
 		{
-			if (Get_sys_time_ms() - Time_delay_press_Q > 350)
-			{
-				if (Global.mode == SPIN)
-					Global.mode = FLOW;
-				else if (Global.mode != SPIN)
-				{
-					Global.mode = SPIN;
-				}
-				Time_delay_press_Q = Get_sys_time_ms();
-			}
+			Global.mode = SPIN;
 		}
+		else
+			Global.mode = FLOW;
 		/*按下C键进入尖角模式*/
 		if (IF_KEY_PRESSED_C && !(IF_KEY_PRESSED_CTRL))
 		{
@@ -418,10 +443,10 @@ void remove_control_task()
 			else
 			{
 
-				if (Global.input.y < 3.0f)
+				if (Global.input.y < 1.5f)
 					Global.input.y += pressW_step;
 				else
-					Global.input.y = 3.0f;
+					Global.input.y = 1.5f;
 			}
 		}
 		/*按下S键后退*/
@@ -431,8 +456,8 @@ void remove_control_task()
 				Global.input.y = 0.0f;
 			if (Global.cap == FULL)
 			{
-				if (Global.input.y > -8.0f)
-					Global.input.y -= 0.01f;
+				if (Global.input.y > -6.0f)
+					Global.input.y -= pressShift_step;
 			}
 			else
 			{
@@ -498,42 +523,45 @@ void remove_control_task()
 		{
 			Time_delay_mouse1 = 0;
 		}
-		if (Time_delay_mouse1 > 100)
+		if (Time_delay_mouse1 > 30)
 			Global.input.shoot_fire = 1;
 		else
 			Global.input.shoot_fire = 0;
 		/*按下F键进入自爆模式*/
-		if (IF_KEY_PRESSED_F && !(IF_KEY_PRESSED_CTRL))
-		{
-			if (Get_sys_time_ms() - Time_delay_press_F > 350)
-			{
-				if (Global.input.isHeatLimit == 0)
-				{
-					Global.input.isHeatLimit = 1;
-				}
-				else
-				{
-					Global.input.isHeatLimit = 0;
-				}
-				Time_delay_press_F = Get_sys_time_ms();
-			}
-		}
+//		if (IF_KEY_PRESSED_F && !(IF_KEY_PRESSED_CTRL))
+//		{
+//			if (Get_sys_time_ms() - Time_delay_press_F > 350)
+//			{
+//				if (Global.input.isHeatLimit == 0)
+//				{
+//					Global.input.isHeatLimit = 1;
+//				}
+//				else
+//				{
+//					Global.input.isHeatLimit = 0;
+//				}
+//				Time_delay_press_F = Get_sys_time_ms();
+//			}
+//		}
 		/*按下E键进入拨盘卸力模式*/
 		if (IF_KEY_PRESSED_E)
 		{
-			if (Get_sys_time_ms() - Time_delay_press_E > 350)
-			{
-				if (Global.input.isOnForce == 1)
-				{
-					Global.input.isOnForce = 0;
-				}
-				else
-				{
-					Global.input.isOnForce = 1;
-				}
-				Time_delay_press_E = Get_sys_time_ms();
-			}
+//			if (Get_sys_time_ms() - Time_delay_press_E > 350)
+//			{
+//				if (Global.input.isOnForce == 1)
+//				{
+			Global.input.isOnForce = 0;
+//				}
+//				else
+//				{
+//					Global.input.isOnForce = 1;
+//				}
+//				Time_delay_press_E = Get_sys_time_ms();
+//			}
 		}
+		else
+			Global.input.isOnForce = 1;
+
 		/*按下R键摩擦轮开关切换*/
 		if (IF_KEY_PRESSED_R)
 		{
@@ -552,8 +580,8 @@ void remove_control_task()
 			if (Get_sys_time_ms() - Time_delay_press_F_CTRL > 350)
 			{
 				shoot.speedUpLevel += 10;
-				shoot.speedLeftLevel += 10;
-				shoot.speedRightLevel += 10;
+				shoot.speedLeftLevel -= 10;
+				shoot.speedRightLevel -= 10;
 				Time_delay_press_F_CTRL = Get_sys_time_ms();
 			}
 		}
@@ -563,62 +591,67 @@ void remove_control_task()
 			if (Get_sys_time_ms() - Time_delay_press_G_CTRL > 350)
 			{
 				shoot.speedUpLevel -= 10;
-				shoot.speedLeftLevel -= 10;
-				shoot.speedRightLevel -= 10;
+				shoot.speedLeftLevel += 10;
+				shoot.speedRightLevel += 10;
 				Time_delay_press_G_CTRL = Get_sys_time_ms();
 			}
 		}
-		/******************UI刷新控制******************/
-		/*按下V键UI结构体初始化*/
+//		/******************UI刷新控制******************/
+//		/*按下V键UI结构体初始化*/
 		if (IF_KEY_PRESSED_V && !(IF_KEY_PRESSED_CTRL))
 		{
-			// UI_task_init();
-			ui_init();
+			 UI_task_init();//老UI
+			
+//			ui_init();//南航UI
 		}
 		/*按下B键刷新瞄准线*/
 		if (IF_KEY_PRESSED_B)
 		{
 			press_refrsh();
+//			auto_refresh();
+//			CHASSIS_ReFresh();
+//			shoot_refresh(shoot.SetSpeedUp); //射击速度
+			
 		}
-		/******************吊射模式行为控制******************/
-		/*按Z键进入吊射模式*/
-		if (IF_KEY_PRESSED_Z)
-		{
-			if (Get_sys_time_ms() - Time_delay_press_Z > 350)
-			{
-				if (Global.mode != LEAN_LOB)
-					Global.mode = LEAN_LOB;
-				else if (Global.mode == LEAN_LOB)
-					Global.mode = FLOW;
-				if (Global.mode == LEAN_LOB)
-				{
-					gimbal.small_pitch.target == 2;
-				}
-				else if (Global.mode != LEAN_LOB)
-				{
-					gimbal.small_pitch.target == 0;
-				}
-				Time_delay_press_Z = Get_sys_time_ms();
-			}
-		}
-		/*按WASD键推出吊射模式*/
-		if (IF_KEY_PRESSED_W || IF_KEY_PRESSED_S || IF_KEY_PRESSED_A || IF_KEY_PRESSED_D)
-		{
+//		/******************吊射模式行为控制******************/
+//		/*按Z键进入吊射模式*/
+//		if (IF_KEY_PRESSED_Z)
+//		{
+//			if (Get_sys_time_ms() - Time_delay_press_Z > 350)
+//			{
+//				if (Global.mode != LEAN_LOB)
+//					Global.mode = LEAN_LOB;
+//				else if (Global.mode == LEAN_LOB)
+//					Global.mode = FLOW;
+//				if (Global.mode == LEAN_LOB)
+//				{
+//					gimbal.small_pitch.target = 2;
+//				}
+//				else if (Global.mode != LEAN_LOB)
+//				{
+//					gimbal.small_pitch.target = 0;
+//				}
+//				Time_delay_press_Z = Get_sys_time_ms();
+//			}
+//		}
+//		/*按WASD键推出吊射模式*/
+//		if (IF_KEY_PRESSED_W || IF_KEY_PRESSED_S || IF_KEY_PRESSED_A || IF_KEY_PRESSED_D)
+//		{
 
-			if (Global.mode == LEAN_LOB)
-				Global.mode = FLOW;
-		}
-		if (IF_KEY_PRESSED_X && IF_KEY_PRESSED_CTRL)
-		{
-			if (Get_sys_time_ms() - Time_delay_press_X_CTRL > 350)
-			{
-				if (fly_mode == 0)
-					fly_mode = 1;
-				else if (fly_mode == 1)
-					fly_mode = 0;
-				Time_delay_press_X_CTRL = Get_sys_time_ms();
-			}
-		}
+//			if (Global.mode == LEAN_LOB)
+//				Global.mode = FLOW;
+//		}
+//		if (IF_KEY_PRESSED_X && IF_KEY_PRESSED_CTRL)
+//		{
+//			if (Get_sys_time_ms() - Time_delay_press_X_CTRL > 350)
+//			{
+//				if (fly_mode == 0)
+//					fly_mode = 1;
+//				else if (fly_mode == 1)
+//					fly_mode = 0;
+//				Time_delay_press_X_CTRL = Get_sys_time_ms();
+//			}
+//		}
 	}
 }
 

@@ -39,12 +39,15 @@ _ui_remove_default_energy_0()
 #include "ui_default_state_2.h"
 // º¯ÊıÉùÃ÷
 void ui_init();
-void ui_update();
+void ui_update(void);
 void ui_supercap(float voltage);
 void char_change();
 void ui_chassis(float angle);
 void ui_chassisline();
 void ui_pitch_angle(float angle);
+void ui_shoot_speed(int a, int b);
+void ui_updata();
+
 #define ui_init_default_state() \
 _ui_init_default_state_0(); \
 _ui_init_default_state_1(); \

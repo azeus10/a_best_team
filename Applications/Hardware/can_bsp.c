@@ -28,6 +28,8 @@ motor_measure_t motor_data[22];
 extern CAN_HandleTypeDef hcan1;
 extern CAN_HandleTypeDef hcan2; // 定义原型在can.c文件
 
+
+
 /************************************CAN接收******************************************************/
 // HAL库中断回调指针
 void HAL_CAN_RxFifo0MsgPendingCallback(CAN_HandleTypeDef *hcan)
@@ -67,7 +69,14 @@ void HAL_CAN_RxFifo0MsgPendingCallback(CAN_HandleTypeDef *hcan)
 	else if(rx_header.StdId < 0x100)//DM
 	{
 		DM_CAN_Callback((can_id)rx_header.StdId - 1,rx_data);//DM电机数据接收
+		return;
 	}
+//	cap.remain_vol = 0;//清数据
+//	if(rx_header.StdId == 0x309)//double
+//	{
+//		data_receive(rx_data);
+//		return;
+//	}   
 }
 
 void canx_send_data(CAN_HandleTypeDef *hcan, uint16_t id, uint8_t *data, uint32_t len)

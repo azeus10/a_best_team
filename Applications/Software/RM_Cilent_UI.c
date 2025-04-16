@@ -52,7 +52,7 @@ void UI_task_init(void)
    memset(&G13, 0, sizeof(G13));
    memset(&G14, 0, sizeof(G14));
    memset(&G15, 0, sizeof(G15));
-   memset(&G16, 0, sizeof(G16));
+//   memset(&G16, 0, sizeof(G16));
    memset(&G17, 0, sizeof(G17));
    memset(&G18, 0, sizeof(G18));
    memset(&G19, 0, sizeof(G19));
@@ -66,12 +66,12 @@ void UI_task_init(void)
    memset(&G34, 0, sizeof(G34));
 	 memset(&G35, 0, sizeof(G35));
 	 
-	 memset(&G36, 0, sizeof(G36));
-	 memset(&G37, 0, sizeof(G37));
-	 memset(&G38, 0, sizeof(G38));
-	 memset(&G39, 0, sizeof(G39));
-	 memset(&G40, 0, sizeof(G40));
-	 memset(&G41, 0, sizeof(G41));
+//	 memset(&G36, 0, sizeof(G36));
+//	 memset(&G37, 0, sizeof(G37));
+//	 memset(&G38, 0, sizeof(G38));
+//	 memset(&G39, 0, sizeof(G39));
+//	 memset(&G40, 0, sizeof(G40));
+//	 memset(&G41, 0, sizeof(G41));
 	 memset(&G42, 0, sizeof(G42));
 	 
    infanty_hero_status_UI_add();
@@ -111,13 +111,13 @@ void infanty_hero_status_UI_add(void) // 手动按键添加UI
    Line_Draw(&G7, "007", UI_Graph_ADD, 9, UI_Color_Orange, 2, 968, 1080-401,1000 , 1080-401); //停转前哨站
 	 
    //前哨站井字线瞄准装甲板
- 	 Line_Draw(&G36, "040", UI_Graph_ADD, 1, UI_Color_Purplish_red, 2, 938, 1080-549, 1043, 1080-549); //水平1
- 	 Line_Draw(&G37, "037", UI_Graph_ADD, 1, UI_Color_Purplish_red, 2, 938, 1080-586, 1043, 1080-586); //水平2
-	 Line_Draw(&G38, "038", UI_Graph_ADD, 1, UI_Color_Purplish_red, 2, 965, 1080-522, 965, 1080-617); //竖直1
-	 Line_Draw(&G39, "039", UI_Graph_ADD, 1, UI_Color_Purplish_red, 2, 1018, 1080-522, 1018, 1080-617); //竖直2
-   //瞄准镜边缘线
-	 Arc_Draw(&G40, " 040", UI_Graph_ADD,  4, UI_Color_Green,60,120, 2,1000,1080-543,431,404);
-	 Arc_Draw(&G41, " 041", UI_Graph_ADD,  7, UI_Color_Green,240,300, 2,1000,1080-543,440,404);
+// 	 Line_Draw(&G36, "040", UI_Graph_ADD, 1, UI_Color_Purplish_red, 2, 938, 1080-549, 1043, 1080-549); //水平1
+// 	 Line_Draw(&G37, "037", UI_Graph_ADD, 1, UI_Color_Purplish_red, 2, 938, 1080-586, 1043, 1080-586); //水平2
+//	 Line_Draw(&G38, "038", UI_Graph_ADD, 1, UI_Color_Purplish_red, 2, 965, 1080-522, 965, 1080-617); //竖直1
+//	 Line_Draw(&G39, "039", UI_Graph_ADD, 1, UI_Color_Purplish_red, 2, 1018, 1080-522, 1018, 1080-617); //竖直2
+//   //瞄准镜边缘线
+//	 Arc_Draw(&G40, " 040", UI_Graph_ADD,  4, UI_Color_Green,60,120, 2,1000,1080-543,431,404);
+//	 Arc_Draw(&G41, " 041", UI_Graph_ADD,  7, UI_Color_Green,240,300, 2,1000,1080-543,440,404);
    //底盘状态指示线
    Line_Draw(&G19, "019", UI_Graph_ADD, 3, UI_Color_Green, 2, 898, 120, 1018, 120); 
    Line_Draw(&G20, "020", UI_Graph_ADD, 3, UI_Color_Pink, 2, 898, 40, 898, 120);
@@ -150,6 +150,8 @@ void press_refrsh(void) // 开局手动添加UI固定准星
 {
    UI_ReFresh(7, G1, G2, G3, G4, G5, G6, G7);
    osDelay(10);
+	UI_ReFresh(1, G13);
+	osDelay(10);
 }
 void CHASSIS_ReFresh(void) // 底盘图示状态刷新
 {
@@ -161,25 +163,25 @@ void CHASSIS_ReFresh(void) // 底盘图示状态刷新
 void auto_refresh(void) // 其他字符刷新
 {                       // freertos里面刷新任务，必须要间歇性发送才可以，不然只能刷新一个
    Char_ReFresh(G8);
-   osDelay(10);
+   osDelay(15);
    Char_ReFresh(G13);
-   osDelay(10);
-	 Char_ReFresh(G14);
+   osDelay(15);
+	 Char_ReFresh(G14);//热量限制
 	 osDelay(10);
    Char_ReFresh(G15);
-   osDelay(10);
+   osDelay(15);
    Char_ReFresh(G16);
-   osDelay(10);
+   osDelay(15);
 	 Char_ReFresh(G17);
-   osDelay(10);
+   osDelay(15);
 	 Char_ReFresh(G32);
-   osDelay(10);
+   osDelay(15);
 	 Char_ReFresh(G33);
-   osDelay(10);
+   osDelay(15);
 	 Char_ReFresh(G34);
-   osDelay(10);
+   osDelay(15);
 	 Char_ReFresh(G35);
-   osDelay(10);
+   osDelay(15);
 }
 void Chassis_Refresh(float angle)                        // 底盘图示状态更新
 {
@@ -198,7 +200,7 @@ void shoot_refresh(int16_t status)                      //摩擦轮开关信息更新
 {
 
    char shoot_arr2[8] = "SHOOT";
-   if (status <-1000) 
+   if (status > 1000) 
    {
       Char_Draw(&G13, "013", UI_Graph_Change, 5, UI_Color_Green, 18, 8, 2, 110, 880, &shoot_arr2[0]);
    }

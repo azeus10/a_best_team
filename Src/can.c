@@ -214,7 +214,7 @@ void HAL_CAN_MspDeInit(CAN_HandleTypeDef* canHandle)
 }
 
 /* USER CODE BEGIN 1 */
-void can_filter_init(void)//Æô¶¯ID¹ýÂË ¼õÉÙÎÞÓÃÐÅÏ¢
+void can_filter_init(void)//ï¿½ï¿½ï¿½ï¿½IDï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ï¢
 {
   static CAN_FilterTypeDef can_filter_st;
   can_filter_st.FilterActivation = ENABLE;

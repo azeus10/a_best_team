@@ -16,26 +16,25 @@
 canID手册，所有电机使用时都要在这定义
 没啥实际意义，主要是为了方便避免ID重复
 */
-#define chassis_FR 		CAN_1_1//底盘右前轮
-#define chassis_FL 		CAN_1_2//左前轮
-#define chassis_BL 		CAN_1_3//左后轮
-#define chassis_BR 		CAN_1_4//右后轮
-#define YAW_MOTOR 		CAN_1_5//云台yaw轴电机
+#define chassis_FR 		CAN_1_1//底盘右前轮0
+#define chassis_FL 		CAN_1_2//左前轮1
+#define chassis_BL 		CAN_1_3//左后轮2
+#define chassis_BR 		CAN_1_4//右后轮3
+#define YAW_MOTOR 		CAN_1_5//云台yaw轴电机4
 //  CAN_1_6
-#define TRIGGER_MOTOR   CAN_1_7//拨弹电机
+#define TRIGGER_MOTOR   CAN_1_7//拨弹电机6
 //  CAN_1_8
 //  CAN_1_6020_5
 //  CAN_1_6020_6
 //  CAN_1_6020_7
 
-#define SHOOT_MOTOR1	CAN_2_1//从枪管正面看 上
-#define SHOOT_MOTOR2 	CAN_2_2//从枪管正面看 左
-#define SHOOT_MOTOR3 	CAN_2_3//从枪管正面看 右
-
-#define SMALL_PITCH 	CAN_2_4//云台小pitch轴电机
-//  CAN_2_5
-#define PITCH_MOTOR 	CAN_2_6//云台pitch轴电机
-#define SCOPE_MOTOR 	CAN_2_7//云台倍镜电机
+#define SHOOT_MOTOR1	CAN_2_1//从枪管正面看 上11
+#define SHOOT_MOTOR2 	CAN_2_2//从枪管正面看 左16
+#define SHOOT_MOTOR3 	CAN_2_3//从枪管正面看 右13
+#define SMALL_PITCH 	CAN_2_4//云台小pitch轴电机14
+#define PITCH_MOTOR 	CAN_2_5//云台pitch轴电机12
+//  CAN_2_6
+#define SCOPE_MOTOR 	CAN_2_7//云台倍镜电机17//2_7
 //  CAN_2_8
 //  CAN_2_6020_5
 //  CAN_2_6020_6

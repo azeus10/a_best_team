@@ -69,7 +69,6 @@ void Error_Handler(void);
 #define IST8310_DRDY_GPIO_Port GPIOG
 #define KEY_Pin GPIO_PIN_0
 #define KEY_GPIO_Port GPIOA
-#define KEY_EXTI_IRQn EXTI0_IRQn
 #define CS1_ACCEL_Pin GPIO_PIN_4
 #define CS1_ACCEL_GPIO_Port GPIOA
 #define INT1_ACCEL_Pin GPIO_PIN_4
@@ -84,8 +83,8 @@ void Error_Handler(void);
 
 /* USER CODE BEGIN Private defines */
 
-//IO口宏定义
-//偷懒，理论上cubeMX生成就不必要了
+//IO锟节宏定锟斤拷
+//偷锟斤拷锟斤拷锟斤拷锟斤拷锟斤拷cubeMX锟斤拷锟缴就诧拷锟斤拷要锟斤拷
 #define PIN_1 1
 #define PIN_2 2
 #define PIN_3 3

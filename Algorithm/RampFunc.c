@@ -30,18 +30,21 @@ void rampIterate(RampGenerator *ramp)
 // 初始化斜坡发生器
 void rampInit(RampGenerator *ramp, float startValue, float targetValue, float time, float cycleTime)
 {
-	  ramp->currentValue = startValue;
-    ramp->targetValue = targetValue;
+//	if(ramp->isBusy == 0)
+//	{
+		ramp->currentValue = startValue;
+		ramp->targetValue = targetValue;
     // 计算步进值，这里需要注意的是，确保斜坡时间和周期时间都不为零来避免除以零的错误
-    if (time != 0 && cycleTime != 0)
-    {
-        ramp->step = (targetValue - startValue) *(cycleTime/time);
-    }
-    else
-    {
-        ramp->step = 0; // 出错情况下设置为0，避免非法操作
-    }
-    ramp->isBusy = 1; // 标记为忙碌
+		if (time != 0 && cycleTime != 0)
+		{
+			ramp->step = (targetValue - startValue) *(cycleTime/time);
+		}
+		else
+		{
+			ramp->step = 0; // 出错情况下设置为0，避免非法操作
+		}
+		ramp->isBusy = 1; // 标记为忙碌
+//	}
 }
 /**
   * @brief          一阶低通滤波初始化

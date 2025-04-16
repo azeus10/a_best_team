@@ -29,7 +29,7 @@ extern "C" {
 #include "main.h"
 
 /* USER CODE BEGIN Includes */
-void can_filter_init(void);//Æô¶¯ID¹ýÂË
+void can_filter_init(void);//ï¿½ï¿½ï¿½ï¿½IDï¿½ï¿½ï¿½ï¿½
 /* USER CODE END Includes */
 
 extern CAN_HandleTypeDef hcan1;

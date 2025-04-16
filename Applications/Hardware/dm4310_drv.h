@@ -25,7 +25,8 @@ void DM_CAN_Callback(can_id ID,uint8_t data[8]);
 //外部调用
 void DM_Init(void);//达妙电机初始化函数
 void DM_Motor_set(can_id Motor_ID,float pos,float vel);//点击设置函数
-
+void DM_Enable(can_id Motor_ID);
+	
 typedef struct 
 {
 	uint16_t id;
@@ -41,6 +42,7 @@ typedef struct
 	float	torque; //温度
 } DM_can_recive_message;
 
+extern DM_can_recive_message DM_motor_data[5];
 #endif /* __DM4310_DRV_H__ */
 
 

@@ -45,6 +45,8 @@
 #include "USB_VirCom.h"
 #include "vofa.h"
 #include "cap_ctl.h"
+
+
 #include "LED_control.h"
 #include "RM_Cilent_UI.h"
 #include "referee_handle_pack.h"
@@ -54,7 +56,7 @@
 #include "control_setting.h"
 
 #include "CAN_ID_Library.h"
-
+#include "ui.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -83,72 +85,72 @@ float spin_forward_sen = -7.9f;
 /* Definitions for Flash_LED_Task */
 osThreadId_t Flash_LED_TaskHandle;
 const osThreadAttr_t Flash_LED_Task_attributes = {
-	.name = "Flash_LED_Task",
-	.stack_size = 128 * 4,
-	.priority = (osPriority_t)osPriorityNormal,
+  .name = "Flash_LED_Task",
+  .stack_size = 128 * 4,
+  .priority = (osPriority_t) osPriorityNormal,
 };
 /* Definitions for CAN_sendTask */
 osThreadId_t CAN_sendTaskHandle;
 const osThreadAttr_t CAN_sendTask_attributes = {
-	.name = "CAN_sendTask",
-	.stack_size = 256 * 4,
-	.priority = (osPriority_t)osPriorityRealtime,
+  .name = "CAN_sendTask",
+  .stack_size = 256 * 4,
+  .priority = (osPriority_t) osPriorityRealtime,
 };
 /* Definitions for RemoteTask */
 osThreadId_t RemoteTaskHandle;
 const osThreadAttr_t RemoteTask_attributes = {
-	.name = "RemoteTask",
-	.stack_size = 256 * 4,
-	.priority = (osPriority_t)osPriorityRealtime,
+  .name = "RemoteTask",
+  .stack_size = 256 * 4,
+  .priority = (osPriority_t) osPriorityRealtime,
 };
 /* Definitions for ChassisTask */
 osThreadId_t ChassisTaskHandle;
 const osThreadAttr_t ChassisTask_attributes = {
-	.name = "ChassisTask",
-	.stack_size = 128 * 4,
-	.priority = (osPriority_t)osPriorityNormal,
+  .name = "ChassisTask",
+  .stack_size = 128 * 4,
+  .priority = (osPriority_t) osPriorityNormal,
 };
 /* Definitions for GimbalTask */
 osThreadId_t GimbalTaskHandle;
 const osThreadAttr_t GimbalTask_attributes = {
-	.name = "GimbalTask",
-	.stack_size = 512 * 4,
-	.priority = (osPriority_t)osPriorityRealtime,
+  .name = "GimbalTask",
+  .stack_size = 512 * 4,
+  .priority = (osPriority_t) osPriorityRealtime,
 };
 /* Definitions for NUCcontrolTask */
 osThreadId_t NUCcontrolTaskHandle;
 const osThreadAttr_t NUCcontrolTask_attributes = {
-	.name = "NUCcontrolTask",
-	.stack_size = 512 * 4,
-	.priority = (osPriority_t)osPriorityRealtime,
+  .name = "NUCcontrolTask",
+  .stack_size = 512 * 4,
+  .priority = (osPriority_t) osPriorityRealtime,
 };
 /* Definitions for ErrorDetectTask */
 osThreadId_t ErrorDetectTaskHandle;
 const osThreadAttr_t ErrorDetectTask_attributes = {
-	.name = "ErrorDetectTask",
-	.stack_size = 128 * 4,
-	.priority = (osPriority_t)osPriorityLow,
+  .name = "ErrorDetectTask",
+  .stack_size = 128 * 4,
+  .priority = (osPriority_t) osPriorityLow,
 };
 /* Definitions for RefereeTask */
 osThreadId_t RefereeTaskHandle;
 const osThreadAttr_t RefereeTask_attributes = {
-	.name = "RefereeTask",
-	.stack_size = 512 * 4,
-	.priority = (osPriority_t)osPriorityLow,
+  .name = "RefereeTask",
+  .stack_size = 512 * 4,
+  .priority = (osPriority_t) osPriorityLow,
 };
 /* Definitions for ModechangeTask */
 osThreadId_t ModechangeTaskHandle;
 const osThreadAttr_t ModechangeTask_attributes = {
-	.name = "ModechangeTask",
-	.stack_size = 512 * 4,
-	.priority = (osPriority_t)osPriorityNormal,
+  .name = "ModechangeTask",
+  .stack_size = 512 * 4,
+  .priority = (osPriority_t) osPriorityNormal,
 };
 /* Definitions for RM_UI_refresh_t */
 osThreadId_t RM_UI_refresh_tHandle;
 const osThreadAttr_t RM_UI_refresh_t_attributes = {
-	.name = "RM_UI_refresh_t",
-	.stack_size = 128 * 4,
-	.priority = (osPriority_t)osPriorityLow,
+  .name = "RM_UI_refresh_t",
+  .stack_size = 256 * 4,
+  .priority = (osPriority_t) osPriorityAboveNormal,
 };
 
 /* Private function prototypes -----------------------------------------------*/
@@ -171,70 +173,70 @@ extern void MX_USB_DEVICE_Init(void);
 void MX_FREERTOS_Init(void); /* (MISRA C 2004 rule 8.1) */
 
 /**
- * @brief  FreeRTOS initialization
- * @param  None
- * @retval None
- */
-void MX_FREERTOS_Init(void)
-{
-	/* USER CODE BEGIN Init */
+  * @brief  FreeRTOS initialization
+  * @param  None
+  * @retval None
+  */
+void MX_FREERTOS_Init(void) {
+  /* USER CODE BEGIN Init */
 
-	/* USER CODE END Init */
+  /* USER CODE END Init */
 
-	/* USER CODE BEGIN RTOS_MUTEX */
+  /* USER CODE BEGIN RTOS_MUTEX */
 	/* add mutexes, ... */
-	/* USER CODE END RTOS_MUTEX */
+  /* USER CODE END RTOS_MUTEX */
 
-	/* USER CODE BEGIN RTOS_SEMAPHORES */
+  /* USER CODE BEGIN RTOS_SEMAPHORES */
 	/* add semaphores, ... */
-	/* USER CODE END RTOS_SEMAPHORES */
+  /* USER CODE END RTOS_SEMAPHORES */
 
-	/* USER CODE BEGIN RTOS_TIMERS */
+  /* USER CODE BEGIN RTOS_TIMERS */
 	/* start timers, add new ones, ... */
-	/* USER CODE END RTOS_TIMERS */
+  /* USER CODE END RTOS_TIMERS */
 
-	/* USER CODE BEGIN RTOS_QUEUES */
+  /* USER CODE BEGIN RTOS_QUEUES */
 	/* add queues, ... */
-	/* USER CODE END RTOS_QUEUES */
+  /* USER CODE END RTOS_QUEUES */
 
-	/* Create the thread(s) */
-	/* creation of Flash_LED_Task */
-	Flash_LED_TaskHandle = osThreadNew(Flash_LED_Task_callback, NULL, &Flash_LED_Task_attributes);
+  /* Create the thread(s) */
+  /* creation of Flash_LED_Task */
+  Flash_LED_TaskHandle = osThreadNew(Flash_LED_Task_callback, NULL, &Flash_LED_Task_attributes);
 
-	/* creation of CAN_sendTask */
-	CAN_sendTaskHandle = osThreadNew(CAN_sendTask_callback, NULL, &CAN_sendTask_attributes);
+  /* creation of CAN_sendTask */
+  CAN_sendTaskHandle = osThreadNew(CAN_sendTask_callback, NULL, &CAN_sendTask_attributes);
 
-	/* creation of RemoteTask */
-	RemoteTaskHandle = osThreadNew(RemoteTask_callback, NULL, &RemoteTask_attributes);
+  /* creation of RemoteTask */
+  RemoteTaskHandle = osThreadNew(RemoteTask_callback, NULL, &RemoteTask_attributes);
 
-	/* creation of ChassisTask */
-	ChassisTaskHandle = osThreadNew(ChassisTask_callback, NULL, &ChassisTask_attributes);
+  /* creation of ChassisTask */
+  ChassisTaskHandle = osThreadNew(ChassisTask_callback, NULL, &ChassisTask_attributes);
 
-	/* creation of GimbalTask */
-	GimbalTaskHandle = osThreadNew(GimbalTask_callback, NULL, &GimbalTask_attributes);
+  /* creation of GimbalTask */
+  GimbalTaskHandle = osThreadNew(GimbalTask_callback, NULL, &GimbalTask_attributes);
 
-	/* creation of NUCcontrolTask */
-	NUCcontrolTaskHandle = osThreadNew(NUCcontrolTask_callback, NULL, &NUCcontrolTask_attributes);
+  /* creation of NUCcontrolTask */
+  NUCcontrolTaskHandle = osThreadNew(NUCcontrolTask_callback, NULL, &NUCcontrolTask_attributes);
 
-	/* creation of ErrorDetectTask */
-	ErrorDetectTaskHandle = osThreadNew(ErrorDetectTask_callback, NULL, &ErrorDetectTask_attributes);
+  /* creation of ErrorDetectTask */
+  ErrorDetectTaskHandle = osThreadNew(ErrorDetectTask_callback, NULL, &ErrorDetectTask_attributes);
 
-	/* creation of RefereeTask */
-	RefereeTaskHandle = osThreadNew(RefereeTask_callback, NULL, &RefereeTask_attributes);
+  /* creation of RefereeTask */
+  RefereeTaskHandle = osThreadNew(RefereeTask_callback, NULL, &RefereeTask_attributes);
 
-	/* creation of ModechangeTask */
-	ModechangeTaskHandle = osThreadNew(ModechangeTask_callback, NULL, &ModechangeTask_attributes);
+  /* creation of ModechangeTask */
+  ModechangeTaskHandle = osThreadNew(ModechangeTask_callback, NULL, &ModechangeTask_attributes);
 
-	/* creation of RM_UI_refresh_t */
-	RM_UI_refresh_tHandle = osThreadNew(RM_UI_refresh_task_callback, NULL, &RM_UI_refresh_t_attributes);
+  /* creation of RM_UI_refresh_t */
+  RM_UI_refresh_tHandle = osThreadNew(RM_UI_refresh_task_callback, NULL, &RM_UI_refresh_t_attributes);
 
-	/* USER CODE BEGIN RTOS_THREADS */
+  /* USER CODE BEGIN RTOS_THREADS */
 	/* add threads, ... */
-	/* USER CODE END RTOS_THREADS */
+  /* USER CODE END RTOS_THREADS */
 
-	/* USER CODE BEGIN RTOS_EVENTS */
+  /* USER CODE BEGIN RTOS_EVENTS */
 	/* add events, ... */
-	/* USER CODE END RTOS_EVENTS */
+  /* USER CODE END RTOS_EVENTS */
+
 }
 
 /* USER CODE BEGIN Header_Flash_LED_Task_callback */
@@ -246,9 +248,9 @@ void MX_FREERTOS_Init(void)
 /* USER CODE END Header_Flash_LED_Task_callback */
 void Flash_LED_Task_callback(void *argument)
 {
-	/* init code for USB_DEVICE */
-	MX_USB_DEVICE_Init();
-	/* USER CODE BEGIN Flash_LED_Task_callback */
+  /* init code for USB_DEVICE */
+  MX_USB_DEVICE_Init();
+  /* USER CODE BEGIN Flash_LED_Task_callback */
 	/* Infinite loop */
 	for (;;)
 	{
@@ -259,7 +261,7 @@ void Flash_LED_Task_callback(void *argument)
 		led_show(GREEN);
 		osDelay(500);
 	}
-	/* USER CODE END Flash_LED_Task_callback */
+  /* USER CODE END Flash_LED_Task_callback */
 }
 
 /* USER CODE BEGIN Header_CAN_sendTask_callback */
@@ -271,23 +273,17 @@ void Flash_LED_Task_callback(void *argument)
 /* USER CODE END Header_CAN_sendTask_callback */
 void CAN_sendTask_callback(void *argument)
 {
-	/* USER CODE BEGIN CAN_sendTask_callback */
+  /* USER CODE BEGIN CAN_sendTask_callback */
 	/* Infinite loop */
 	for (;;)
 	{
-    if (Global.mode == LOCK)
-    {
-      CAN1_send_ZERO_current();
-      CAN2_send_ZER0_current();
-    } // ·¢ËÍµç»ú¿ØÖÆµçÁ÷		}
-    else
-    {
+
       CAN1_send_current();
       CAN2_send_current();
-    }
+
 		osDelay(5);
 	}
-	/* USER CODE END CAN_sendTask_callback */
+  /* USER CODE END CAN_sendTask_callback */
 }
 
 /* USER CODE BEGIN Header_RemoteTask_callback */
@@ -299,14 +295,14 @@ void CAN_sendTask_callback(void *argument)
 /* USER CODE END Header_RemoteTask_callback */
 void RemoteTask_callback(void *argument)
 {
-	/* USER CODE BEGIN RemoteTask_callback */
+  /* USER CODE BEGIN RemoteTask_callback */
 	/* Infinite loop */
 	for (;;)
 	{
 		remove_control_task();
 		osDelay(1);
 	}
-	/* USER CODE END RemoteTask_callback */
+  /* USER CODE END RemoteTask_callback */
 }
 
 /* USER CODE BEGIN Header_ChassisTask_callback */
@@ -318,7 +314,7 @@ void RemoteTask_callback(void *argument)
 /* USER CODE END Header_ChassisTask_callback */
 void ChassisTask_callback(void *argument)
 {
-	/* USER CODE BEGIN ChassisTask_callback */
+  /* USER CODE BEGIN ChassisTask_callback */
 
 	/* Infinite loop */
 	for (;;)
@@ -326,7 +322,7 @@ void ChassisTask_callback(void *argument)
 		chassis_moto_speed_calc();
 		osDelay(5);
 	}
-	/* USER CODE END ChassisTask_callback */
+  /* USER CODE END ChassisTask_callback */
 }
 
 /* USER CODE BEGIN Header_GimbalTask_callback */
@@ -338,7 +334,7 @@ void ChassisTask_callback(void *argument)
 /* USER CODE END Header_GimbalTask_callback */
 void GimbalTask_callback(void *argument)
 {
-	/* USER CODE BEGIN GimbalTask_callback */
+  /* USER CODE BEGIN GimbalTask_callback */
 	/* Infinite loop */
 
 	for (;;)
@@ -349,7 +345,7 @@ void GimbalTask_callback(void *argument)
 		shoot_update();
 		osDelay(1);
 	}
-	/* USER CODE END GimbalTask_callback */
+  /* USER CODE END GimbalTask_callback */
 }
 
 /* USER CODE BEGIN Header_NUCcontrolTask_callback */
@@ -361,21 +357,21 @@ void GimbalTask_callback(void *argument)
 /* USER CODE END Header_NUCcontrolTask_callback */
 void NUCcontrolTask_callback(void *argument)
 {
-	/* USER CODE BEGIN NUCcontrolTask_callback */
+  /* USER CODE BEGIN NUCcontrolTask_callback */
 	/* Infinite loop */
-	// ÊÓ¾õÍ¨ÐÅ
+	// ï¿½Ó¾ï¿½Í¨ï¿½ï¿½
 	
 	unsigned char data[128];
 //	char data[128];
-	// ´®¿ÚÏÔÊ¾²¨ÐÎ£¨Vofa+£©
+	// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê¾ï¿½ï¿½ï¿½Î£ï¿½Vofa+ï¿½ï¿½
 	ext_robot_status_t robot_status;
 	for (;;)
 	{
-		// ÊÓ¾õÍ¨ÐÅ²¿·Ö
-		if (get_robot_id() > 100) // µÐ·½ÑÕÉ«
-			toNUC.enemy = 1;	  // 1        //ºìÉ«  ×ÔÃéÊ¶±ð
+		// ï¿½Ó¾ï¿½Í¨ï¿½Å²ï¿½ï¿½ï¿½
+		if (get_robot_id() > 100) // ï¿½Ð·ï¿½ï¿½ï¿½É«
+			toNUC.enemy = 1;	  // 1        //ï¿½ï¿½É«  ï¿½ï¿½ï¿½ï¿½Ê¶ï¿½ï¿½
 		else
-			toNUC.enemy = 0; // 0      //À¶É«
+			toNUC.enemy = 0; // 0      //ï¿½ï¿½É«
 		toNUC.b_speed = 15.5f;
 		toNUC.mode = 2;
 		toNUC.yaw = rad2degree(IMU_data.AHRS.yaw);
@@ -383,8 +379,8 @@ void NUCcontrolTask_callback(void *argument)
 
 		encodeSTM32(&toNUC, data, sizeof(STM32_data_t));
 		VirCom_send(data, sizeof(STM32_data_t));
-		// ÐéÄâ´®¿ÚÏÔÊ¾²¨ÐÎ²¿·Ö
-		// ¸ñÊ½ÈçÏÂ
+		// ï¿½ï¿½ï¿½â´®ï¿½ï¿½ï¿½ï¿½Ê¾ï¿½ï¿½ï¿½Î²ï¿½ï¿½ï¿½
+		// ï¿½ï¿½Ê½ï¿½ï¿½ï¿½ï¿½
 		//   char matlab[128];
 
 		//  unsigned char len = 0;
@@ -396,7 +392,7 @@ void NUCcontrolTask_callback(void *argument)
 		osDelay(1);
 	}
 
-	/* USER CODE END NUCcontrolTask_callback */
+  /* USER CODE END NUCcontrolTask_callback */
 }
 
 /* USER CODE BEGIN Header_ErrorDetectTask_callback */
@@ -408,14 +404,14 @@ void NUCcontrolTask_callback(void *argument)
 /* USER CODE END Header_ErrorDetectTask_callback */
 void ErrorDetectTask_callback(void *argument)
 {
-	/* USER CODE BEGIN ErrorDetectTask_callback */
+  /* USER CODE BEGIN ErrorDetectTask_callback */
 	/* Infinite loop */
 	for (;;)
 	{
 		Error_detect_flush();
 		osDelay(100);
 	}
-	/* USER CODE END ErrorDetectTask_callback */
+  /* USER CODE END ErrorDetectTask_callback */
 }
 
 /* USER CODE BEGIN Header_RefereeTask_callback */
@@ -427,7 +423,7 @@ void ErrorDetectTask_callback(void *argument)
 /* USER CODE END Header_RefereeTask_callback */
 void RefereeTask_callback(void *argument)
 {
-	/* USER CODE BEGIN RefereeTask_callback */
+  /* USER CODE BEGIN RefereeTask_callback */
 
 	/* Infinite loop */
 	for (;;)
@@ -435,10 +431,14 @@ void RefereeTask_callback(void *argument)
 		referee_usart_task();
 		Required_Data();
 		Cap_Required_Data();
+
 		cap_update();
+//		data_send();
+
+		
 		osDelay(5);
 	}
-	/* USER CODE END RefereeTask_callback */
+  /* USER CODE END RefereeTask_callback */
 }
 
 /* USER CODE BEGIN Header_ModechangeTask_callback */
@@ -450,13 +450,13 @@ void RefereeTask_callback(void *argument)
 /* USER CODE END Header_ModechangeTask_callback */
 void ModechangeTask_callback(void *argument)
 {
-	/* USER CODE BEGIN ModechangeTask_callback */
+  /* USER CODE BEGIN ModechangeTask_callback */
 	/* Infinite loop */
 	float x_s, y_s, r_s;
 	float sin_beta, cos_beta;
 	uint32_t mul = 0;
 	pid_t chassis_follow;
-	// µ×ÅÌ¸úËæPID
+	// è·ŸéšPID
 	pid_set(&chassis_follow, 2, 0, 10, 50, 0);
 	for (;;)
 	{
@@ -468,14 +468,15 @@ void ModechangeTask_callback(void *argument)
 				pid_set(&chassis_follow, 5, 0, 30, 50, 0);
 			else
 				pid_set(&chassis_follow, 3, 0, 26, 50, 0);
+//				pid_set(&chassis_follow, 1.3, 0, 26, 50, 0);
 			relative_angle = -(get_motor_data(YAW_MOTOR).angle_cnt - gimbal.yaw.offset);
-//			if (RC_data.rc.ch[2] == 0 && Global.input.yaw == 0)
-//				relative_angle = 0; // ·ÀÖ¹×ß²»Ö±
+//			relative_angle = 0;
+
 		}
 		else if (Global.mode == SPIN)
 		{
 			relative_angle = -(get_motor_data(YAW_MOTOR).angle_cnt - gimbal.yaw.offset - get_motor_data(YAW_MOTOR).round_speed * spin_forward_sen);
-			r_s = chassis_spin_speed_level_up(); // Ð¡ÍÓÂÝ×ªËÙ°´µÈ¼¶ÌáÉý
+			r_s = chassis_spin_speed_level_up(); //å°é™€èžºè½¬é€Ÿ
 		}
 		else if (Global.mode == LOCK)
 		{
@@ -493,6 +494,8 @@ void ModechangeTask_callback(void *argument)
 			Global.input.isHeatLimit = 0;
 			Global.input.shooter_status = 0;
 			Global.input.shoot_fire = 0;
+			
+			relative_angle = 0;
 		}
 		else if (Global.mode == LEAN_LOB)
 		{
@@ -504,27 +507,30 @@ void ModechangeTask_callback(void *argument)
 		}
 		sin_beta = sinf(degree2rad(relative_angle));
 		cos_beta = cosf(degree2rad(relative_angle));
-		x_s = Global.input.x * cos_beta - sin_beta * Global.input.y; // ÔË¶¯·Ö½â
+		x_s = Global.input.x * cos_beta - sin_beta * Global.input.y; // ï¿½Ë¶ï¿½ï¿½Ö½ï¿½
 		y_s = Global.input.x * sin_beta + Global.input.y * cos_beta;
 		mul = abs((int)relative_angle) / 180;
 		if (relative_angle > 180.0f)
 		{
-			if (mul % 2 == 1) // ´¦ÓÚ-180¶È
+			if (mul % 2 == 1) // ï¿½ï¿½ï¿½ï¿½-180ï¿½ï¿½
 				relative_angle -= (mul + 1) * 180;
-			else // ´¦ÓÚ180¶È
+			else // ï¿½ï¿½ï¿½ï¿½180ï¿½ï¿½
 				relative_angle -= mul * 180;
 		}
 		if (relative_angle < -180.0f)
 		{
-			if (mul % 2 == 1) // ´¦ÓÚ180¶È
+			if (mul % 2 == 1) // ï¿½ï¿½ï¿½ï¿½180ï¿½ï¿½
 				relative_angle += (mul + 1) * 180;
-			else // ´¦ÓÚ-180¶È
+			else // ï¿½ï¿½ï¿½ï¿½-180ï¿½ï¿½
 				relative_angle += mul * 180;
 		}
 		if(Global.mode != SPIN)
 		{
-			if (fabs(relative_angle) > 0.3f)									  //
-				r_s = pid_cal(&chassis_follow, degree2rad(relative_angle), 0.0f); // degree2rad(relative_angle)
+			if (fabs(relative_angle) > 0.3f)
+			{
+				float coef = (181 - fabs(relative_angle))/180;
+				r_s = coef * pid_cal(&chassis_follow, degree2rad(relative_angle), 0.0f); // degree2rad(relative_angle)
+			}
 			else
 				r_s = 0.0;
 		}
@@ -534,7 +540,10 @@ void ModechangeTask_callback(void *argument)
 		}
 		if (fabs(Global.input.pitch) > 0.0f)
 		{
-			gimbal.pitch.set -= Global.input.pitch;
+			if(Global.input.pitch == 0)
+				gimbal.pitch.set = gimbal.pitch.now;
+			else
+				gimbal.pitch.set -= Global.input.pitch;
 		}
 		chassis.speed.x = x_s;
 		chassis.speed.y = y_s;
@@ -542,7 +551,7 @@ void ModechangeTask_callback(void *argument)
 
 		osDelay(5);
 	}
-	/* USER CODE END ModechangeTask_callback */
+  /* USER CODE END ModechangeTask_callback */
 }
 
 /* USER CODE BEGIN Header_RM_UI_refresh_task_callback */
@@ -554,26 +563,41 @@ void ModechangeTask_callback(void *argument)
 /* USER CODE END Header_RM_UI_refresh_task_callback */
 void RM_UI_refresh_task_callback(void *argument)
 {
-	/* USER CODE BEGIN RM_UI_refresh_task_callback */
+  /* USER CODE BEGIN RM_UI_refresh_task_callback */
 	/* Infinite loop */
 	for (;;)
 	{
-		// UIË¢ÐÂ
-		ui_shoot_speed((int)((shoot.speedUpLevel - 5350) * 1.0f), (int)((shoot.speedLeftLevel - 5350) * 1.0)); // Ä¦²ÁÂÖ×ªËÙ²î¸üÐÂ
-		ui_pitch_angle(IMU_data.AHRS.pitch * 57.3f * 1000);													   // pitch½Ç¶È¸üÐÂ
-		ui_supercap(cap.remain_vol);																		   // ³¬µãÄÜÁ¿
-		char_change();																						   // ×Ö·û¸üÐÂ
-		ui_chassis(relative_angle);																			   // µØÅÌ·½ÏòÖ¸Ê¾
-		osDelay(2);
-		ui_updata();
-		osDelay(3);
-		UI_id_check(); // ¼ì²é»úÆ÷ÈËid£¬ÊµÏÖ¶¯Ì¬¸üÐÂ
-		osDelay(1);
+		//laoUI
+
+//		CHASSIS_ReFresh(); 
+//		Chassis_Refresh(relative_angle); 
+//		osDelay(5);
+//		auto_refresh();// å…¶ä»–å­—ç¬¦åˆ·æ–°
+//		osDelay(5);
+//		shoot_refresh(shoot.SetSpeedUp); //æ‘©æ“¦è½®å¼€å…³ï¼Ÿï¼Ÿï¼Ÿï¼Ÿï¼Ÿï¼Ÿï¼Ÿï¼Ÿï¼Ÿï¼Ÿï¼Ÿï¼Ÿï¼Ÿï¼Ÿï¼Ÿï¼Ÿï¼Ÿï¼Ÿï¼Ÿï¼Ÿï¼Ÿï¼Ÿ
+//		Super_POWER(cap_get_remain_vol());			   
+//		chassis_status_refresh(Global.mode);
+			
+//		osDelay(5);
+		// UIË¢ï¿½ï¿½
+//		ui_shoot_speed((int)((shoot.speedUpLevel - 5350) * 1.0f), (int)((shoot.speedLeftLevel - 5350) * 1.0)); 
+//		ui_pitch_angle(IMU_data.AHRS.pitch * 57.3f * 1000);													   
+//		ui_supercap(cap.remain_vol);		
+//		ui_supercap(REFEREE_DATA.Buffer_Energy);		
+//		char_change();																						   
+//		ui_chassis(relative_angle);																			  
+//		osDelay(2);
+//	ui_updata();
+//		osDelay(3);
+//		UI_id_check(); // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½idï¿½ï¿½Êµï¿½Ö¶ï¿½Ì¬ï¿½ï¿½ï¿½ï¿½
+
+		osDelay(5);
 	}
-	/* USER CODE END RM_UI_refresh_task_callback */
+  /* USER CODE END RM_UI_refresh_task_callback */
 }
 
 /* Private application code --------------------------------------------------*/
 /* USER CODE BEGIN Application */
 
 /* USER CODE END Application */
+

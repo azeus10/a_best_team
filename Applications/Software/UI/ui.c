@@ -1,4 +1,4 @@
-#include <ui.h>
+#include "ui.h"
 #include "referee_handle_pack.h"
 #include "FreeRTOS.h"
 #include "task.h"
@@ -45,23 +45,23 @@ void ui_updata()
   osDelay(2);
   _ui_update_default_shoot_0();
   osDelay(2);
-  _ui_update_default_gimbal_0();
-  osDelay(2);
+//  _ui_update_default_gimbal_0();
+//  osDelay(2);
   _ui_update_default_energy_0();
   osDelay(2);
-  _ui_update_default_chassis_0();
-  osDelay(2);
-  _ui_update_default_aim_0();
-  osDelay(2);
-  _ui_update_default_close_aim_0();
-  osDelay(2);
+//  _ui_update_default_chassis_0();
+//  osDelay(2);
+//  _ui_update_default_aim_0();
+//  osDelay(2);
+//  _ui_update_default_close_aim_0();
+//  osDelay(2);
 }
 
 void ui_supercap(float votage)
 {
   float cnt = votage * votage;
   float percent = (cnt - 49.0f) / 480.0f;
-  if (percent >= 1)
+	if (percent >= 1)
     percent = 1;
   if (percent <= 0)
     percent = 0;
@@ -72,7 +72,19 @@ void ui_supercap(float votage)
   if (percent <= 0.3)
     ui_default_energy_EnergyLine->color = 4; // 紫红色
   ui_default_energy_EnergyLine->end_x = ui_default_energy_EnergyLine->start_x + 795.0f * percent;
+//	float percent = votage;
+//  if (percent >= 60)
+//    percent = 60;
+//  if (percent <= 0)
+//    percent = 0;
+//  if (percent >= 40)
+//    ui_default_energy_EnergyLine->color = 2; // 绿色
+//  else if (percent <= 30)
+//    ui_default_energy_EnergyLine->color = 3; // 橙色
+//  else if (percent <= 15)
+//    ui_default_energy_EnergyLine->color = 4; // 紫红色
 
+  ui_default_energy_EnergyLine->end_x = ui_default_energy_EnergyLine->start_x + 795.0f * percent;
   if (Global.cap != FULL)
   {
     ui_default_energy_energycircle->color = 6;
@@ -87,17 +99,17 @@ void ui_supercap(float votage)
 
 void char_change()
 {
-  // 飞坡模式
-  if (fly_mode != 1)
-  {
-    ui_default_state_Fly->color = 7;
-    ui_default_state_Fly->font_size = 30;
-  }
-  else
-  {
-    ui_default_state_Fly->color = 2;
-    ui_default_state_Fly->font_size = 30;
-  }
+//  // 飞坡模式
+//  if (fly_mode != 1)
+//  {
+//    ui_default_state_Fly->color = 7;
+//    ui_default_state_Fly->font_size = 30;
+//  }
+//  else
+//  {
+//    ui_default_state_Fly->color = 2;
+//    ui_default_state_Fly->font_size = 30;
+//  }
   // 摩擦轮
   if (Global.input.isOnForce == 0)
   {
@@ -116,17 +128,17 @@ void char_change()
   }
 
   // 吊射
-  if (Global.mode != LEAN_LOB)
-  {
-    ui_default_state_Lob->color = 7;
-    ui_default_state_Lob->font_size = 30;
-  }
+//  if (Global.mode != LEAN_LOB)
+//  {
+//    ui_default_state_Lob->color = 7;
+//    ui_default_state_Lob->font_size = 30;
+//  }
 
-  else
-  {
-    ui_default_state_Lob->color = 2;
-    ui_default_state_Lob->font_size = 30;
-  }
+//  else
+//  {
+//    ui_default_state_Lob->color = 2;
+//    ui_default_state_Lob->font_size = 30;
+//  }
 }
 
 void ui_chassis(float angle)

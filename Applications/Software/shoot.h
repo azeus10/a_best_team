@@ -15,8 +15,9 @@
 
 //#define USE_3508_AS_SHOOT_MOTOR
 
-// #define A_BULLET_ANGEL -25502
-#define A_BULLET_ANGEL -26225
+//#define A_BULLET_ANGEL -27000//////////////////
+#define A_BULLET_ANGEL -26219
+//#define A_BULLET_ANGEL -26225
 
 //// Ä¦²ÁÂÖµç»úÅäÖÃ 3508
 //#ifdef USE_3508_AS_SHOOT_MOTOR
@@ -71,6 +72,8 @@ typedef struct
 		float speedUpLevel;
 		float speedLeftLevel;
 		float speedRightLevel;
+	
+		uint8_t shoot_flag;
 } shoot_t;
 
 extern shoot_t shoot;

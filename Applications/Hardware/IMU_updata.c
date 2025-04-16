@@ -128,13 +128,13 @@ HAL_IWDG_Refresh(&hiwdg);
 	BMI088_read(IMU_data.gyro, IMU_data.accel, &IMU_data.temp);
 	ist8310_read_mag(IMU_data.mag);
 //¡„∆Ø“∆≤π≥•
-//	IMU_data.gyro[0]   -= (0.0044389558);
-//	IMU_data.gyro[1]   -= (0.0044359558);
-//	IMU_data.gyro[2]   -= (-0.000659398094);
+	IMU_data.gyro[0]   -= (0.00132731919);
+	IMU_data.gyro[1]   -= (-0.000852212077);
+	IMU_data.gyro[2]   -= (0.000551806472);
 	
-	IMU_data.gyro[0]   -= 0;
-	IMU_data.gyro[1]   -= 0;
-	IMU_data.gyro[2]   -= 0;
+//	IMU_data.gyro[0]   -= 0;
+//	IMU_data.gyro[1]   -= 0;
+//	IMU_data.gyro[2]   -= 0;
 	
 
 // º”»»∆˜PIDº∆À„
