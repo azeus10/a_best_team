@@ -10,44 +10,44 @@
  */
 //#include "CAN_receive&send.h"
 #include "IMU_updata.h"
-#include "cap_ctl.h"
+#include "cap_ctl.h"//
 
 #include "math.h"
 #include "stdlib.h"
 #include "cmsis_os.h"
 #include "string.h"
 
-//µç»úÇý¶¯
+//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 #include "LK_motor_process.h"
 #include "HT_drive.h"
 #include "dm4310_drv.h"
-// µç»úÊý¾Ý
+// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 motor_measure_t motor_data[22];
 
-// CAN¼Ä´æÆ÷¼°¿ØÖÆÆ÷
+// CANï¿½Ä´ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 extern CAN_HandleTypeDef hcan1;
-extern CAN_HandleTypeDef hcan2; // ¶¨ÒåÔ­ÐÍÔÚcan.cÎÄ¼þ
+extern CAN_HandleTypeDef hcan2; // ï¿½ï¿½ï¿½ï¿½Ô­ï¿½ï¿½ï¿½ï¿½can.cï¿½Ä¼ï¿½
 
 
 
-/************************************CAN½ÓÊÕ******************************************************/
-// HAL¿âÖÐ¶Ï»Øµ÷Ö¸Õë
+/************************************CANï¿½ï¿½ï¿½ï¿½******************************************************/
+// HALï¿½ï¿½ï¿½Ð¶Ï»Øµï¿½Ö¸ï¿½ï¿½
 void HAL_CAN_RxFifo0MsgPendingCallback(CAN_HandleTypeDef *hcan)
 {
-  CAN_RxHeaderTypeDef rx_header; // CAN Êý¾ÝÖ¸Õë
-  uint8_t rx_data[8];            // »ñÈ¡µ½µÄÊý¾Ý
+  CAN_RxHeaderTypeDef rx_header; // CAN ï¿½ï¿½ï¿½ï¿½Ö¸ï¿½ï¿½
+  uint8_t rx_data[8];            // ï¿½ï¿½È¡ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 
-  HAL_CAN_GetRxMessage(hcan, CAN_RX_FIFO0, &rx_header, rx_data); // È¡µÃÐÅÏ¢
+  HAL_CAN_GetRxMessage(hcan, CAN_RX_FIFO0, &rx_header, rx_data); // È¡ï¿½ï¿½ï¿½ï¿½Ï¢
   CAN_ID_matching(rx_header.StdId,rx_data);
-  // ³¬¼¶µçÈÝ
+  // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
   if (rx_header.StdId == 0x307)  //0x307
   {
     cap_handle_message(rx_data);
     return;
   }
-  //DMµç»ú	
+  //DMï¿½ï¿½ï¿½	
 
-	//Áì¿Øµç»ú4015V3
+	//ï¿½ï¿½Øµï¿½ï¿½4015V3
   if(rx_header.StdId == 0x141)
 	{
 		
@@ -55,23 +55,23 @@ void HAL_CAN_RxFifo0MsgPendingCallback(CAN_HandleTypeDef *hcan)
 		return;
 	}
 	
-	if(rx_header.StdId > 0x1FE)//´ó½®µç»úÊý¾Ý½ÓÊÕ
+	if(rx_header.StdId > 0x1FE)//ï¿½ó½®µï¿½ï¿½ï¿½ï¿½ï¿½Ý½ï¿½ï¿½ï¿½
 	{
-		if (hcan == &hcan1) // CAN1/2ÅÐ¶Ï
+		if (hcan == &hcan1) // CAN1/2ï¿½Ð¶ï¿½
 		{
-			DJI_CAN1_handle_message(rx_header.StdId,rx_data);//DJIµç»úcan1Êý¾Ý½ÓÊÕ
+			DJI_CAN1_handle_message(rx_header.StdId,rx_data);//DJIï¿½ï¿½ï¿½can1ï¿½ï¿½ï¿½Ý½ï¿½ï¿½ï¿½
 		}
 		else
 		{
-			DJI_CAN2_handle_message(rx_header.StdId,rx_data);//DJIµç»úcan2Êý¾Ý½ÓÊÕ
+			DJI_CAN2_handle_message(rx_header.StdId,rx_data);//DJIï¿½ï¿½ï¿½can2ï¿½ï¿½ï¿½Ý½ï¿½ï¿½ï¿½
 		}
   	}
 	else if(rx_header.StdId < 0x100)//DM
 	{
-		DM_CAN_Callback((can_id)rx_header.StdId - 1,rx_data);//DMµç»úÊý¾Ý½ÓÊÕ
+		DM_CAN_Callback((can_id)rx_header.StdId - 1,rx_data);//DMï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ý½ï¿½ï¿½ï¿½
 		return;
 	}
-//	cap.remain_vol = 0;//ÇåÊý¾Ý
+//	cap.remain_vol = 0;//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 //	if(rx_header.StdId == 0x309)//double
 //	{
 //		data_receive(rx_data);
@@ -92,8 +92,8 @@ void canx_send_data(CAN_HandleTypeDef *hcan, uint16_t id, uint8_t *data, uint32_
 
 	 HAL_CAN_AddTxMessage(hcan, &TxHeader, data,&send_mail_box);
 }
-// ·µ»ØÂí´ïÊý¾Ý£¨»¹²»¹»°²È«¡£¡£¡££©
-motor_measure_t get_motor_data(can_id motorID) // »ñÈ¡Âí´ïÊý¾Ý
+// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ý£ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½È«ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+motor_measure_t get_motor_data(can_id motorID) // ï¿½ï¿½È¡ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 {
   return motor_data[motorID];
 }
